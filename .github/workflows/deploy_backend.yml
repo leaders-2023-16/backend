@@ -13,7 +13,7 @@ env:
   REGISTRY_URL: 'registry.hub.docker.com'
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
     steps:
       -
