@@ -71,6 +71,10 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ steps.get_known_hosts.outputs.hosts }}
 
+      - name: Set short sha
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
@@ -84,4 +88,4 @@ jobs:
             -e DOCKER_USER=${{ secrets.DOCKERHUB_USERNAME }}
             -e secret_key=${{ secrets.SECRET_KEY }}
             -e postgres_password=${{ secrets.POSTGRES_PASSWORD }}
-            -e app_image_version=${{ github.sha }}
+            -e app_image_version=${{ steps.vars.outputs.sha_short }}
