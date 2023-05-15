@@ -2,6 +2,7 @@ domain: leaders.rubles.lol
 
 postgres_db: app
 
-backend_cors_origins: "[\"http://localhost\", \"http://localhost:3000\", \"https://localhost:3000\", \"http://{{domain}}\", \"https://{{domain}}\"]"
-server_host: http://{{domain}}
+allowed_hosts: "{{domain}} {{ansible_host}} localhost 127.0.0.1 localhost:3000 127.0.0.1:3000"
+csrf_trusted_origins: "https://{{domain}} http://{{domain}} http://localhost http://localhost:3000"
+server_host: https://{{domain}}
 app_image_version: feature-ci
