@@ -18,7 +18,7 @@ services:
     env_file:
       - .env
     ports:
-      - "127.0.0.1:{{ app_external_port }}:80"
+      - "127.0.0.1:{{ app_external_port }}:8000"
 
   redis:
     image: redis:latest
