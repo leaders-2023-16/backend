@@ -1,0 +1,8 @@
+project_slug: leaders-backend
+docker_image: registry.hub.docker.com/andrewklyuchnikov/leaders-backend
+app_external_port: 8081
+postgres_server: db:5432
+postgres_user: postgres
+postgres_password: postgres
+
+code_path: /home/{{ansible_user}}/{{ project_slug }}

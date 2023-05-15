@@ -10,6 +10,7 @@ on:
 
 env:
   IMAGE: registry.hub.docker.com/andrewklyuchnikov/leaders-backend
+  REGISTRY_URL: 'registry.hub.docker.com'
 
 jobs:
   docker:
@@ -45,3 +46,36 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=${{ env.IMAGE }}:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Get Known Hosts
+        id: get_known_hosts
+        run: |
+          KNOWN_HOSTS=$(ssh-keyscan -H ${{ secrets.SSH_HOST }})
+          echo ::set-output name=hosts::${KNOWN_HOSTS}
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ steps.get_known_hosts.outputs.hosts }}
+
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: deploy.yml
+          directory: ./ansible
+          options: |
+            --inventory hosts
+            --verbose
+            -e DOCKER_REGISTRY=${{ env.REGISTRY_URL }}
+            -e DOCKER_PASSWORD=${{ secrets.DOCKERHUB_TOKEN }}
+            -e DOCKER_USER=${{ secrets.DOCKERHUB_USERNAME }}
+            -e secret_key=${{ secrets.SECRET_KEY }}
+            -e postgres_password=${{ secrets.POSTGRES_PASSWORD }}

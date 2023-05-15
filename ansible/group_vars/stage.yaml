@@ -1,0 +1,7 @@
+domain: leaders.rubles.lol
+
+postgres_db: app
+
+backend_cors_origins: "[\"http://localhost\", \"http://localhost:3000\", \"https://localhost:3000\", \"http://{{domain}}\", \"https://{{domain}}\"]"
+server_host: http://{{domain}}
+app_image_version: feature-ci
