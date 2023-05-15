@@ -1,0 +1,11 @@
+project_slug: leaders-backend
+docker_image: registry.hub.docker.com/andrewklyuchnikov/leaders-backend
+app_external_port: 8081
+postgres_server: db:5432
+postgres_user: postgres
+postgres_password: postgres
+
+code_path: /home/{{ansible_user}}/{{ project_slug }}
+
+allowed_hosts: "{{ansible_host}} localhost 127.0.0.1 localhost:3000 127.0.0.1:3000"
+csrf_trusted_origins: "http://localhost http://localhost:3000"

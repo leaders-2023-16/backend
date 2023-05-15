@@ -1,0 +1,33 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - app-db-data:/var/lib/postgresql/data/pgdata
+    env_file:
+      - .env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+  app:
+    image: {{ docker_image }}:{{ app_image_version }}
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:{{ app_external_port }}:8000"
+
+  redis:
+    image: redis:latest
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 30s
+      retries: 50
+    restart: always
+
+volumes:
+  app-db-data:

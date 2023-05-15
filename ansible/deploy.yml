@@ -1,0 +1,29 @@
+- hosts: "stage"
+  gather_facts: no
+  tasks:
+    - include: "tasks/docker_login.yml"
+
+    - name: create target directory
+      file:
+        path: "{{ code_path }}"
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: 0755
+
+    - include: "tasks/compose.yml"
+
+    - name: run services
+      shell: "docker compose up -d db redis"
+      args:
+        chdir: "{{ code_path }}"
+
+    - name: run app
+      shell: "docker compose up -d app"
+      args:
+        chdir: "{{ code_path }}"
+
+    - name: run migrate
+      shell: "docker compose exec app sh -c \"python manage.py migrate\""
+      args:
+        chdir: "{{ code_path }}"
