@@ -25,6 +25,11 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: andrewklyuchnikov/leaders-backend
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -79,3 +84,4 @@ jobs:
             -e DOCKER_USER=${{ secrets.DOCKERHUB_USERNAME }}
             -e secret_key=${{ secrets.SECRET_KEY }}
             -e postgres_password=${{ secrets.POSTGRES_PASSWORD }}
+            -e app_image_version=${{ github.sha }}
