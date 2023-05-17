@@ -88,3 +88,17 @@ jobs:
             -e secret_key=${{ secrets.SECRET_KEY }}
             -e postgres_password=${{ secrets.POSTGRES_PASSWORD }}
             -e app_image_version=${{ steps.vars.outputs.sha_short }}
+
+      - name: send telegram message on deploy
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Backend was deployed by ${{ github.actor }}
+
+            Commit message: ${{ github.event.commits[0].message }}
+
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
