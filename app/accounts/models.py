@@ -41,9 +41,3 @@ class User(AbstractUser):
     )
 
     objects = UserManager()
-
-    def is_upperclass(self):
-        return self.role in {
-            self.Role.TRAINEE,
-            self.Role.MENTOR,
-        }
