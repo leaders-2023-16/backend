@@ -1,0 +1,560 @@
+openapi: 3.0.0
+info:
+  title: User Profile API
+  version: 1.0.0
+
+servers:
+  - url: http://127.0.0.1:8000/api/v1
+    description: develop server
+
+  - url: https://leaders.rubles.lol/api/v1
+    description: stage server
+
+paths:
+  /users:
+    get:
+      summary: Retrieve a list of users
+      description: Retrieves a list of users based on the provided filters.
+      tags:
+        - Users
+      parameters:
+        - in: query
+          name: role
+          schema:
+            type: string
+          description: Filter users by role attribute.
+      responses:
+        200:
+          description: List of users returned successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+  /users/{user_id}/profile:
+    get:
+      summary: Retrieve a user's profile
+      description: Retrieves the profile of a specific user.
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: user_id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the user.
+      responses:
+        200:
+          description: User profile retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+
+    put:
+      summary: Update a user's profile
+      description: Updates the profile of a specific user.
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: user_id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the user.
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfileData'
+      responses:
+        200:
+          description: User profile updated successfully.
+
+  /tests:
+    get:
+      summary: Retrieve a list of tests
+      description: Retrieves a list of tests.
+      tags:
+        - Tests
+      responses:
+        '200':
+          description: List of tests returned successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+      # Add appropriate error responses if needed.
+
+  /tests/{test_id}:
+    get:
+      summary: Retrieve a specific test
+      description: Retrieves a specific test.
+      tags:
+        - Tests
+      parameters:
+        - in: path
+          name: test_id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the test.
+      responses:
+        '200':
+          description: Test retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+      # Add appropriate error responses if needed.
+
+  /prizes:
+    get:
+      summary: Retrieve a list of prizes
+      description: Retrieves a list of prizes.
+      tags:
+        - Prizes
+      responses:
+        '200':
+          description: List of prizes returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrizeListResponse'
+      # Add appropriate error responses if needed.
+
+  /prizes/{prize_id}:
+    get:
+      summary: Retrieve a specific prize
+      description: Retrieves a specific prize.
+      tags:
+        - Prizes
+      parameters:
+        - in: path
+          name: prize_id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the prize.
+      responses:
+        '200':
+          description: Prize retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prize'
+      # Add appropriate error responses if needed.
+
+  /vacancies:
+    get:
+      summary: Retrieve a list of vacancies
+      description: Retrieves a list of vacancies.
+      tags:
+        - Vacancies
+      responses:
+        200:
+          description: List of vacancies returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VacancyListResponse'
+      # Add appropriate error responses if needed.
+
+    post:
+      summary: Create a new vacancy
+      description: Creates a new vacancy.
+      tags:
+        - Vacancies
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VacancyCreate'
+      responses:
+        201:
+          description: Vacancy created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vacancy'
+      # Add appropriate error responses if needed.
+
+  /vacancies/{vacancy_id}:
+    get:
+      summary: Retrieve a specific vacancy
+      description: Retrieves a specific vacancy.
+      tags:
+        - Vacancies
+      parameters:
+        - in: path
+          name: vacancy_id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the vacancy.
+      responses:
+        200:
+          description: Vacancy retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vacancy'
+      # Add appropriate error responses if needed.
+
+    put:
+      summary: Update an existing vacancy
+      description: Updates an existing vacancy.
+      tags:
+        - Vacancies
+      parameters:
+        - in: path
+          name: vacancy_id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the vacancy.
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VacancyUpdate'
+      responses:
+        200:
+          description: Vacancy updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vacancy'
+
+  /career-events:
+    get:
+      summary: Retrieve a list of career events
+      description: Retrieves a list of career events.
+      tags:
+        - Career Events
+      responses:
+        '200':
+          description: List of career events returned successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CareerEvent'
+
+  /career-events/{event_id}:
+    get:
+      summary: Retrieve a specific career event
+      description: Retrieves a specific career event.
+      tags:
+        - Career Events
+      parameters:
+        - in: path
+          name: event_id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the career event.
+      responses:
+        '200':
+          description: Career event retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CareerEvent'
+
+  /departments:
+    get:
+      summary: Retrieve a list of departments
+      description: Retrieves a list of departments.
+      tags:
+        - Departments
+      responses:
+        '200':
+          description: List of departments returned successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Department'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the user.
+        name:
+          type: string
+          example: John
+          description: The name of the user.
+        lastname:
+          type: string
+          example: Doe
+          description: The last name of the user.
+        email:
+          type: string
+          example: john.doe@example.com
+          description: The email address of the user.
+        role:
+          type: string
+          description: The role of the user.
+
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the user profile.
+        name:
+          type: string
+          example: John
+          description: The name of the user profile.
+        email:
+          type: string
+          example: john.doe@example.com
+          description: The email address of the user profile.
+        role:
+          type: string
+          description: The role of the user profile.
+        profile:
+          $ref: '#/components/schemas/UserProfileData'
+
+    UserProfileData:
+      type: object
+      properties:
+        educations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Education'
+        bio:
+          type: string
+          description: Biography of the user.
+        phone:
+          type: string
+          description: Phone number of the user
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLink'
+
+    UserLink:
+      type: object
+      properties:
+        url:
+          type: string
+          example: https://example.com/test.png
+
+    Test:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          example: Русский язык
+        qualifications:
+          type: array
+          example:
+            - 1
+            - 23
+            - 34
+          items:
+            type: integer
+
+    VacancyListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Vacancy'
+
+    Vacancy:
+      type: object
+      properties:
+        id:
+          type: integer
+        required_qualifications:
+          type: integer
+        department:
+          $ref: '#/components/schemas/Department'
+        description:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        salary_from:
+          type: integer
+        salary_to:
+          type: integer
+
+    VacancyCreate:
+      type: object
+      properties:
+        required_qualifications:
+          type: integer
+          description: ID of the required qualification.
+        department_id:
+          type: integer
+          description: ID of the department.
+        description:
+          type: string
+          description: Description of the vacancy.
+        name:
+          type: string
+          description: Name of the vacancy.
+        type:
+          type: string
+          description: Type of the vacancy (job or internship).
+        salary_from:
+          type: integer
+          description: Minimum salary for the vacancy.
+        salary_to:
+          type: integer
+          description: Maximum salary for the vacancy.
+
+    VacancyUpdate:
+      type: object
+      properties:
+        required_qualifications:
+          type: integer
+          description: ID of the required qualification.
+        department:
+          type: integer
+          description: ID of the department.
+        description:
+          type: string
+          description: Description of the vacancy.
+        name:
+          type: string
+          description: Name of the vacancy.
+        type:
+          type: string
+          description: Type of the vacancy (job or internship).
+        salary_from:
+          type: integer
+          description: Minimum salary for the vacancy.
+        salary_to:
+          type: integer
+          description: Maximum salary for the vacancy.
+
+    PrizeListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Prize'
+
+    Prize:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: The ID of the prize.
+        price:
+          type: integer
+          example: 3000
+          description: The price of the prize.
+        name:
+          type: string
+          example: Толстовка
+          description: The name of the prize.
+        description:
+          type: string
+          example: Описание толстовки
+          description: The description of the prize.
+        photo:
+          type: string
+          example: https://example.com/photo.png
+          description: The URL of the prize photo.
+
+    CareerEvent:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+
+    UserProfileUpdate:
+      type: object
+      properties:
+        educations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Education'
+        bio:
+          type: string
+          description: Biography of the user.
+          example: Ищу стажировку в правительстве!
+        phone:
+          type: string
+          description: Phone number of the user.
+          example: "79004000300"
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLink'
+
+    Education:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Программная инженерия
+          description: The name of the education.
+        type:
+          type: string
+          example: university
+          description: The type of the education (e.g., university, school).
+        started_at:
+          type: string
+          format: date
+          description: The start date of the education.
+        ended_at:
+          type: string
+          format: date
+          description: The end date of the education.
+        description:
+          type: string
+          example: Занимался наукой, писал статьи
+          description: Description of the education.
+        speciality:
+          type: string
+          example: Программная инженерия
+          description: The speciality or focus area of the education.
+
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the department.
+        name:
+          type: string
+          example: Департамент здравоохранения
+          description: The name of the department.
