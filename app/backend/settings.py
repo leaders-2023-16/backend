@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_yasg",
     "accounts",
+    "internship",
 ]
 
 MIDDLEWARE = [
@@ -161,3 +162,4 @@ REST_FRAMEWORK = {
 PREFERABLE_CITIZENSHIP_ID = (
     475  # Russian Federation (id from app/accounts/fixtures/countries.yaml)
 )
+REQUIRED_UNIVERSITY_YEARS = 3

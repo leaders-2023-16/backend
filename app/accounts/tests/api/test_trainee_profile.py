@@ -38,10 +38,10 @@ def test_list_trainee_profiles(generic_api_client, trainee_profile):
 
 
 @pytest.mark.django_db
-def test_update_trainee_profile(api_client, user, country2):
+def test_update_trainee_profile(api_client, user, non_preferable_country):
     url = reverse("trainee-profiles-detail", kwargs={"user_id": user.id})
     data = {
-        "citizenship": country2.id,
+        "citizenship": non_preferable_country.id,
         "bio": "Updated trainee bio",
         "phone_number": "9876543210",
         "links": [{"url": "https://example.com/new-link"}],
@@ -72,7 +72,7 @@ def test_update_trainee_profile(api_client, user, country2):
 
     trainee_profile = user.trainee_profile
     trainee_profile.refresh_from_db()
-    assert trainee_profile.citizenship == country2
+    assert trainee_profile.citizenship == non_preferable_country
     assert trainee_profile.bio == "Updated trainee bio"
     assert trainee_profile.phone_number == "9876543210"
     assert trainee_profile.links.count() == 1
@@ -99,10 +99,12 @@ def test_update_trainee_profile(api_client, user, country2):
 
 
 @pytest.mark.django_db
-def test_non_authenticate_update_trainee_profile(anon_api_client, user, country2):
+def test_non_authenticate_update_trainee_profile(
+    anon_api_client, user, non_preferable_country
+):
     url = reverse("trainee-profiles-detail", kwargs={"user_id": user.id})
     data = {
-        "citizenship": country2.id,
+        "citizenship": non_preferable_country.id,
         "bio": "Updated trainee bio",
         "phone_number": "9876543210",
         "links": [{"url": "https://example.com/new-link"}],
