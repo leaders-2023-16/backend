@@ -88,6 +88,7 @@ jobs:
             -e secret_key=${{ secrets.SECRET_KEY }}
             -e postgres_password=${{ secrets.POSTGRES_PASSWORD }}
             -e app_image_version=${{ steps.vars.outputs.sha_short }}
+            -e admin_password=${{ secrets.ADMIN_PASSWORD }}
 
       - name: send telegram message on deploy
         uses: appleboy/telegram-action@master

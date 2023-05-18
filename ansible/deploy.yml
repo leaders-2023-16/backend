@@ -27,3 +27,14 @@
       shell: "docker compose exec app sh -c \"python manage.py migrate\""
       args:
         chdir: "{{ code_path }}"
+
+    - name: load fixtures
+      shell: "docker compose exec app sh -c \"python manage.py loaddata countries\""
+      args:
+        chdir: "{{ code_path }}"
+
+    - name: create admin
+      shell: "docker compose exec app sh -c \"python manage.py createadmin {{ admin_username }} {{ admin_email }} {{ admin_password }}\""
+      no_log: true
+      args:
+        chdir: "{{ code_path }}"
