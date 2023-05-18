@@ -40,4 +40,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest
+          cd app && poetry run pytest
