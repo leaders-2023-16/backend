@@ -16,6 +16,24 @@ def api_client(user):
     return client
 
 
+@pytest.fixture
+def candidate_client(user):
+    user.role = User.Role.CANDIDATE
+    user.save()
+    client = APIClient()
+    client.force_authenticate(user)
+    return client
+
+
+@pytest.fixture
+def curator_client(user):
+    user.role = User.Role.CURATOR
+    user.save()
+    client = APIClient()
+    client.force_authenticate(user)
+    return client
+
+
 @pytest.fixture(
     params=[
         pytest.param("anon"),

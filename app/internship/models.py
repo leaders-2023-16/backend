@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class InternshipApplication(models.Model):
-    class StatusChoices(models.TextChoices):
+    class Status(models.TextChoices):
         PENDING = "pending", _("Pending")
         REJECTED = "rejected", _("Rejected")
         NEXT_STAGE = "next_stage", _("Approved for next stage")
@@ -22,7 +22,7 @@ class InternshipApplication(models.Model):
     )
     created_at = models.DateTimeField(default=timezone.now)
     status = models.CharField(
-        max_length=255, choices=StatusChoices.choices, blank=True, null=True
+        max_length=255, choices=Status.choices, default=Status.PENDING
     )
     status_changed_at = models.DateTimeField(blank=True, null=True)
     status_changed_by = models.ForeignKey(
