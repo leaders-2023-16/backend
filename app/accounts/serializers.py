@@ -21,8 +21,8 @@ class EducationSerializer(serializers.ModelSerializer):
         fields = [
             "name",
             "type",
-            "start_date",
-            "end_date",
+            "start_year",
+            "end_year",
             "specialization",
             "degree",
             "description",

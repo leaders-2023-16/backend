@@ -49,8 +49,8 @@ def test_update_trainee_profile(api_client, user, country2):
             {
                 "name": "University B",
                 "type": "university",
-                "start_date": "2022-01-01",
-                "end_date": "2022-12-31",
+                "start_year": 2018,
+                "end_year": 2022,
                 "specialization": "Computer Science",
                 "degree": "Master",
                 "description": "Master's degree in Computer Science",
@@ -61,7 +61,7 @@ def test_update_trainee_profile(api_client, user, country2):
                 "employer": "Company B",
                 "position": "Software Developer",
                 "start_date": "2023-01-01",
-                "end_date": "2023-12-31",
+                "end_date": None,
                 "description": "Worked on software development projects",
             }
         ],
@@ -83,8 +83,8 @@ def test_update_trainee_profile(api_client, user, country2):
     education = trainee_profile.educations.first()
     assert education.name == "University B"
     assert education.type == "university"
-    assert education.start_date.strftime("%Y-%m-%d") == "2022-01-01"
-    assert education.end_date.strftime("%Y-%m-%d") == "2022-12-31"
+    assert education.start_year == 2018
+    assert education.end_year == 2022
     assert education.specialization == "Computer Science"
     assert education.degree == "Master"
     assert education.description == "Master's degree in Computer Science"
@@ -94,7 +94,7 @@ def test_update_trainee_profile(api_client, user, country2):
     assert work_experience.employer == "Company B"
     assert work_experience.position == "Software Developer"
     assert work_experience.start_date.strftime("%Y-%m-%d") == "2023-01-01"
-    assert work_experience.end_date.strftime("%Y-%m-%d") == "2023-12-31"
+    assert work_experience.end_date is None
     assert work_experience.description == "Worked on software development projects"
 
 
