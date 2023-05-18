@@ -1,9 +1,6 @@
 name: Django Tests
 
 on:
-  push:
-    branches:
-      - feature/tests-in-ci
   pull_request:
     branches:
       - main
