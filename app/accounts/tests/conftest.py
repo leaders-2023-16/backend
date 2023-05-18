@@ -1,22 +1,9 @@
 import pytest
-from accounts.models import Country, User
-from django.conf import settings
+from accounts.models import User
 
 
 @pytest.fixture
-def country():
-    return Country.objects.create(
-        id=settings.PREFERABLE_CITIZENSHIP_ID, name="Российская федерация"
-    )
-
-
-@pytest.fixture
-def country2():
-    return Country.objects.create(id=2, name="Country B")
-
-
-@pytest.fixture
-def trainee_profile(country, user):
+def trainee_profile(preferable_country, user):
     return user.trainee_profile
 
 
