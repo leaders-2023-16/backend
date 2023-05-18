@@ -1,3 +1,4 @@
+from accounts.models import User
 from rest_framework import permissions
 
 
@@ -14,3 +15,28 @@ class OwnProfilePermission(permissions.BasePermission):
 
         # obj here is a UserProfile instance
         return obj.user == request.user
+
+
+class IsCandidate(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.role == User.Role.CANDIDATE
+
+
+class IsTrainee(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.role == User.Role.TRAINEE
+
+
+class IsMentor(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.role == User.Role.MENTOR
+
+
+class IsCurator(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.role == User.Role.CURATOR
+
+
+class IsPersonnel(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.role == User.Role.TRAINEE
