@@ -36,8 +36,11 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     class Role(models.TextChoices):
+        CANDIDATE = "F", _("Candidate")  # F - like first-timer
         TRAINEE = "T", _("Trainee")
         MENTOR = "M", _("Mentor")
+        PERSONNEL = "P", _("Personnel")
+        CURATOR = "C", _("Curator")
         ADMIN = "A", _("Admin")
 
     role = models.CharField(
