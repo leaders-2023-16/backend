@@ -13,6 +13,6 @@ router.register(r"countries", CountryViewSet, basename="countries")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("api/auth/sign-in", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/auth/refresh", TokenRefreshAndAccessView.as_view(), name="token_refresh"),
+    path("auth/sign-in", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("auth/refresh", TokenRefreshAndAccessView.as_view(), name="token_refresh"),
 ]
