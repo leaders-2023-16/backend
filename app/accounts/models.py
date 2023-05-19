@@ -17,10 +17,12 @@ class UserManager(BaseUserManager):
             user.trainee_profile = TraineeProfile.objects.create(user=user)
         return user
 
-    def create_user(self, username, password=None, **extra_fields):
+    def create_user(self, username, password=None, gender="M", age=0, **extra_fields):
         extra_fields.setdefault("is_superuser", False)
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("role", User.Role.TRAINEE)
+        extra_fields.setdefault("gender", gender)
+        extra_fields.setdefault("age", age)
         return self._create_user(username, password, **extra_fields)
 
     def create_superuser(self, username, password, **extra_fields):
@@ -46,6 +48,17 @@ class User(AbstractUser):
     role = models.CharField(
         max_length=1,
         choices=Role.choices,
+    )
+
+    class Gender(models.TextChoices):
+        MALE = "M", _("Male")
+        FEMALE = "F", _("Female")
+
+    age = models.PositiveIntegerField()
+
+    gender = models.CharField(
+        max_length=1,
+        choices=Gender.choices,
     )
 
     objects = UserManager()
