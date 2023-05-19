@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from accounts.urls import urlpatterns as accounts_url
+from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path, re_path
 from drf_yasg import openapi
@@ -30,6 +30,7 @@ schema_view = get_schema_view(
         contact=openapi.Contact(email="contact@example.com"),
         license=openapi.License(name="BSD License"),
     ),
+    url=settings.SERVER_HOST,
     public=True,
     permission_classes=[permissions.AllowAny],
 )
@@ -51,5 +52,3 @@ urlpatterns = [
     ),
     path(r"redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
 ]
-
-urlpatterns += accounts_url

@@ -26,7 +26,8 @@ def test_list_trainee_profiles(generic_api_client, trainee_profile):
     assert response.status_code == 200
 
     response_data = response.json()
-    results = response_data
+    assert "results" in response_data
+    results = response_data["results"]
     assert len(results) == 1
 
     for data in results:

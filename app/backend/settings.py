@@ -158,6 +158,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 100,
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.BasicAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
 }
 
@@ -166,13 +167,9 @@ PREFERABLE_CITIZENSHIP_ID = (
 )
 REQUIRED_UNIVERSITY_YEARS = 3
 
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ],
-}
-
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(weeks=1),
 }
+
+SERVER_HOST = os.getenv("SERVER_HOST", "http://127.0.0.1:8000")
