@@ -173,3 +173,9 @@ SIMPLE_JWT = {
 }
 
 SERVER_HOST = os.getenv("SERVER_HOST", "http://127.0.0.1:8000")
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
+    }
+}
