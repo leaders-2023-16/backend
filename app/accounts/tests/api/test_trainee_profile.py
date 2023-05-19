@@ -16,6 +16,9 @@ def test_retrieve_trainee_profile(generic_api_client, trainee_profile):
     assert response_data["citizenship"] == trainee_profile.citizenship_id
     assert response_data["bio"] == trainee_profile.bio
     assert response_data["phone_number"] == trainee_profile.phone_number
+    assert response_data["first_name"] == trainee_profile.user.first_name
+    assert response_data["last_name"] == trainee_profile.user.last_name
+    assert response_data["email"] == trainee_profile.user.email
 
 
 @pytest.mark.django_db
@@ -35,6 +38,9 @@ def test_list_trainee_profiles(generic_api_client, trainee_profile):
         assert "citizenship" in data
         assert "bio" in data
         assert "phone_number" in data
+        assert "first_name" in data
+        assert "last_name" in data
+        assert "email" in data
 
 
 @pytest.mark.django_db
