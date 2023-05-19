@@ -10,3 +10,7 @@ code_path: /home/{{ansible_user}}/{{ project_slug }}
 
 allowed_hosts: "{{ansible_host}} localhost 127.0.0.1 localhost:3000 127.0.0.1:3000"
 csrf_trusted_origins: "http://localhost http://localhost:3000"
+
+admin_username: admin
+admin_email: admin@admin.com
+admin_password: admin

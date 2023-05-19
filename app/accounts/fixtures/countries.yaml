@@ -1,0 +1,996 @@
+- model: accounts.country
+  pk: 431
+  fields:
+    name: Бенин
+- model: accounts.country
+  pk: 432
+  fields:
+    name: Израиль
+- model: accounts.country
+  pk: 433
+  fields:
+    name: Кюрасао
+- model: accounts.country
+  pk: 434
+  fields:
+    name: Барбадос
+- model: accounts.country
+  pk: 435
+  fields:
+    name: Мавритания
+- model: accounts.country
+  pk: 436
+  fields:
+    name: Панама
+- model: accounts.country
+  pk: 437
+  fields:
+    name: Сен-Пьер и Микелон
+- model: accounts.country
+  pk: 438
+  fields:
+    name: Гренада
+- model: accounts.country
+  pk: 439
+  fields:
+    name: Кипр
+- model: accounts.country
+  pk: 440
+  fields:
+    name: Сен-Бартельми
+- model: accounts.country
+  pk: 441
+  fields:
+    name: Австрия
+- model: accounts.country
+  pk: 442
+  fields:
+    name: Соломоновы острова
+- model: accounts.country
+  pk: 443
+  fields:
+    name: Конго
+- model: accounts.country
+  pk: 444
+  fields:
+    name: Сент-Люсия
+- model: accounts.country
+  pk: 445
+  fields:
+    name: Сан-Томе и Принсипи
+- model: accounts.country
+  pk: 446
+  fields:
+    name: Камбоджа
+- model: accounts.country
+  pk: 447
+  fields:
+    name: Кыргызстан
+- model: accounts.country
+  pk: 448
+  fields:
+    name: Северная Македония
+- model: accounts.country
+  pk: 449
+  fields:
+    name: Мадагаскар
+- model: accounts.country
+  pk: 450
+  fields:
+    name: Сербия
+- model: accounts.country
+  pk: 451
+  fields:
+    name: Эритрея
+- model: accounts.country
+  pk: 452
+  fields:
+    name: Французская Гвиана
+- model: accounts.country
+  pk: 453
+  fields:
+    name: Азербайджан
+- model: accounts.country
+  pk: 454
+  fields:
+    name: Румыния
+- model: accounts.country
+  pk: 455
+  fields:
+    name: Куба
+- model: accounts.country
+  pk: 456
+  fields:
+    name: Ирландия
+- model: accounts.country
+  pk: 457
+  fields:
+    name: Остров Мэн
+- model: accounts.country
+  pk: 458
+  fields:
+    name: Палау
+- model: accounts.country
+  pk: 459
+  fields:
+    name: Реюньон
+- model: accounts.country
+  pk: 460
+  fields:
+    name: Казахстан
+- model: accounts.country
+  pk: 461
+  fields:
+    name: Швейцария
+- model: accounts.country
+  pk: 462
+  fields:
+    name: Тувалу
+- model: accounts.country
+  pk: 463
+  fields:
+    name: Британские Виргинские острова
+- model: accounts.country
+  pk: 464
+  fields:
+    name: Катар
+- model: accounts.country
+  pk: 465
+  fields:
+    name: Хорватия
+- model: accounts.country
+  pk: 466
+  fields:
+    name: Иран
+- model: accounts.country
+  pk: 467
+  fields:
+    name: Папуа - Новая Гвинея
+- model: accounts.country
+  pk: 468
+  fields:
+    name: Малави
+- model: accounts.country
+  pk: 469
+  fields:
+    name: Кирибати
+- model: accounts.country
+  pk: 470
+  fields:
+    name: Зимбабве
+- model: accounts.country
+  pk: 471
+  fields:
+    name: Люксембург
+- model: accounts.country
+  pk: 472
+  fields:
+    name: Ватикан
+- model: accounts.country
+  pk: 473
+  fields:
+    name: Мексика
+- model: accounts.country
+  pk: 474
+  fields:
+    name: Коморы
+- model: accounts.country
+  pk: 475
+  fields:
+    name: Российская Федерация
+- model: accounts.country
+  pk: 476
+  fields:
+    name: Эсватини
+- model: accounts.country
+  pk: 477
+  fields:
+    name: Никарагуа
+- model: accounts.country
+  pk: 478
+  fields:
+    name: Тайвань
+- model: accounts.country
+  pk: 479
+  fields:
+    name: Ниуэ
+- model: accounts.country
+  pk: 480
+  fields:
+    name: Чили
+- model: accounts.country
+  pk: 481
+  fields:
+    name: Марокко
+- model: accounts.country
+  pk: 482
+  fields:
+    name: Тонга
+- model: accounts.country
+  pk: 483
+  fields:
+    name: Британская территория в Индийском океане
+- model: accounts.country
+  pk: 484
+  fields:
+    name: Уганда
+- model: accounts.country
+  pk: 485
+  fields:
+    name: Южная Корея
+- model: accounts.country
+  pk: 486
+  fields:
+    name: Гренландия
+- model: accounts.country
+  pk: 487
+  fields:
+    name: Макао
+- model: accounts.country
+  pk: 488
+  fields:
+    name: Сомали
+- model: accounts.country
+  pk: 489
+  fields:
+    name: Ливан
+- model: accounts.country
+  pk: 490
+  fields:
+    name: Габон
+- model: accounts.country
+  pk: 491
+  fields:
+    name: Французские Южные и Антарктические территории
+- model: accounts.country
+  pk: 492
+  fields:
+    name: Эквадор
+- model: accounts.country
+  pk: 493
+  fields:
+    name: Пуэрто-Рико
+- model: accounts.country
+  pk: 494
+  fields:
+    name: Перу
+- model: accounts.country
+  pk: 495
+  fields:
+    name: Фарерские острова
+- model: accounts.country
+  pk: 496
+  fields:
+    name: Майотта
+- model: accounts.country
+  pk: 497
+  fields:
+    name: Боливия
+- model: accounts.country
+  pk: 498
+  fields:
+    name: Суринам
+- model: accounts.country
+  pk: 499
+  fields:
+    name: Бурунди
+- model: accounts.country
+  pk: 500
+  fields:
+    name: Камерун
+- model: accounts.country
+  pk: 501
+  fields:
+    name: Танзания
+- model: accounts.country
+  pk: 502
+  fields:
+    name: Остров Рождества
+- model: accounts.country
+  pk: 503
+  fields:
+    name: Уругвай
+- model: accounts.country
+  pk: 504
+  fields:
+    name: Гондурас
+- model: accounts.country
+  pk: 505
+  fields:
+    name: Остров Херд и острова Макдональд
+- model: accounts.country
+  pk: 506
+  fields:
+    name: Кокосовые острова
+- model: accounts.country
+  pk: 507
+  fields:
+    name: Фиджи
+- model: accounts.country
+  pk: 508
+  fields:
+    name: Бельгия
+- model: accounts.country
+  pk: 509
+  fields:
+    name: Пакистан
+- model: accounts.country
+  pk: 510
+  fields:
+    name: Южная Георгия и Южные Сандвичевы острова
+- model: accounts.country
+  pk: 511
+  fields:
+    name: Вануату
+- model: accounts.country
+  pk: 512
+  fields:
+    name: Святой Престол
+- model: accounts.country
+  pk: 513
+  fields:
+    name: Маврикий
+- model: accounts.country
+  pk: 514
+  fields:
+    name: Исландия
+- model: accounts.country
+  pk: 515
+  fields:
+    name: Турция
+- model: accounts.country
+  pk: 516
+  fields:
+    name: Босния и Герцеговина
+- model: accounts.country
+  pk: 517
+  fields:
+    name: Афганистан
+- model: accounts.country
+  pk: 518
+  fields:
+    name: Польша
+- model: accounts.country
+  pk: 519
+  fields:
+    name: Бонэйр, Синт-Эстатиус и Саба
+- model: accounts.country
+  pk: 520
+  fields:
+    name: Центральноафриканская Республика
+- model: accounts.country
+  pk: 521
+  fields:
+    name: Греция
+- model: accounts.country
+  pk: 522
+  fields:
+    name: Непал
+- model: accounts.country
+  pk: 523
+  fields:
+    name: Государство Палестина
+- model: accounts.country
+  pk: 524
+  fields:
+    name: Египет
+- model: accounts.country
+  pk: 525
+  fields:
+    name: Замбия
+- model: accounts.country
+  pk: 526
+  fields:
+    name: Таджикистан
+- model: accounts.country
+  pk: 527
+  fields:
+    name: Албания
+- model: accounts.country
+  pk: 528
+  fields:
+    name: Американское Самоа
+- model: accounts.country
+  pk: 529
+  fields:
+    name: Мальдивы
+- model: accounts.country
+  pk: 530
+  fields:
+    name: Япония
+- model: accounts.country
+  pk: 531
+  fields:
+    name: Уоллис и Футуна
+- model: accounts.country
+  pk: 532
+  fields:
+    name: Доминика
+- model: accounts.country
+  pk: 533
+  fields:
+    name: Аргентина
+- model: accounts.country
+  pk: 534
+  fields:
+    name: Аландские острова
+- model: accounts.country
+  pk: 535
+  fields:
+    name: Парагвай
+- model: accounts.country
+  pk: 536
+  fields:
+    name: Дания
+- model: accounts.country
+  pk: 537
+  fields:
+    name: Филиппины
+- model: accounts.country
+  pk: 538
+  fields:
+    name: Шпицберген и Ян-Майен
+- model: accounts.country
+  pk: 539
+  fields:
+    name: Экваториальная Гвинея
+- model: accounts.country
+  pk: 540
+  fields:
+    name: Судан
+- model: accounts.country
+  pk: 541
+  fields:
+    name: Сан-Марино
+- model: accounts.country
+  pk: 542
+  fields:
+    name: Того
+- model: accounts.country
+  pk: 543
+  fields:
+    name: Питкэрн
+- model: accounts.country
+  pk: 544
+  fields:
+    name: Тунис
+- model: accounts.country
+  pk: 545
+  fields:
+    name: Тринидад и Тобаго
+- model: accounts.country
+  pk: 546
+  fields:
+    name: Восточный Тимор
+- model: accounts.country
+  pk: 547
+  fields:
+    name: Кения
+- model: accounts.country
+  pk: 548
+  fields:
+    name: Северная Корея
+- model: accounts.country
+  pk: 549
+  fields:
+    name: Вьетнам
+- model: accounts.country
+  pk: 550
+  fields:
+    name: Токелау
+- model: accounts.country
+  pk: 551
+  fields:
+    name: Йемен
+- model: accounts.country
+  pk: 552
+  fields:
+    name: Лесото
+- model: accounts.country
+  pk: 553
+  fields:
+    name: Сенегал
+- model: accounts.country
+  pk: 554
+  fields:
+    name: Гибралтар
+- model: accounts.country
+  pk: 555
+  fields:
+    name: Кабо-Верде
+- model: accounts.country
+  pk: 556
+  fields:
+    name: Кувейт
+- model: accounts.country
+  pk: 557
+  fields:
+    name: Науру
+- model: accounts.country
+  pk: 558
+  fields:
+    name: Эфиопия
+- model: accounts.country
+  pk: 559
+  fields:
+    name: Руанда
+- model: accounts.country
+  pk: 560
+  fields:
+    name: Туркменистан
+- model: accounts.country
+  pk: 561
+  fields:
+    name: Ирак
+- model: accounts.country
+  pk: 562
+  fields:
+    name: Острова Теркс и Кайкос
+- model: accounts.country
+  pk: 563
+  fields:
+    name: Ботсвана
+- model: accounts.country
+  pk: 564
+  fields:
+    name: Франция
+- model: accounts.country
+  pk: 565
+  fields:
+    name: Австралия
+- model: accounts.country
+  pk: 566
+  fields:
+    name: Бруней
+- model: accounts.country
+  pk: 567
+  fields:
+    name: Китай
+- model: accounts.country
+  pk: 568
+  fields:
+    name: Фолклендские острова
+- model: accounts.country
+  pk: 569
+  fields:
+    name: Бангладеш
+- model: accounts.country
+  pk: 570
+  fields:
+    name: Бутан
+- model: accounts.country
+  pk: 571
+  fields:
+    name: Эстония
+- model: accounts.country
+  pk: 572
+  fields:
+    name: Джерси
+- model: accounts.country
+  pk: 573
+  fields:
+    name: Грузия
+- model: accounts.country
+  pk: 574
+  fields:
+    name: Гваделупа
+- model: accounts.country
+  pk: 575
+  fields:
+    name: Мали
+- model: accounts.country
+  pk: 576
+  fields:
+    name: Ангола
+- model: accounts.country
+  pk: 577
+  fields:
+    name: Гамбия
+- model: accounts.country
+  pk: 578
+  fields:
+    name: Саудовская Аравия
+- model: accounts.country
+  pk: 579
+  fields:
+    name: Объединенные Арабские Эмираты
+- model: accounts.country
+  pk: 580
+  fields:
+    name: Сингапур
+- model: accounts.country
+  pk: 581
+  fields:
+    name: Беларусь
+- model: accounts.country
+  pk: 582
+  fields:
+    name: Кот д'Ивуар
+- model: accounts.country
+  pk: 583
+  fields:
+    name: Гвинея-Бисау
+- model: accounts.country
+  pk: 584
+  fields:
+    name: Монако
+- model: accounts.country
+  pk: 585
+  fields:
+    name: Молдова
+- model: accounts.country
+  pk: 586
+  fields:
+    name: Иордания
+- model: accounts.country
+  pk: 587
+  fields:
+    name: Мьянма
+- model: accounts.country
+  pk: 588
+  fields:
+    name: Нигерия
+- model: accounts.country
+  pk: 589
+  fields:
+    name: Германия
+- model: accounts.country
+  pk: 590
+  fields:
+    name: Италия
+- model: accounts.country
+  pk: 591
+  fields:
+    name: Бермудские острова
+- model: accounts.country
+  pk: 592
+  fields:
+    name: Антигуа и Барбуда
+- model: accounts.country
+  pk: 593
+  fields:
+    name: Маршалловы острова
+- model: accounts.country
+  pk: 594
+  fields:
+    name: Гана
+- model: accounts.country
+  pk: 595
+  fields:
+    name: Сент-Винсент и Гренадины
+- model: accounts.country
+  pk: 596
+  fields:
+    name: Чехия
+- model: accounts.country
+  pk: 597
+  fields:
+    name: Канада
+- model: accounts.country
+  pk: 598
+  fields:
+    name: Индия
+- model: accounts.country
+  pk: 599
+  fields:
+    name: Лаос
+- model: accounts.country
+  pk: 600
+  fields:
+    name: Ливия
+- model: accounts.country
+  pk: 601
+  fields:
+    name: Монголия
+- model: accounts.country
+  pk: 602
+  fields:
+    name: Джибути
+- model: accounts.country
+  pk: 603
+  fields:
+    name: Сент-Китс и Невис
+- model: accounts.country
+  pk: 604
+  fields:
+    name: Самоа
+- model: accounts.country
+  pk: 605
+  fields:
+    name: Украина
+- model: accounts.country
+  pk: 606
+  fields:
+    name: Сьерра-Леоне
+- model: accounts.country
+  pk: 607
+  fields:
+    name: Южный Судан
+- model: accounts.country
+  pk: 608
+  fields:
+    name: Монтсеррат
+- model: accounts.country
+  pk: 609
+  fields:
+    name: Каймановы острова
+- model: accounts.country
+  pk: 610
+  fields:
+    name: Западная Сахара
+- model: accounts.country
+  pk: 611
+  fields:
+    name: Гватемала
+- model: accounts.country
+  pk: 612
+  fields:
+    name: Гуам
+- model: accounts.country
+  pk: 613
+  fields:
+    name: Мальта
+- model: accounts.country
+  pk: 614
+  fields:
+    name: Синт-Мартен
+- model: accounts.country
+  pk: 615
+  fields:
+    name: Французская Полинезия
+- model: accounts.country
+  pk: 616
+  fields:
+    name: Буркина-Фасо
+- model: accounts.country
+  pk: 617
+  fields:
+    name: Ямайка
+- model: accounts.country
+  pk: 618
+  fields:
+    name: Латвия
+- model: accounts.country
+  pk: 619
+  fields:
+    name: Лихтенштейн
+- model: accounts.country
+  pk: 620
+  fields:
+    name: Венгрия
+- model: accounts.country
+  pk: 621
+  fields:
+    name: Словения
+- model: accounts.country
+  pk: 622
+  fields:
+    name: Соединенные Штаты Америки
+- model: accounts.country
+  pk: 623
+  fields:
+    name: Финляндия
+- model: accounts.country
+  pk: 624
+  fields:
+    name: Великобритания
+- model: accounts.country
+  pk: 625
+  fields:
+    name: Багамские Острова
+- model: accounts.country
+  pk: 626
+  fields:
+    name: Новая Каледония
+- model: accounts.country
+  pk: 627
+  fields:
+    name: Северные Марианские острова
+- model: accounts.country
+  pk: 628
+  fields:
+    name: Чад
+- model: accounts.country
+  pk: 629
+  fields:
+    name: Коста-Рика
+- model: accounts.country
+  pk: 630
+  fields:
+    name: Острова Святой Елены, Вознесения и Тристан-да-Кунья
+- model: accounts.country
+  pk: 631
+  fields:
+    name: Словакия
+- model: accounts.country
+  pk: 632
+  fields:
+    name: Таиланд
+- model: accounts.country
+  pk: 633
+  fields:
+    name: Гвинея
+- model: accounts.country
+  pk: 634
+  fields:
+    name: Сальвадор
+- model: accounts.country
+  pk: 635
+  fields:
+    name: Индонезия
+- model: accounts.country
+  pk: 636
+  fields:
+    name: Виргинские острова, США
+- model: accounts.country
+  pk: 637
+  fields:
+    name: Испания
+- model: accounts.country
+  pk: 638
+  fields:
+    name: Доминиканская Республика
+- model: accounts.country
+  pk: 639
+  fields:
+    name: Бразилия
+- model: accounts.country
+  pk: 640
+  fields:
+    name: Гонконг
+- model: accounts.country
+  pk: 641
+  fields:
+    name: Оман
+- model: accounts.country
+  pk: 642
+  fields:
+    name: Ангилья
+- model: accounts.country
+  pk: 643
+  fields:
+    name: Остров Норфолк
+- model: accounts.country
+  pk: 644
+  fields:
+    name: Остров Буве
+- model: accounts.country
+  pk: 645
+  fields:
+    name: Андорра
+- model: accounts.country
+  pk: 646
+  fields:
+    name: Гаити
+- model: accounts.country
+  pk: 647
+  fields:
+    name: Алжир
+- model: accounts.country
+  pk: 648
+  fields:
+    name: Намибия
+- model: accounts.country
+  pk: 649
+  fields:
+    name: Гайана
+- model: accounts.country
+  pk: 650
+  fields:
+    name: Гернси
+- model: accounts.country
+  pk: 651
+  fields:
+    name: Норвегия
+- model: accounts.country
+  pk: 652
+  fields:
+    name: Острова Кука
+- model: accounts.country
+  pk: 653
+  fields:
+    name: Сейшельские Острова
+- model: accounts.country
+  pk: 654
+  fields:
+    name: Демократическая Республика Конго
+- model: accounts.country
+  pk: 655
+  fields:
+    name: Сен-Мартен
+- model: accounts.country
+  pk: 656
+  fields:
+    name: Бахрейн
+- model: accounts.country
+  pk: 657
+  fields:
+    name: Болгария
+- model: accounts.country
+  pk: 658
+  fields:
+    name: Армения
+- model: accounts.country
+  pk: 659
+  fields:
+    name: Антарктида
+- model: accounts.country
+  pk: 660
+  fields:
+    name: Нидерланды
+- model: accounts.country
+  pk: 661
+  fields:
+    name: Шри-Ланка
+- model: accounts.country
+  pk: 662
+  fields:
+    name: Колумбия
+- model: accounts.country
+  pk: 663
+  fields:
+    name: Литва
+- model: accounts.country
+  pk: 664
+  fields:
+    name: Малайзия
+- model: accounts.country
+  pk: 665
+  fields:
+    name: Мартиника
+- model: accounts.country
+  pk: 666
+  fields:
+    name: Сирия
+- model: accounts.country
+  pk: 667
+  fields:
+    name: Венесуэла
+- model: accounts.country
+  pk: 668
+  fields:
+    name: Узбекистан
+- model: accounts.country
+  pk: 669
+  fields:
+    name: Микронезия
+- model: accounts.country
+  pk: 670
+  fields:
+    name: Либерия
+- model: accounts.country
+  pk: 671
+  fields:
+    name: Нигер
+- model: accounts.country
+  pk: 672
+  fields:
+    name: Южно-Африканская Республика
+- model: accounts.country
+  pk: 673
+  fields:
+    name: Швеция
+- model: accounts.country
+  pk: 674
+  fields:
+    name: Новая Зеландия
+- model: accounts.country
+  pk: 675
+  fields:
+    name: Мозамбик
+- model: accounts.country
+  pk: 676
+  fields:
+    name: Аруба
+- model: accounts.country
+  pk: 677
+  fields:
+    name: Черногория
+- model: accounts.country
+  pk: 678
+  fields:
+    name: Португалия
+- model: accounts.country
+  pk: 679
+  fields:
+    name: Белиз
