@@ -11,9 +11,9 @@ def test_list_countries(generic_api_client, country, country2):
     assert response.status_code == 200
 
     response_data = response.json()
-    assert len(response_data["results"]) == 2
+    assert len(response_data) == 2
 
-    country_names = [country["name"] for country in response_data["results"]]
+    country_names = [country["name"] for country in response_data]
     assert country.name in country_names
     assert country2.name in country_names
 
