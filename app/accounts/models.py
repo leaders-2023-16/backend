@@ -59,6 +59,10 @@ class Country(models.Model):
 
 
 class TraineeProfile(models.Model):
+    class Sex(models.TextChoices):
+        MALE = "M", _("MALE")
+        FEMALE = "F", _("FEMALE")
+
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -77,6 +81,10 @@ class TraineeProfile(models.Model):
     phone_number = models.CharField(
         max_length=20, null=True, blank=True, verbose_name="Phone Number"
     )
+    sex = models.CharField(
+        "Sex", max_length=1, choices=Sex.choices, null=True, blank=True
+    )
+    birth_date = models.DateField("Birth date", blank=True, null=True)
 
     class Meta:
         db_table = "accounts_trainee_profile"
