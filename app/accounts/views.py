@@ -1,13 +1,17 @@
-from accounts.models import Country, TraineeProfile
+from accounts.models import Country, Department, TraineeProfile
 from accounts.permissions import OwnProfilePermission
 from accounts.serializers import (
     CountrySerializer,
+    DepartmentSerializer,
     TokenRefreshSerializer,
     TraineeProfileSerializer,
 )
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -55,3 +59,12 @@ class TraineeProfileViewSet(
 class CountryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
+
+
+class DepartmentViewSet(ReadOnlyModelViewSet):
+    queryset = Department.objects.all()
+    serializer_class = DepartmentSerializer
+
+    @method_decorator(cache_page(60 * 60 * 6))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)

@@ -1,0 +1,816 @@
+- model: accounts.department
+  pk: 219165
+  fields:
+    name: Москомспорт.
+- model: accounts.department
+  pk: 219173
+  fields:
+    name: Минспорт России
+- model: accounts.department
+  pk: 219376
+  fields:
+    name: Министерство образования и науки Российской Федерации
+- model: accounts.department
+  pk: 219782
+  fields:
+    name: Управа района Хорошево-Мневники города Москвы
+- model: accounts.department
+  pk: 219814
+  fields:
+    name: Департамент образования и науки города Москвы
+- model: accounts.department
+  pk: 220057
+  fields:
+    name: Администрация городского округа Коломна
+- model: accounts.department
+  pk: 220253
+  fields:
+    name: Министерство образования Московской области
+- model: accounts.department
+  pk: 237332
+  fields:
+    name: Департамент культуры города Москвы
+- model: accounts.department
+  pk: 237333
+  fields:
+    name: Департамент жилищно-коммунального хозяйства города Москвы
+- model: accounts.department
+  pk: 237334
+  fields:
+    name: Департамент здравоохранения города Москвы
+- model: accounts.department
+  pk: 237335
+  fields:
+    name: Департамент природопользования и охраны окружающей среды города Москвы
+- model: accounts.department
+  pk: 237336
+  fields:
+    name: Департамент труда и социальной защиты населения города Москвы
+- model: accounts.department
+  pk: 237337
+  fields:
+    name: Департамент транспорта и развития дорожно-транспортной инфраструктуры города
+      Москвы
+- model: accounts.department
+  pk: 237339
+  fields:
+    name: Префектура Центрального административного округа города Москвы
+- model: accounts.department
+  pk: 237340
+  fields:
+    name: Префектура Северного административного округа города Москвы
+- model: accounts.department
+  pk: 237341
+  fields:
+    name: Префектура Северо-Восточного административного округа города Москвы
+- model: accounts.department
+  pk: 237342
+  fields:
+    name: Префектура Восточного административного округа города Москвы
+- model: accounts.department
+  pk: 237343
+  fields:
+    name: Префектура Юго-Восточного административного округа города Москвы
+- model: accounts.department
+  pk: 237344
+  fields:
+    name: Префектура Южного административного округа города Москвы
+- model: accounts.department
+  pk: 237345
+  fields:
+    name: Префектура Юго-Западного административного округа города Москвы
+- model: accounts.department
+  pk: 237346
+  fields:
+    name: Префектура Западного административного округа города Москвы
+- model: accounts.department
+  pk: 237347
+  fields:
+    name: Префектура Северо-Западного административного округа города Москвы
+- model: accounts.department
+  pk: 237348
+  fields:
+    name: Префектура Зеленоградского административного округа города Москвы
+- model: accounts.department
+  pk: 237349
+  fields:
+    name: Префектура Троицкого и Новомосковского административных округов города Москвы
+- model: accounts.department
+  pk: 237350
+  fields:
+    name: Управа Савеловского района города Москвы
+- model: accounts.department
+  pk: 237351
+  fields:
+    name: Управа района Аэропорт города Москвы
+- model: accounts.department
+  pk: 237352
+  fields:
+    name: Управа района Беговой города Москвы
+- model: accounts.department
+  pk: 237353
+  fields:
+    name: Управа Бескудниковского района города Москвы
+- model: accounts.department
+  pk: 237354
+  fields:
+    name: Управа Войковского района города Москвы
+- model: accounts.department
+  pk: 237355
+  fields:
+    name: Управа района Восточное Дегунино города Москвы
+- model: accounts.department
+  pk: 237356
+  fields:
+    name: Управа Головинского района города Москвы
+- model: accounts.department
+  pk: 237357
+  fields:
+    name: Управа Дмитровского района города Москвы
+- model: accounts.department
+  pk: 237358
+  fields:
+    name: Управа района Западное Дегунино города Москвы
+- model: accounts.department
+  pk: 237359
+  fields:
+    name: Управа района Коптево города Москвы
+- model: accounts.department
+  pk: 237360
+  fields:
+    name: Управа Молжаниновского района города Москвы
+- model: accounts.department
+  pk: 237361
+  fields:
+    name: Управа Тимирязевского района города Москвы
+- model: accounts.department
+  pk: 237362
+  fields:
+    name: Управа района Ховрино города Москвы
+- model: accounts.department
+  pk: 237363
+  fields:
+    name: Управа Хорошевского района города Москвы
+- model: accounts.department
+  pk: 237364
+  fields:
+    name: Управа района Сокол города Москвы
+- model: accounts.department
+  pk: 237365
+  fields:
+    name: Управа района Левобережный города Москвы
+- model: accounts.department
+  pk: 237366
+  fields:
+    name: Управа Алексеевского района города Москвы
+- model: accounts.department
+  pk: 237367
+  fields:
+    name: Управа Алтуфьевского района города Москвы
+- model: accounts.department
+  pk: 237368
+  fields:
+    name: Управа Бабушкинского района города Москвы
+- model: accounts.department
+  pk: 237369
+  fields:
+    name: Управа района Бибирево города Москвы
+- model: accounts.department
+  pk: 237370
+  fields:
+    name: Управа Бутырского района города Москвы
+- model: accounts.department
+  pk: 237371
+  fields:
+    name: Управа Лосиноостровского района города Москвы
+- model: accounts.department
+  pk: 237372
+  fields:
+    name: Управа района Марфино города Москвы
+- model: accounts.department
+  pk: 237373
+  fields:
+    name: Управа района Марьина Роща города Москвы
+- model: accounts.department
+  pk: 237374
+  fields:
+    name: Управа Останкинского района города Москвы
+- model: accounts.department
+  pk: 237375
+  fields:
+    name: Управа района Отрадное города Москвы
+- model: accounts.department
+  pk: 237376
+  fields:
+    name: Управа района Ростокино города Москвы
+- model: accounts.department
+  pk: 237377
+  fields:
+    name: Управа района Свиблово города Москвы
+- model: accounts.department
+  pk: 237378
+  fields:
+    name: Управа района Северный города Москвы
+- model: accounts.department
+  pk: 237379
+  fields:
+    name: Управа района Северное Медведково города Москвы
+- model: accounts.department
+  pk: 237380
+  fields:
+    name: Управа района Южное Медведково города Москвы
+- model: accounts.department
+  pk: 237381
+  fields:
+    name: Управа Ярославского района города Москвы
+- model: accounts.department
+  pk: 237382
+  fields:
+    name: Управа района Лианозово города Москвы
+- model: accounts.department
+  pk: 237383
+  fields:
+    name: Управа района Богородское города Москвы
+- model: accounts.department
+  pk: 237384
+  fields:
+    name: Управа района Вешняки города Москвы
+- model: accounts.department
+  pk: 237385
+  fields:
+    name: Управа района Восточный города Москвы
+- model: accounts.department
+  pk: 237386
+  fields:
+    name: Управа района Восточное Измайлово города Москвы
+- model: accounts.department
+  pk: 237387
+  fields:
+    name: Управа района Гольяново города Москвы
+- model: accounts.department
+  pk: 237388
+  fields:
+    name: Управа района Ивановское города Москвы
+- model: accounts.department
+  pk: 237389
+  fields:
+    name: Управа района Измайлово города Москвы
+- model: accounts.department
+  pk: 237390
+  fields:
+    name: Управа района Косино-Ухтомский города Москвы
+- model: accounts.department
+  pk: 237391
+  fields:
+    name: Управа района Метрогородок города Москвы
+- model: accounts.department
+  pk: 237392
+  fields:
+    name: Управа района Новогиреево города Москвы
+- model: accounts.department
+  pk: 237393
+  fields:
+    name: Управа района Новокосино города Москвы
+- model: accounts.department
+  pk: 237394
+  fields:
+    name: Управа района Перово города Москвы
+- model: accounts.department
+  pk: 237395
+  fields:
+    name: Управа района Преображенское города Москвы
+- model: accounts.department
+  pk: 237396
+  fields:
+    name: Управа района Северное Измайлово города Москвы
+- model: accounts.department
+  pk: 237397
+  fields:
+    name: Управа района Соколиная Гора города Москвы
+- model: accounts.department
+  pk: 237398
+  fields:
+    name: Управа района Сокольники города Москвы
+- model: accounts.department
+  pk: 237399
+  fields:
+    name: Управа района Крюково города Москвы
+- model: accounts.department
+  pk: 237400
+  fields:
+    name: Управа района Матушкино города Москвы
+- model: accounts.department
+  pk: 237401
+  fields:
+    name: Управа района Савелки города Москвы
+- model: accounts.department
+  pk: 237402
+  fields:
+    name: Управа района Силино города Москвы
+- model: accounts.department
+  pk: 237403
+  fields:
+    name: Управа района Старое Крюково города Москвы
+- model: accounts.department
+  pk: 237404
+  fields:
+    name: Управа района Тропарево-Никулино города Москвы
+- model: accounts.department
+  pk: 237405
+  fields:
+    name: Управа района Филевский парк города Москвы
+- model: accounts.department
+  pk: 237406
+  fields:
+    name: Управа района Внуково города Москвы
+- model: accounts.department
+  pk: 237407
+  fields:
+    name: Управа района Дорогомилово города Москвы
+- model: accounts.department
+  pk: 237408
+  fields:
+    name: Управа района Крылатское города Москвы
+- model: accounts.department
+  pk: 237409
+  fields:
+    name: Управа района Кунцево города Москвы
+- model: accounts.department
+  pk: 237410
+  fields:
+    name: Управа Можайского района города Москвы
+- model: accounts.department
+  pk: 237411
+  fields:
+    name: Управа района Ново-Переделкино города Москвы
+- model: accounts.department
+  pk: 237412
+  fields:
+    name: Управа района Очаково-Матвеевское города Москвы
+- model: accounts.department
+  pk: 237413
+  fields:
+    name: Управа района Проспект Вернадского города Москвы
+- model: accounts.department
+  pk: 237414
+  fields:
+    name: Управа района Раменки города Москвы
+- model: accounts.department
+  pk: 237415
+  fields:
+    name: Управа района Солнцево города Москвы
+- model: accounts.department
+  pk: 237416
+  fields:
+    name: Управа района Фили-Давыдково города Москвы
+- model: accounts.department
+  pk: 237417
+  fields:
+    name: Управа района Куркино города Москвы
+- model: accounts.department
+  pk: 237418
+  fields:
+    name: Управа района Митино города Москвы
+- model: accounts.department
+  pk: 237419
+  fields:
+    name: Управа района Покровское-Стрешнево города Москвы
+- model: accounts.department
+  pk: 237420
+  fields:
+    name: Управа района Северное Тушино города Москвы
+- model: accounts.department
+  pk: 237421
+  fields:
+    name: Управа района Строгино города Москвы
+- model: accounts.department
+  pk: 237422
+  fields:
+    name: Управа района Щукино города Москвы
+- model: accounts.department
+  pk: 237423
+  fields:
+    name: Управа района Южное Тушино города Москвы
+- model: accounts.department
+  pk: 237424
+  fields:
+    name: Управа Пресненского района города Москвы
+- model: accounts.department
+  pk: 237425
+  fields:
+    name: Управа Мещанского района города Москвы
+- model: accounts.department
+  pk: 237426
+  fields:
+    name: Управа Тверского района города Москвы
+- model: accounts.department
+  pk: 237427
+  fields:
+    name: Управа района Арбат города Москвы
+- model: accounts.department
+  pk: 237428
+  fields:
+    name: Управа Басманного района города Москвы
+- model: accounts.department
+  pk: 237429
+  fields:
+    name: Управа района Замоскворечье города Москвы
+- model: accounts.department
+  pk: 237430
+  fields:
+    name: Управа Красносельского района города Москвы
+- model: accounts.department
+  pk: 237431
+  fields:
+    name: Управа Таганского района города Москвы
+- model: accounts.department
+  pk: 237432
+  fields:
+    name: Управа района Хамовники города Москвы
+- model: accounts.department
+  pk: 237433
+  fields:
+    name: Управа района Якиманка города Москвы
+- model: accounts.department
+  pk: 237434
+  fields:
+    name: Управа района Выхино-Жулебино города Москвы
+- model: accounts.department
+  pk: 237435
+  fields:
+    name: Управа района Капотня города Москвы
+- model: accounts.department
+  pk: 237436
+  fields:
+    name: Управа района Кузьминки города Москвы
+- model: accounts.department
+  pk: 237437
+  fields:
+    name: Управа района Лефортово города Москвы
+- model: accounts.department
+  pk: 237438
+  fields:
+    name: Управа района Люблино города Москвы
+- model: accounts.department
+  pk: 237439
+  fields:
+    name: Управа района Марьино города Москвы
+- model: accounts.department
+  pk: 237440
+  fields:
+    name: Управа района Некрасовка города Москвы
+- model: accounts.department
+  pk: 237441
+  fields:
+    name: Управа Нижегородского района города Москвы
+- model: accounts.department
+  pk: 237442
+  fields:
+    name: Управа района Печатники города Москвы
+- model: accounts.department
+  pk: 237443
+  fields:
+    name: Управа Рязанского района города Москвы
+- model: accounts.department
+  pk: 237444
+  fields:
+    name: Управа района Текстильщики города Москвы
+- model: accounts.department
+  pk: 237445
+  fields:
+    name: Управа Южнопортового района города Москвы
+- model: accounts.department
+  pk: 237446
+  fields:
+    name: Управа Обручевского района города Москвы
+- model: accounts.department
+  pk: 237447
+  fields:
+    name: Управа Академического района города Москвы
+- model: accounts.department
+  pk: 237448
+  fields:
+    name: Управа Гагаринского района города Москвы
+- model: accounts.department
+  pk: 237449
+  fields:
+    name: Управа района Зюзино города Москвы
+- model: accounts.department
+  pk: 237450
+  fields:
+    name: Управа района Коньково города Москвы
+- model: accounts.department
+  pk: 237451
+  fields:
+    name: Управа района Котловка города Москвы
+- model: accounts.department
+  pk: 237452
+  fields:
+    name: Управа Ломоносовского района города Москвы
+- model: accounts.department
+  pk: 237453
+  fields:
+    name: Управа района Северное Бутово города Москвы
+- model: accounts.department
+  pk: 237454
+  fields:
+    name: Управа района Теплый Стан города Москвы
+- model: accounts.department
+  pk: 237455
+  fields:
+    name: Управа района Черемушки города Москвы
+- model: accounts.department
+  pk: 237456
+  fields:
+    name: Управа района Южное Бутово города Москвы
+- model: accounts.department
+  pk: 237457
+  fields:
+    name: Управа района Ясенево города Москвы
+- model: accounts.department
+  pk: 237458
+  fields:
+    name: Управа района Бирюлево Восточное города Москвы
+- model: accounts.department
+  pk: 237459
+  fields:
+    name: Управа района Бирюлево Западное города Москвы
+- model: accounts.department
+  pk: 237460
+  fields:
+    name: Управа района Братеево города Москвы
+- model: accounts.department
+  pk: 237461
+  fields:
+    name: Управа Даниловского района города Москвы
+- model: accounts.department
+  pk: 237462
+  fields:
+    name: Управа Донского района города Москвы
+- model: accounts.department
+  pk: 237463
+  fields:
+    name: Управа района Зябликово города Москвы
+- model: accounts.department
+  pk: 237464
+  fields:
+    name: Управа района Москворечье-Сабурово города Москвы
+- model: accounts.department
+  pk: 237465
+  fields:
+    name: Управа района Нагатино-Садовники города Москвы
+- model: accounts.department
+  pk: 237466
+  fields:
+    name: Управа района Нагатинский затон города Москвы
+- model: accounts.department
+  pk: 237467
+  fields:
+    name: Управа Нагорного района города Москвы
+- model: accounts.department
+  pk: 237468
+  fields:
+    name: Управа района Орехово-Борисово Северное города Москвы
+- model: accounts.department
+  pk: 237469
+  fields:
+    name: Управа района Орехово-Борисово Южное города Москвы
+- model: accounts.department
+  pk: 237470
+  fields:
+    name: Управа района Царицыно города Москвы
+- model: accounts.department
+  pk: 237471
+  fields:
+    name: Управа района Чертаново Северное города Москвы
+- model: accounts.department
+  pk: 237472
+  fields:
+    name: Управа района Чертаново Центральное города Москвы
+- model: accounts.department
+  pk: 237473
+  fields:
+    name: Управа района Чертаново Южное города Москвы
+- model: accounts.department
+  pk: 257867
+  fields:
+    name: Администрация городского округа Троицк
+- model: accounts.department
+  pk: 257868
+  fields:
+    name: Администрация городского округа Щербинка
+- model: accounts.department
+  pk: 257869
+  fields:
+    name: Администрация поселения Внуковское
+- model: accounts.department
+  pk: 257873
+  fields:
+    name: Администрация поселения Сосенское
+- model: accounts.department
+  pk: 257874
+  fields:
+    name: Администрация поселения Филимонковское
+- model: accounts.department
+  pk: 257875
+  fields:
+    name: Администрация поселения Кленовское
+- model: accounts.department
+  pk: 257877
+  fields:
+    name: Администрация поселения Марушкинское
+- model: accounts.department
+  pk: 257878
+  fields:
+    name: Администрация поселения Новофёдоровское
+- model: accounts.department
+  pk: 257879
+  fields:
+    name: Администрация поселения Первомайское
+- model: accounts.department
+  pk: 257880
+  fields:
+    name: Администрация поселения Вороновское
+- model: accounts.department
+  pk: 257882
+  fields:
+    name: Администрация поселения Краснопахорское
+- model: accounts.department
+  pk: 257884
+  fields:
+    name: Администрация поселения Михайлово-Ярцевское
+- model: accounts.department
+  pk: 257886
+  fields:
+    name: Администрация поселения Рязановское
+- model: accounts.department
+  pk: 257887
+  fields:
+    name: Администрация поселения Щаповское
+- model: accounts.department
+  pk: 257888
+  fields:
+    name: Администрация поселения Десеновское
+- model: accounts.department
+  pk: 259553
+  fields:
+    name: Администрация городского округа Пущино
+- model: accounts.department
+  pk: 259573
+  fields:
+    name: Департамент торговли и услуг города Москвы
+- model: accounts.department
+  pk: 259810
+  fields:
+    name: Министерство обороны Российской Федерации
+- model: accounts.department
+  pk: 259811
+  fields:
+    name: Министерство сельского хозяйства Российской Федерации
+- model: accounts.department
+  pk: 259812
+  fields:
+    name: Министерство внутренних дел Российской Федерации
+- model: accounts.department
+  pk: 259813
+  fields:
+    name: Российская академия медицинских наук
+- model: accounts.department
+  pk: 259814
+  fields:
+    name: Министерство Российской Федерации по делам гражданской обороны, чрезвычайным
+      ситуациям и ликвидации последствий стихийных бедствий
+- model: accounts.department
+  pk: 259815
+  fields:
+    name: Федеральная служба безопасности Российской Федерации (ФСБ РФ)
+- model: accounts.department
+  pk: 260052
+  fields:
+    name: Федеральное агентство связи (Россвязь)
+- model: accounts.department
+  pk: 260603
+  fields:
+    name: Министерство культуры Российской Федерации
+- model: accounts.department
+  pk: 260656
+  fields:
+    name: Министерство иностранных дел Российской Федерации
+- model: accounts.department
+  pk: 260857
+  fields:
+    name: Министерство здравоохранения Российской Федерации
+- model: accounts.department
+  pk: 261928
+  fields:
+    name: Департамент по делам гражданской обороны, чрезвычайным ситуациям и пожарной
+      безопасности города Москвы
+- model: accounts.department
+  pk: 262196
+  fields:
+    name: Следственный Комитет Российской Федерации
+- model: accounts.department
+  pk: 262649
+  fields:
+    name: Департамент строительства города Москвы
+- model: accounts.department
+  pk: 262889
+  fields:
+    name: Управление делами Президента Российской Федерации
+- model: accounts.department
+  pk: 263004
+  fields:
+    name: Министерство природных ресурсов и экологии Российской Федерации
+- model: accounts.department
+  pk: 263870
+  fields:
+    name: Министерство транспорта Российской Федерации
+- model: accounts.department
+  pk: 265106
+  fields:
+    name: Администрация муниципального округа Гагаринский
+- model: accounts.department
+  pk: 266016
+  fields:
+    name: Администрация городского округа Подольск
+- model: accounts.department
+  pk: 266070
+  fields:
+    name: Администрация муниципального образования городской округ Люберцы Московской
+      области
+- model: accounts.department
+  pk: 266099
+  fields:
+    name: Администрация городского округа Бронницы Московской области
+- model: accounts.department
+  pk: 266272
+  fields:
+    name: Администрация городского округа Реутов
+- model: accounts.department
+  pk: 266599
+  fields:
+    name: Территориальное Управление федерального Агентства по управлению государственным
+      имуществом в городе Москве
+- model: accounts.department
+  pk: 266600
+  fields:
+    name: Федеральное агенство по управлению государственным имуществом (Росимущество)
+- model: accounts.department
+  pk: 266642
+  fields:
+    name: Управление по делам молодежи, физической культуры и спорта Администрации
+      Дмитровского городского округа Московской области
+- model: accounts.department
+  pk: 266698
+  fields:
+    name: Департамент городского имущества города Москвы
+- model: accounts.department
+  pk: 266718
+  fields:
+    name: Администрация городского округа Балашиха
+- model: accounts.department
+  pk: 266746
+  fields:
+    name: Федеральное агенство по делам молодежи (Росмолодежь)
+- model: accounts.department
+  pk: 266885
+  fields:
+    name: Православная религиозная организация Московская Епархия русской православной
+      церкви
+- model: accounts.department
+  pk: 266981
+  fields:
+    name: Минобрнауки России
+- model: accounts.department
+  pk: 266982
+  fields:
+    name: Министерство экономического развития Российской Федерации
+- model: accounts.department
+  pk: 267135
+  fields:
+    name: Департамент градостроительной политики города Москвы
+- model: accounts.department
+  pk: 267360
+  fields:
+    name: Государственная корпорация по космической деятельности «Роскосмос»
+- model: accounts.department
+  pk: 267476
+  fields:
+    name: ФСИН России
+- model: accounts.department
+  pk: 267550
+  fields:
+    name: Администрация города Лобня
+- model: accounts.department
+  pk: 267552
+  fields:
+    name: Совет депутатов городского округа Орехово-Зуево
+- model: accounts.department
+  pk: 267553
+  fields:
+    name: Администрация города Пушкино Пушкинского муниципального района Московской
+      области
+- model: accounts.department
+  pk: 267616
+  fields:
+    name: Федеральное агенство воздушного транспорта (Росавиация)

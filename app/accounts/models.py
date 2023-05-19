@@ -156,3 +156,10 @@ class WorkExperience(models.Model):
     class Meta:
         db_table = "accounts_work_experience"
         verbose_name_plural = "Work Experiences"
+
+
+class Department(models.Model):
+    name = models.CharField("Name", max_length=200)
+
+    def __str__(self):
+        return self.name
