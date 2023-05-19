@@ -1,4 +1,11 @@
-from accounts.models import Country, Education, Link, TraineeProfile, WorkExperience
+from accounts.models import (
+    Country,
+    Department,
+    Education,
+    Link,
+    TraineeProfile,
+    WorkExperience,
+)
 from django.db import transaction
 from rest_framework import serializers
 from rest_framework_simplejwt.exceptions import TokenError
@@ -135,3 +142,9 @@ class TokenRefreshSerializer(serializers.Serializer):
             raise serializers.ValidationError("Refresh token is required")
 
         return attrs
+
+
+class DepartmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = "__all__"

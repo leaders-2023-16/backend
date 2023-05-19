@@ -1,5 +1,6 @@
 from accounts.views import (
     CountryViewSet,
+    DepartmentViewSet,
     TokenRefreshAndAccessView,
     TraineeProfileViewSet,
 )
@@ -12,6 +13,7 @@ router.register(
     r"users/trainee-profiles", TraineeProfileViewSet, basename="trainee-profiles"
 )
 router.register(r"countries", CountryViewSet, basename="countries")
+router.register(r"departments", DepartmentViewSet, basename="departments")
 
 urlpatterns = [
     path("", include(router.urls)),
