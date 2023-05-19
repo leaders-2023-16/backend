@@ -36,8 +36,11 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     class Role(models.TextChoices):
+        CANDIDATE = "F", _("Candidate")  # F - like first-timer
         TRAINEE = "T", _("Trainee")
         MENTOR = "M", _("Mentor")
+        PERSONNEL = "P", _("Personnel")
+        CURATOR = "C", _("Curator")
         ADMIN = "A", _("Admin")
 
     role = models.CharField(
@@ -109,8 +112,8 @@ class Education(models.Model):
     )
     name = models.CharField(max_length=100, verbose_name="Name")
     type = models.CharField(max_length=20, choices=Type.choices, verbose_name="Type")
-    start_date = models.DateField(verbose_name="Start Date")
-    end_date = models.DateField(blank=True, null=True, verbose_name="End Date")
+    start_year = models.IntegerField(verbose_name="Start year")
+    end_year = models.IntegerField(blank=True, null=True, verbose_name="End year")
     specialization = models.CharField(max_length=100, verbose_name="Specialization")
     degree = models.CharField(
         max_length=100, choices=DegreeType.choices, verbose_name="Degree"
