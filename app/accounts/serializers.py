@@ -1,6 +1,8 @@
 from accounts.models import Country, Education, Link, TraineeProfile, WorkExperience
 from django.db import transaction
 from rest_framework import serializers
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class CountrySerializer(serializers.ModelSerializer):
@@ -109,3 +111,21 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
         WorkExperience.objects.bulk_create(work_experiences)
 
         return instance
+
+
+class TokenRefreshSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+
+    def validate(self, attrs):
+        refresh_token = attrs.get("refresh")
+        if refresh_token:
+            try:
+                refresh_token = RefreshToken(refresh_token)
+                refresh_token.verify()
+                attrs["refresh_token"] = refresh_token
+            except TokenError:
+                raise serializers.ValidationError("Invalid refresh token")
+        else:
+            raise serializers.ValidationError("Refresh token is required")
+
+        return attrs

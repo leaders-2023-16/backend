@@ -1,30 +1,16 @@
 from accounts.models import Country, TraineeProfile
 from accounts.permissions import OwnProfilePermission
-from accounts.serializers import CountrySerializer, TraineeProfileSerializer
-from rest_framework import serializers, viewsets
+from accounts.serializers import (
+    CountrySerializer,
+    TokenRefreshSerializer,
+    TraineeProfileSerializer,
+)
+from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
-
-
-class TokenRefreshSerializer(serializers.Serializer):
-    refresh = serializers.CharField()
-
-    def validate(self, attrs):
-        refresh_token = attrs.get("refresh")
-        if refresh_token:
-            try:
-                refresh_token = RefreshToken(refresh_token)
-                refresh_token.verify()
-                attrs["refresh_token"] = refresh_token
-            except TokenError:
-                raise serializers.ValidationError("Invalid refresh token")
-        else:
-            raise serializers.ValidationError("Refresh token is required")
-
-        return attrs
 
 
 class TokenRefreshAndAccessView(TokenRefreshView):
