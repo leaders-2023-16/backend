@@ -3,18 +3,30 @@ from accounts.permissions import OwnProfilePermission
 from accounts.serializers import (
     CountrySerializer,
     DepartmentSerializer,
+    TokenObtainPairResponseSerializer,
     TokenRefreshSerializer,
     TraineeProfileSerializer,
 )
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from rest_framework import viewsets
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import status, viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+
+class DecoratedTokenObtainPairView(TokenObtainPairView):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenObtainPairResponseSerializer(),
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
 
 
 class TokenRefreshAndAccessView(TokenRefreshView):
