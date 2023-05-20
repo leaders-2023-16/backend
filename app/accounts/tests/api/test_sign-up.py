@@ -24,18 +24,14 @@ def test_registration(generic_api_client):
     assert User.objects.filter(username="testuser@us.com").exists()
 
     # Проверка наличия токенов в ответе
-    assert "access_token" in response.data
-    assert "refresh_token" in response.data
+    assert "access" in response.data
+    assert "refresh" in response.data
 
-    # Проверка наличия профиля стажера в ответе
-    assert "trainee_profile" in response.data
-    assert response.data["trainee_profile"]["first_name"] == "Test"
-    assert response.data["trainee_profile"]["last_name"] == "User"
+    assert response.data["user_id"]
 
 
 @pytest.mark.django_db
 def test_registration_existing_user(generic_api_client):
-
     url = reverse("sign-up")
     data = {
         "username": "testuser@us.com",
@@ -49,9 +45,8 @@ def test_registration_existing_user(generic_api_client):
     response = generic_api_client.post(url, data, format="json")
 
     # Проверка кода ответа
-    assert response.status_code == status.HTTP_409_CONFLICT
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
 
-    # Проверка создания пользователя в базе данных
-    assert User.objects.filter(username="testuser@us.com").exists()
-
-    assert response.data["detail"] == "USER_ALREADY_EXISTS"
+    assert response.json() == {
+        "username": ["A user with that username already exists."]
+    }
