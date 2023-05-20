@@ -4,7 +4,7 @@ from rest_framework import status
 
 
 @pytest.mark.django_db
-def test_sign_in(generic_api_client):
+def test_sign_in(generic_api_client, user):
     # Запрос на эндпоинт
     url = reverse("token_obtain_pair")
     data = {"username": "user@user.com", "password": "password"}
@@ -16,6 +16,7 @@ def test_sign_in(generic_api_client):
     # Проверка наличия токенов в ответе
     assert "access" in response.data
     assert "refresh" in response.data
+    assert response.data["user_id"] == user.id
 
 
 @pytest.mark.django_db

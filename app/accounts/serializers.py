@@ -9,6 +9,7 @@ from accounts.models import (
 from django.db import transaction
 from rest_framework import serializers
 from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
@@ -148,3 +149,10 @@ class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
         fields = "__all__"
+
+
+class TokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        data["user_id"] = self.user.id
+        return data

@@ -170,6 +170,7 @@ REQUIRED_UNIVERSITY_YEARS = 3
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(weeks=1),
+    "TOKEN_OBTAIN_SERIALIZER": "accounts.serializers.TokenObtainPairSerializer",
 }
 
 SERVER_HOST = os.getenv("SERVER_HOST", "http://127.0.0.1:8000")
