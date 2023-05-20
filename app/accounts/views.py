@@ -3,7 +3,9 @@ from accounts.permissions import OwnProfilePermission
 from accounts.serializers import (
     CountrySerializer,
     DepartmentSerializer,
+    SignUpSerializer,
     TokenObtainPairResponseSerializer,
+    TokenObtainPairWithUserIdSerializer,
     TokenRefreshSerializer,
     TraineeProfileSerializer,
 )
@@ -13,6 +15,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status, viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -49,6 +52,27 @@ class TokenRefreshAndAccessView(TokenRefreshView):
                 "refresh": str(refresh_token),
             }
         )
+
+
+class SignUpAPIView(APIView):
+    @swagger_auto_schema(
+        request_body=SignUpSerializer(),
+        responses={
+            200: TokenObtainPairResponseSerializer(),
+        },
+    )
+    def post(self, request):
+        serializer = SignUpSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        response_serializer = TokenObtainPairWithUserIdSerializer(
+            data={
+                "username": serializer.validated_data["username"],
+                "password": serializer.validated_data["password"],
+            }
+        )
+        response_serializer.is_valid()
+        return Response(response_serializer.validated_data, status=201)
 
 
 class TraineeProfileViewSet(

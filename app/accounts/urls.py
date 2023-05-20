@@ -2,6 +2,7 @@ from accounts.views import (
     CountryViewSet,
     DecoratedTokenObtainPairView,
     DepartmentViewSet,
+    SignUpAPIView,
     TokenRefreshAndAccessView,
     TraineeProfileViewSet,
 )
@@ -17,6 +18,7 @@ router.register(r"departments", DepartmentViewSet, basename="departments")
 
 urlpatterns = [
     path("", include(router.urls)),
+    path("auth/sign-up", SignUpAPIView.as_view(), name="sign-up"),
     path(
         "auth/sign-in", DecoratedTokenObtainPairView.as_view(), name="token_obtain_pair"
     ),

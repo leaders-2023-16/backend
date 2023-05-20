@@ -4,6 +4,7 @@ from accounts.models import (
     Education,
     Link,
     TraineeProfile,
+    User,
     WorkExperience,
 )
 from django.db import transaction
@@ -168,3 +169,14 @@ class TokenObtainPairWithUserIdSerializer(TokenObtainPairSerializer):
         data = super().validate(attrs)
         data["user_id"] = self.user.id
         return data
+
+
+class SignUpSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ("username", "password", "first_name", "last_name")
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
