@@ -48,7 +48,9 @@ def generic_api_client(request, anon_api_client, api_client):
 
 @pytest.fixture
 def user():
-    return User.objects.create_user(username="user@user.com", password="password")
+    return User.objects.create_user(
+        first_name="user", last_name="user", email="user@user.com", password="password"
+    )
 
 
 @pytest.fixture(autouse=True)
