@@ -1,0 +1,28 @@
+- model: internship.direction
+  pk: 1
+  fields:
+    name: IT-город
+- model: internship.direction
+  pk: 2
+  fields:
+    name: Медийный город
+- model: internship.direction
+  pk: 3
+  fields:
+    name: Социальный город
+- model: internship.direction
+  pk: 4
+  fields:
+    name: Комфортная городская среда
+- model: internship.direction
+  pk: 5
+  fields:
+    name: Правовое пространство
+- model: internship.direction
+  pk: 6
+  fields:
+    name: Городская экономика
+- model: internship.direction
+  pk: 7
+  fields:
+    name: HR-город
