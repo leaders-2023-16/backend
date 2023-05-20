@@ -46,6 +46,31 @@ class WorkExperienceSerializer(serializers.ModelSerializer):
         fields = ["employer", "position", "start_date", "end_date", "description"]
 
 
+class ReadTraineeProfileSerializer(serializers.ModelSerializer):
+    links = LinkSerializer(many=True, required=False)
+    educations = EducationSerializer(many=True, required=False)
+    work_experiences = WorkExperienceSerializer(many=True, required=False)
+    first_name = serializers.CharField(source="user.first_name", read_only=True)
+    last_name = serializers.CharField(source="user.last_name", read_only=True)
+    email = serializers.CharField(source="user.email", read_only=True)
+
+    class Meta:
+        model = TraineeProfile
+        fields = [
+            "user_id",
+            "citizenship",
+            "bio",
+            "phone_number",
+            "links",
+            "educations",
+            "work_experiences",
+            "first_name",
+            "last_name",
+            "email",
+        ]
+        depth = 1
+
+
 class TraineeProfileSerializer(serializers.ModelSerializer):
     links = LinkSerializer(many=True, required=False)
     educations = EducationSerializer(many=True, required=False)
