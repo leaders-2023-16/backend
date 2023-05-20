@@ -20,6 +20,7 @@ class InternshipApplication(models.Model):
         related_name="applications",
         primary_key=True,
     )
+    is_recommended = models.BooleanField(blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     status = models.CharField(
         max_length=255, choices=Status.choices, default=Status.PENDING
@@ -33,7 +34,12 @@ class InternshipApplication(models.Model):
         related_name="reviewed_applications",
     )
 
-    def is_recommended(self):
+    def set_recommendation(self):
+        self.is_recommended = self._calculate_recommendation()
+        self.save()
+        return self
+
+    def _calculate_recommendation(self):
         if (
             self.applicant.trainee_profile.citizenship_id
             != settings.PREFERABLE_CITIZENSHIP_ID

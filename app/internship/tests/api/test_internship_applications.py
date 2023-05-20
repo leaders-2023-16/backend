@@ -22,6 +22,7 @@ def test_get_internship_applications(api_client, internship_application):
     assert len(data) == 1
     assert data[0]["applicant"]["email"] == internship_application.applicant.email
     assert data[0]["status"] == internship_application.status
+    assert data[0]["is_recommended"] is False
 
 
 @pytest.mark.django_db
