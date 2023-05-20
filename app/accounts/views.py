@@ -4,6 +4,7 @@ from accounts.serializers import (
     CountrySerializer,
     DepartmentSerializer,
     SignUpSerializer,
+    TokenObtainPairResponseSerializer,
     TokenRefreshSerializer,
     TraineeProfileSerializer,
 )
@@ -19,7 +20,17 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+
+class DecoratedTokenObtainPairView(TokenObtainPairView):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenObtainPairResponseSerializer(),
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
 
 
 class TokenRefreshAndAccessView(TokenRefreshView):

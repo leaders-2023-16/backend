@@ -67,6 +67,9 @@ class Country(models.Model):
     class Meta:
         verbose_name_plural = "Countries"
 
+    def __str__(self):
+        return self.name
+
 
 class TraineeProfile(models.Model):
     class Sex(models.TextChoices):

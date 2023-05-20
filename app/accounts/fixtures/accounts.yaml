@@ -1,0 +1,126 @@
+- model: accounts.user
+  pk: 7
+  fields:
+    password: pbkdf2_sha256$600000$LVO5m868kkGsaLpqLUzNyK$uvlqpiHgXJQyUL7eB71Lf/226MAVqXZyA4Ylf4dDDrE=
+    last_login: null
+    is_superuser: false
+    username: trainee@user.com
+    first_name: Райан
+    last_name: Ховард
+    email: trainee@user.com
+    is_staff: false
+    is_active: true
+    date_joined: 2023-05-20 14:45:20+00:00
+    role: T
+    groups: []
+    user_permissions: []
+- model: accounts.user
+  pk: 8
+  fields:
+    password: pbkdf2_sha256$600000$GYBITiQrMJBqBXT2AEfcQy$/NSOsQCjwKAoLB8Pm7P37l64K4oAY8TrwvzJk6qZJQQ=
+    last_login: null
+    is_superuser: false
+    username: curator@user.com
+    first_name: Джен
+    last_name: Левинсон
+    email: curator@user.com
+    is_staff: false
+    is_active: true
+    date_joined: 2023-05-20 14:46:57+00:00
+    role: C
+    groups: []
+    user_permissions: []
+- model: accounts.user
+  pk: 9
+  fields:
+    password: pbkdf2_sha256$600000$Slpj4WFdlTxUnaNjK8b0M7$PsjD40ktIC6YM/RTr79N3N+KQTJGwQUuO8PUnxgUGq0=
+    last_login: null
+    is_superuser: false
+    username: mentor@user.com
+    first_name: Майкл
+    last_name: Скотт
+    email: mentor@user.com
+    is_staff: false
+    is_active: true
+    date_joined: 2023-05-20 14:48:55+00:00
+    role: M
+    groups: []
+    user_permissions: []
+- model: accounts.user
+  pk: 10
+  fields:
+    password: pbkdf2_sha256$600000$o5djpJn6MW9EVChz6wmB1v$Tkw6dqwCR3MEGjRfVMUOr6ofvO9sU79mgHglWze2yA8=
+    last_login: null
+    is_superuser: false
+    username: personnel@user.com
+    first_name: Тоби
+    last_name: Флендерсон
+    email: personnel@user.com
+    is_staff: false
+    is_active: true
+    date_joined: 2023-05-20 14:49:45+00:00
+    role: P
+    groups: []
+    user_permissions: []
+- model: accounts.user
+  pk: 11
+  fields:
+    password: pbkdf2_sha256$600000$K6B5ZhuaCuflcRtBUhf37q$oeX+3kIUTwlcDHjq5lSY8L3EqKuIJMLPSjzj10VhdZE=
+    last_login: null
+    is_superuser: false
+    username: candidate@user.com
+    first_name: Энди
+    last_name: Бернард
+    email: candidate@user.com
+    is_staff: false
+    is_active: true
+    date_joined: 2023-05-20 14:50:36+00:00
+    role: F
+    groups: []
+    user_permissions: []
+- model: accounts.traineeprofile
+  pk: 7
+  fields:
+    citizenship: 475
+    bio: молодой, умный, хладнокровный человек, временно работающий в офисе. Имеет
+      высшее образование, окончил бизнес-школу. Он очень быстро оценивает реальное
+      положение вещей в офисе, несмотря на попытки Майкла внушить ему официальную
+      точку зрения.[1] Является самым мотивированным сотрудником филиала бумажной
+      компании "Dunder Mifflin" в Скрэнтоне на протяжении первого, второго, третьего,
+      четвёртого, пятого сезонов сериала. В последней серии третьего сезона "Офиса"
+      стал самым молодым вице-президентом компании и занимал эту должность на протяжении
+      всего четвёртого сезона. В результате незаконных действий по укреплению созданного
+      им сайта компании, был снят с этой должности и опять возвращен на работу в Скрэнтон
+      как временный сотрудник. В пятом сезоне подвел компанию второй раз. Начиная
+      с пятого сезона, Райан становится самым безответственным персонажем "Офиса".
+    phone_number: '79003333444'
+    sex: M
+    birth_date: 2000-05-20
+- model: accounts.traineeprofile
+  pk: 11
+  fields:
+    citizenship: 476
+    bio: ''
+    phone_number: '79001111222'
+    sex: M
+    birth_date: 1989-05-17
+- model: accounts.education
+  pk: 1
+  fields:
+    profile: 7
+    name: Бизнес школа
+    type: university
+    start_year: 2018
+    end_year: 2022
+    specialization: Бизнес
+    degree: Master
+    description: Обучался бизнесу
+- model: accounts.workexperience
+  pk: 1
+  fields:
+    profile: 7
+    employer: Боулинг
+    position: Кассир
+    start_date: 2022-05-20
+    end_date: 2023-03-20
+    description: Выдавал ботинки, объявлял дни рождения
