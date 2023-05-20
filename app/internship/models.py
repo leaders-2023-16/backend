@@ -33,6 +33,7 @@ class InternshipApplication(models.Model):
         related_name="reviewed_applications",
     )
 
+    @property
     def is_recommended(self):
         if (
             self.applicant.trainee_profile.citizenship_id

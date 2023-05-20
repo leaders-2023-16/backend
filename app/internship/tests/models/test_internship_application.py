@@ -5,7 +5,7 @@ from django.conf import settings
 
 @pytest.mark.django_db
 def test_is_recommended(internship_application, recommended_trainee_profile):
-    assert internship_application.is_recommended() is True
+    assert internship_application.is_recommended is True
 
 
 @pytest.mark.django_db
@@ -16,7 +16,7 @@ def test_is_recommended_without_preferable_citizenship(
         id=settings.PREFERABLE_CITIZENSHIP_ID
     ).first()
     recommended_trainee_profile.save()
-    assert not internship_application.is_recommended()
+    assert internship_application.is_recommended is False
 
 
 @pytest.mark.django_db
@@ -27,4 +27,4 @@ def test_is_recommended_without_required_university_years(
     education = recommended_trainee_profile.educations.first()
     education.end_year = education.start_year + settings.REQUIRED_UNIVERSITY_YEARS - 1
     education.save()
-    assert internship_application.is_recommended() is False
+    assert internship_application.is_recommended is False
