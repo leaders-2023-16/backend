@@ -16,4 +16,5 @@ def recommended_trainee_profile(internship_application, user):
     user.trainee_profile.educations.add(education)
     user.trainee_profile.citizenship_id = settings.PREFERABLE_CITIZENSHIP_ID
     user.trainee_profile.save()
+    internship_application.set_recommendation()  # for recommendation calculation
     return user.trainee_profile

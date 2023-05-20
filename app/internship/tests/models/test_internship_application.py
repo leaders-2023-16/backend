@@ -16,6 +16,7 @@ def test_is_recommended_without_preferable_citizenship(
         id=settings.PREFERABLE_CITIZENSHIP_ID
     ).first()
     recommended_trainee_profile.save()
+    internship_application.set_recommendation()  # for recommendation calculation
     assert internship_application.is_recommended is False
 
 
@@ -27,4 +28,5 @@ def test_is_recommended_without_required_university_years(
     education = recommended_trainee_profile.educations.first()
     education.end_year = education.start_year + settings.REQUIRED_UNIVERSITY_YEARS - 1
     education.save()
+    internship_application.set_recommendation()  # for recommendation calculation
     assert internship_application.is_recommended is False

@@ -31,7 +31,8 @@ class InternshipApplicationSerializer(serializers.ModelSerializer):
         validated_data["applicant"] = self.context["request"].user
         if "status" in validated_data:
             del validated_data["status"]
-        return super().create(validated_data)
+        instance = super().create(validated_data)
+        return instance.set_recommendation()
 
     def update(self, instance, validated_data):
         if "status" in validated_data and instance.status != validated_data["status"]:
