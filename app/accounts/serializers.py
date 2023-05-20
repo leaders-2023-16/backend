@@ -151,7 +151,19 @@ class DepartmentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class TokenObtainPairSerializer(TokenObtainPairSerializer):
+class TokenObtainPairResponseSerializer(serializers.Serializer):
+    access = serializers.CharField()
+    refresh = serializers.CharField()
+    user_id = serializers.CharField()
+
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()
+
+
+class TokenObtainPairWithUserIdSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
         data["user_id"] = self.user.id
