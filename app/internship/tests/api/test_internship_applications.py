@@ -5,6 +5,26 @@ from rest_framework import status
 
 
 @pytest.mark.django_db
+def test_unauthorized_get_internship_applications(
+    anon_api_client, internship_application
+):
+    url = reverse("internship-application-list")
+    response = anon_api_client.get(url)
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
+
+
+@pytest.mark.django_db
+def test_get_internship_applications(api_client, internship_application):
+    url = reverse("internship-application-list")
+    response = api_client.get(url)
+    assert response.status_code == status.HTTP_200_OK
+    data = response.data["results"]
+    assert len(data) == 1
+    assert data[0]["applicant"]["email"] == internship_application.applicant.email
+    assert data[0]["status"] == internship_application.status
+
+
+@pytest.mark.django_db
 def test_create_internship_application(candidate_client, user):
     url = reverse("internship-application-list")
 

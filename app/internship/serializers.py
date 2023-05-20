@@ -1,6 +1,17 @@
+from accounts.serializers import UserSerializer
 from django.utils import timezone
 from internship.models import InternshipApplication
 from rest_framework import serializers
+
+
+class ReadInternshipApplicationSerializer(serializers.ModelSerializer):
+    applicant = UserSerializer()
+    status_changed_by = UserSerializer()
+
+    class Meta:
+        model = InternshipApplication
+        fields = "__all__"
+        read_only_fields = ("status_changed_at", "status_changed_by", "applicant")
 
 
 class InternshipApplicationSerializer(serializers.ModelSerializer):
