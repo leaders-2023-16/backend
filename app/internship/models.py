@@ -51,3 +51,7 @@ class InternshipApplication(models.Model):
             return False
         # TODO: check relevancy of job experience
         return True
+
+
+class Direction(models.Model):
+    name = models.CharField(max_length=255)
