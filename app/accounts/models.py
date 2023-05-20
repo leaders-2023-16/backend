@@ -8,30 +8,20 @@ class UserManager(BaseUserManager):
     use_in_migrations = True
 
     @transaction.atomic
-    def _create_user(self, username, password, first_name, last_name, **extra_fields):
+    def _create_user(self, username, password, **extra_fields):
         extra_fields.setdefault("is_active", True)
-        user = self.model(
-            username=username,
-            first_name=first_name,
-            last_name=last_name,
-            email=username,
-            **extra_fields
-        )
+        user = self.model(username=username, email=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         if user.role == User.Role.TRAINEE:
             user.trainee_profile = TraineeProfile.objects.create(user=user)
         return user
 
-    def create_user(
-        self, username, password=None, first_name=None, last_name=None, **extra_fields
-    ):
+    def create_user(self, username, password=None, **extra_fields):
         extra_fields.setdefault("is_superuser", False)
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("role", User.Role.TRAINEE)
-        return self._create_user(
-            username, password, first_name, last_name, **extra_fields
-        )
+        return self._create_user(username, password, **extra_fields)
 
     def create_superuser(self, username, password, **extra_fields):
         extra_fields.setdefault("is_staff", True)
