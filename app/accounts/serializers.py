@@ -1,4 +1,11 @@
-from accounts.models import Country, Education, Link, TraineeProfile, WorkExperience
+from accounts.models import (
+    Country,
+    Department,
+    Education,
+    Link,
+    TraineeProfile,
+    WorkExperience,
+)
 from django.db import transaction
 from rest_framework import serializers
 from rest_framework_simplejwt.exceptions import TokenError
@@ -41,6 +48,9 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
     links = LinkSerializer(many=True, required=False)
     educations = EducationSerializer(many=True, required=False)
     work_experiences = WorkExperienceSerializer(many=True, required=False)
+    first_name = serializers.CharField(source="user.first_name", read_only=True)
+    last_name = serializers.CharField(source="user.last_name", read_only=True)
+    email = serializers.CharField(source="user.email", read_only=True)
 
     class Meta:
         model = TraineeProfile
@@ -52,6 +62,9 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
             "links",
             "educations",
             "work_experiences",
+            "first_name",
+            "last_name",
+            "email",
         ]
 
     @transaction.atomic
@@ -129,3 +142,9 @@ class TokenRefreshSerializer(serializers.Serializer):
             raise serializers.ValidationError("Refresh token is required")
 
         return attrs
+
+
+class DepartmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = "__all__"

@@ -10,8 +10,8 @@ def trainee_profile(preferable_country, user):
 @pytest.fixture
 def user2():
     return User.objects.create_user(
-        first_name="user2",
-        last_name="user2",
-        email="user2@user.com",
+        username="user2@user.com",
         password="password",
+        first_name="Johny",
+        last_name="Doel",
     )

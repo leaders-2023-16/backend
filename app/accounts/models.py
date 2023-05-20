@@ -8,13 +8,13 @@ class UserManager(BaseUserManager):
     use_in_migrations = True
 
     @transaction.atomic
-    def _create_user(self, first_name, last_name, email, password, **extra_fields):
+    def _create_user(self, username, password, first_name, last_name, **extra_fields):
         extra_fields.setdefault("is_active", True)
         user = self.model(
+            username=username,
             first_name=first_name,
             last_name=last_name,
-            username=email,
-            email=email,
+            email=username,
             **extra_fields
         )
         user.set_password(password)
@@ -23,11 +23,15 @@ class UserManager(BaseUserManager):
             user.trainee_profile = TraineeProfile.objects.create(user=user)
         return user
 
-    def create_user(self, first_name, last_name, email, password=None, **extra_fields):
+    def create_user(
+        self, username, password=None, first_name=None, last_name=None, **extra_fields
+    ):
         extra_fields.setdefault("is_superuser", False)
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("role", User.Role.TRAINEE)
-        return self._create_user(first_name, last_name, email, password, **extra_fields)
+        return self._create_user(
+            username, password, first_name, last_name, **extra_fields
+        )
 
     def create_superuser(self, username, password, **extra_fields):
         extra_fields.setdefault("is_staff", True)
@@ -65,6 +69,10 @@ class Country(models.Model):
 
 
 class TraineeProfile(models.Model):
+    class Sex(models.TextChoices):
+        MALE = "M", _("MALE")
+        FEMALE = "F", _("FEMALE")
+
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -83,6 +91,10 @@ class TraineeProfile(models.Model):
     phone_number = models.CharField(
         max_length=20, null=True, blank=True, verbose_name="Phone Number"
     )
+    sex = models.CharField(
+        "Sex", max_length=1, choices=Sex.choices, null=True, blank=True
+    )
+    birth_date = models.DateField("Birth date", blank=True, null=True)
 
     class Meta:
         db_table = "accounts_trainee_profile"
@@ -154,3 +166,10 @@ class WorkExperience(models.Model):
     class Meta:
         db_table = "accounts_work_experience"
         verbose_name_plural = "Work Experiences"
+
+
+class Department(models.Model):
+    name = models.CharField("Name", max_length=200)
+
+    def __str__(self):
+        return self.name

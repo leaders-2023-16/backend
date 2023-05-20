@@ -1,5 +1,5 @@
 import pytest
-from accounts.models import Country, User
+from accounts.models import Country, Department, User
 from django.conf import settings
 from rest_framework.test import APIClient
 
@@ -49,7 +49,10 @@ def generic_api_client(request, anon_api_client, api_client):
 @pytest.fixture
 def user():
     return User.objects.create_user(
-        first_name="user", last_name="user", email="user@user.com", password="password"
+        username="user@user.com",
+        password="password",
+        first_name="John",
+        last_name="Doe",
     )
 
 
@@ -65,3 +68,13 @@ def non_preferable_country():
     return Country.objects.create(
         id=settings.PREFERABLE_CITIZENSHIP_ID + 1, name="Non preferable country"
     )
+
+
+@pytest.fixture(autouse=True)
+def department():
+    return Department.objects.create(name="Department 1")
+
+
+@pytest.fixture(autouse=True)
+def department2():
+    return Department.objects.create(name="Department 2")
