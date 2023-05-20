@@ -26,6 +26,25 @@ def test_get_internship_applications(api_client, internship_application):
 
 
 @pytest.mark.django_db
+def test_get_internship_applications_with_filter(api_client, internship_application):
+    url = reverse("internship-application-list")
+    query = {"is_recommended": True}
+    response = api_client.get(url, query)
+    assert response.status_code == status.HTTP_200_OK
+    data = response.data["results"]
+    assert len(data) == 0
+
+    query["is_recommended"] = False
+    response = api_client.get(url, query)
+    assert response.status_code == status.HTTP_200_OK
+    data = response.data["results"]
+    assert len(data) == 1
+    assert data[0]["applicant"]["email"] == internship_application.applicant.email
+    assert data[0]["status"] == internship_application.status
+    assert data[0]["is_recommended"] is False
+
+
+@pytest.mark.django_db
 def test_create_internship_application(candidate_client, user):
     url = reverse("internship-application-list")
 
