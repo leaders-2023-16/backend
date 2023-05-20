@@ -23,9 +23,6 @@ def test_registration(generic_api_client):
     # Проверка создания пользователя в базе данных
     assert User.objects.filter(username="testuser@us.com").exists()
 
-    # Проверка входа в систему после регистрации
-    assert "_auth_user_id" in response.client.session
-
     # Проверка наличия токенов в ответе
     assert "access_token" in response.data
     assert "refresh_token" in response.data

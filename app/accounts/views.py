@@ -3,15 +3,16 @@ from accounts.permissions import OwnProfilePermission
 from accounts.serializers import (
     CountrySerializer,
     DepartmentSerializer,
+    SignUpSerializer,
     TokenRefreshSerializer,
     TraineeProfileSerializer,
 )
-from django.contrib.auth import login
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status, viewsets
+from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -65,6 +66,18 @@ class CountryViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CountrySerializer
 
 
+class UserViewSet(viewsets.GenericViewSet):
+    queryset = User.objects.all()
+    serializer_class = SignUpSerializer()
+
+    @action(methods=["POST"], detail=False)
+    def sign_up(self, request):
+        serializer = self.get_serializer(request.data)
+        serializer.is_valid()
+        instance = serializer.save()
+        return Response(TraineeProfileSerializer(instance.trainee_profile))
+
+
 class RegistrationAPIView(APIView):
     @swagger_auto_schema(
         request_body=openapi.Schema(
@@ -101,9 +114,6 @@ class RegistrationAPIView(APIView):
             username=username,
             password=password,
         )
-
-        # Вход в систему после регистрации
-        login(request, user)
 
         # Создание и получение JWT-токенов
         refresh = RefreshToken.for_user(user)
