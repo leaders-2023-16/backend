@@ -3,6 +3,7 @@ from accounts.permissions import OwnProfilePermission
 from accounts.serializers import (
     CountrySerializer,
     DepartmentSerializer,
+    ReadTraineeProfileSerializer,
     SignUpSerializer,
     TokenObtainPairResponseSerializer,
     TokenObtainPairWithUserIdSerializer,
@@ -90,6 +91,11 @@ class TraineeProfileViewSet(
         if self.action in ("update", "partial_update"):
             return IsAuthenticated(), OwnProfilePermission()
         return super().get_permissions()
+
+    def get_serializer_class(self):
+        if self.action not in ("update", "partial_update", "create"):
+            return ReadTraineeProfileSerializer
+        return self.serializer_class
 
 
 class CountryViewSet(viewsets.ReadOnlyModelViewSet):

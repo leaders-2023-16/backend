@@ -13,7 +13,8 @@ def test_retrieve_trainee_profile(generic_api_client, trainee_profile):
 
     response_data = response.json()
     assert response_data["user_id"] == trainee_profile.user_id
-    assert response_data["citizenship"] == trainee_profile.citizenship_id
+    assert response_data["citizenship"]["id"] == trainee_profile.citizenship.id
+    assert response_data["citizenship"]["name"] == trainee_profile.citizenship.name
     assert response_data["bio"] == trainee_profile.bio
     assert response_data["phone_number"] == trainee_profile.phone_number
     assert response_data["first_name"] == trainee_profile.user.first_name

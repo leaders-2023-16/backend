@@ -4,7 +4,10 @@ from accounts.models import User
 
 @pytest.fixture
 def trainee_profile(preferable_country, user):
-    return user.trainee_profile
+    profile = user.trainee_profile
+    profile.citizenship = preferable_country
+    profile.save()
+    return profile
 
 
 @pytest.fixture
