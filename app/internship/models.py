@@ -1,4 +1,4 @@
-from accounts.models import Education
+from accounts.models import Department, Education
 from django.conf import settings
 from django.db import models
 from django.db.models import F
@@ -55,3 +55,52 @@ class InternshipApplication(models.Model):
 
 class Direction(models.Model):
     name = models.CharField(max_length=255)
+
+
+class Qualification(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+
+
+class Vacancy(models.Model):
+    required_qualifications = models.ManyToManyField(
+        Qualification, verbose_name="Required Qualifications"
+    )
+    name = models.CharField(max_length=255, verbose_name="Name")
+    description = models.TextField(verbose_name="Description")
+    direction = models.ForeignKey(
+        Direction, on_delete=models.CASCADE, verbose_name="Direction"
+    )
+    department = models.ForeignKey(
+        Department, on_delete=models.CASCADE, verbose_name="Department"
+    )
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name="Owner",
+        related_name="owned_vacancies",
+    )
+    is_published = models.BooleanField(default=False, verbose_name="Is published")
+    approved_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name="Approved By",
+        related_name="approved_vacancies",
+    )
+    mentor = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name="Mentor",
+        related_name="mentor_of",
+    )
+    published_at = models.DateTimeField(
+        blank=True, null=True, verbose_name="Published At"
+    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created At")
+
+    class Meta:
+        verbose_name_plural = "Vacancies"
