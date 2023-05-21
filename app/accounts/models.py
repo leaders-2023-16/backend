@@ -20,7 +20,7 @@ class UserManager(BaseUserManager):
         user = self.model(username=username, email=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
-        if user.role == User.Role.TRAINEE:
+        if user.role in (User.Role.TRAINEE, User.Role.CANDIDATE):
             user.trainee_profile = TraineeProfile.objects.create(user=user)
         return user
 
