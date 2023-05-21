@@ -115,7 +115,7 @@ class VacancySerializer(serializers.ModelSerializer):
         qualification_ids = validated_data.pop("required_qualifications")
         validated_data.pop("is_published")  # publishing only after curator review
         validated_data["owner"] = self.context["request"].user
-        # validated_data["department"] = self.context["request"].user.department
+        validated_data["department"] = self.context["request"].user.department
         vacancy = Vacancy.objects.create(**validated_data)
 
         qualifications = Qualification.objects.filter(id__in=qualification_ids)
