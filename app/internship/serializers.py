@@ -2,7 +2,13 @@ from accounts.models import User
 from accounts.serializers import DepartmentSerializer, UserSerializer
 from django.db import transaction
 from django.utils import timezone
-from internship.models import Direction, InternshipApplication, Qualification, Vacancy
+from internship.models import (
+    Direction,
+    InternshipApplication,
+    Qualification,
+    TestTask,
+    Vacancy,
+)
 from rest_framework import serializers
 from rest_framework.exceptions import PermissionDenied
 
@@ -58,6 +64,18 @@ class DirectionSerializer(serializers.ModelSerializer):
         fields = ["id", "name"]
 
 
+class TestTaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TestTask
+        fields = ["id", "title", "type", "description"]
+        read_only_fields = ["id"]
+
+    def create(self, validated_data):
+        return TestTask.objects.create(
+            **validated_data, department=self.context["department"]
+        )
+
+
 class ReadVacancySerializer(serializers.ModelSerializer):
     required_qualifications = QualificationSerializer(many=True)
     direction = DirectionSerializer()
@@ -65,6 +83,7 @@ class ReadVacancySerializer(serializers.ModelSerializer):
     owner = UserSerializer()
     reviewed_by = UserSerializer(required=False)
     mentor = UserSerializer()
+    test_task = TestTaskSerializer()
 
     class Meta:
         model = Vacancy
@@ -79,6 +98,7 @@ class ReadVacancySerializer(serializers.ModelSerializer):
             "status",
             "reviewed_by",
             "mentor",
+            "test_task",
             "published_at",
             "created_at",
         ]
@@ -88,6 +108,7 @@ class VacancySerializer(serializers.ModelSerializer):
     required_qualifications = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Qualification.objects.all()
     )
+    test_task = TestTaskSerializer()
 
     class Meta:
         model = Vacancy
@@ -104,6 +125,7 @@ class VacancySerializer(serializers.ModelSerializer):
             "mentor",
             "published_at",
             "created_at",
+            "test_task",
         ]
         read_only_fields = (
             "id",
@@ -117,16 +139,25 @@ class VacancySerializer(serializers.ModelSerializer):
     @transaction.atomic
     def create(self, validated_data):
         qualifications = validated_data.pop("required_qualifications")
+        test_task_data = validated_data.pop("test_task")
         validated_data.pop("status")  # publishing only after curator review
         validated_data["owner"] = self.context["request"].user
-        validated_data["department"] = self.context["request"].user.department
-        vacancy = Vacancy.objects.create(**validated_data)
+        department = self.context["request"].user.department
+        validated_data["department"] = department
+        serializer = TestTaskSerializer(
+            data=test_task_data,
+            context={"department": department},
+        )
+        serializer.is_valid(raise_exception=True)
+        test_task = serializer.save()
+        vacancy = Vacancy.objects.create(**validated_data, test_task=test_task)
         vacancy.required_qualifications.set(qualifications)
         vacancy.save()
         return vacancy
 
     @transaction.atomic
     def update(self, instance: Vacancy, validated_data):
+        test_task_data = validated_data.pop("test_task")
         if validated_data["status"] != instance.status:
             if self.context["request"].user.role != User.Role.CURATOR:
                 raise PermissionDenied()
@@ -134,6 +165,12 @@ class VacancySerializer(serializers.ModelSerializer):
                 validated_data["published_at"] = timezone.now()
                 validated_data["reviewed_by"] = self.context["request"].user
 
+        serializer = TestTaskSerializer(
+            data=test_task_data, context={"department": instance.department}
+        )
+        serializer.is_valid(raise_exception=True)
+        test_task = serializer.save()
+        instance.test_task = test_task
         qualifications = validated_data.pop("required_qualifications")
         instance.required_qualifications.set(qualifications)
         return super().update(instance, validated_data)

@@ -1,6 +1,6 @@
 import pytest
 from django.urls import reverse
-from internship.models import Vacancy
+from internship.models import TestTask, Vacancy
 from rest_framework import status
 
 
@@ -51,6 +51,7 @@ def test_create_vacancy(
         "direction": direction.id,
         "mentor": mentor.id,
         "required_qualifications": [qualification.id],
+        "test_task": {"title": "Test", "description": "Description", "type": "text"},
     }
 
     # Make a POST request to create the internship application
@@ -65,6 +66,11 @@ def test_create_vacancy(
     assert list(actual_vacancy.required_qualifications.all()) == [qualification]
     assert actual_vacancy.direction == direction
     assert actual_vacancy.department == personnel.department
+    assert TestTask.objects.count() == 1
+    test_task = TestTask.objects.get()
+    assert test_task.title == vacancy_data["test_task"]["title"]
+    assert test_task.description == vacancy_data["test_task"]["description"]
+    assert test_task.type == vacancy_data["test_task"]["type"]
 
 
 @pytest.mark.django_db
@@ -78,7 +84,11 @@ def test_publish_vacancy(
     personnel,
 ):
     url = reverse("vacancies-detail", args=[not_published_vacancy.id])
-    vacancy_data = {"status": Vacancy.Status.PUBLISHED, "required_qualifications": []}
+    vacancy_data = {
+        "status": Vacancy.Status.PUBLISHED,
+        "required_qualifications": [],
+        "test_task": {"title": "Test2", "description": "Description2", "type": "text"},
+    }
 
     response = curator_client.patch(url, vacancy_data, format="json")
 
@@ -92,3 +102,7 @@ def test_publish_vacancy(
     assert actual_vacancy.department == personnel.department
     assert actual_vacancy.reviewed_by == curator
     assert actual_vacancy.published_at is not None
+    assert TestTask.objects.count() == 2
+    test_task = TestTask.objects.get(title=vacancy_data["test_task"]["title"])
+    assert test_task.description == vacancy_data["test_task"]["description"]
+    assert test_task.type == vacancy_data["test_task"]["type"]

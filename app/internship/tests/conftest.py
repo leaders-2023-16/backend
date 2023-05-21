@@ -1,5 +1,5 @@
 import pytest
-from internship.models import InternshipApplication, Qualification, Vacancy
+from internship.models import InternshipApplication, Qualification, TestTask, Vacancy
 
 
 @pytest.fixture
@@ -15,6 +15,16 @@ def internship_application(user):
 
 
 @pytest.fixture
+def test_task(department):
+    return TestTask.objects.create(
+        title="Simple test task",
+        type=TestTask.Type.TEXT,
+        description="Test description",
+        department=department,
+    )
+
+
+@pytest.fixture
 def vacancy_data():
     return {
         "name": "Test Vacancy",
@@ -25,7 +35,7 @@ def vacancy_data():
 
 @pytest.fixture
 def not_published_vacancy(
-    qualification, curator, mentor, personnel, direction, department
+    qualification, curator, mentor, personnel, direction, department, test_task
 ):
     vacancy = Vacancy.objects.create(
         name="Test vacancy",
@@ -35,6 +45,7 @@ def not_published_vacancy(
         owner=personnel,
         direction=direction,
         department=department,
+        test_task=test_task,
     )
     vacancy.required_qualifications.add(qualification)
     return vacancy

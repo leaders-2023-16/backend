@@ -64,6 +64,25 @@ class InternshipApplication(models.Model):
         return True
 
 
+class TestTask(models.Model):
+    class Type(models.TextChoices):
+        TEXT = "text", _("Text")
+
+    title = models.CharField(max_length=200, default="Тестовое задание")
+    type = models.CharField(max_length=50, choices=Type.choices, default=Type.TEXT)
+    description = models.TextField("Description")
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.CASCADE,
+        verbose_name="Owned by department",
+        related_name="test_tasks",
+    )
+
+    class Meta:
+        db_table = "internship_test_task"
+        verbose_name_plural = "Test tasks"
+
+
 class Direction(models.Model):
     name = models.CharField(max_length=255)
 
@@ -117,6 +136,13 @@ class Vacancy(models.Model):
         null=True,
         verbose_name="Mentor",
         related_name="mentor_of",
+    )
+    test_task = models.ForeignKey(
+        TestTask,
+        verbose_name="Test task",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
     )
     published_at = models.DateTimeField(
         blank=True, null=True, verbose_name="Published At"
