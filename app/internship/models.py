@@ -1,4 +1,4 @@
-from accounts.models import Department, Education
+from accounts.models import Department, Education, TraineeProfile
 from django.conf import settings
 from django.db import models
 from django.db.models import F
@@ -146,3 +146,25 @@ class Vacancy(models.Model):
 
     class Meta:
         verbose_name_plural = "Vacancies"
+
+
+class VacancyResponse(models.Model):
+    vacancy = models.ForeignKey(
+        Vacancy, on_delete=models.CASCADE, related_name="responses"
+    )
+    applicant = models.ForeignKey(TraineeProfile, on_delete=models.CASCADE)
+    text_answer = models.TextField()
+    covering_letter = models.TextField(
+        verbose_name="Covering letter", blank=True, null=True
+    )
+    approved_by_mentor = models.BooleanField(
+        "Approved by mentor", blank=True, null=True
+    )
+    approved_by_applicant = models.BooleanField(
+        "Approved by applicant", blank=True, null=True
+    )
+
+    class Meta:
+        db_table = "internship_vacancy_response"
+        verbose_name_plural = "Vacancy responses"
+        unique_together = [["vacancy", "applicant"]]
