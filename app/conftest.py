@@ -1,6 +1,7 @@
 import pytest
 from accounts.models import Country, Department, User
 from django.conf import settings
+from internship.models import Direction
 from rest_framework.test import APIClient
 
 
@@ -26,6 +27,11 @@ def department():
 @pytest.fixture(autouse=True)
 def department2():
     return Department.objects.create(name="Department 2")
+
+
+@pytest.fixture
+def direction():
+    return Direction.objects.create(name="Test direction")
 
 
 @pytest.fixture

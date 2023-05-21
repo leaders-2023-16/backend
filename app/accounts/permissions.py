@@ -39,4 +39,4 @@ class IsCurator(permissions.BasePermission):
 
 class IsPersonnel(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user.role == User.Role.TRAINEE
+        return request.user.role == User.Role.PERSONNEL

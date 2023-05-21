@@ -19,7 +19,7 @@ def vacancy_data():
     return {
         "name": "Test Vacancy",
         "description": "Test Description",
-        "is_published": True,
+        "status": Vacancy.Status.PUBLISHED,
     }
 
 
@@ -40,3 +40,20 @@ def create_vacancy(vacancy_data):
         return vacancy
 
     return _create_vacancy
+
+
+@pytest.fixture
+def not_published_vacancy(
+    qualification, curator, mentor, personnel, direction, department
+):
+    vacancy = Vacancy.objects.create(
+        name="Test vacancy",
+        description="Test description",
+        status=Vacancy.Status.PENDING,
+        mentor=mentor,
+        owner=personnel,
+        direction=direction,
+        department=department,
+    )
+    vacancy.required_qualifications.add(qualification)
+    return vacancy

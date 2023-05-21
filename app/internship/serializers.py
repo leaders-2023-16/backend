@@ -1,8 +1,10 @@
+from accounts.models import User
 from accounts.serializers import DepartmentSerializer, UserSerializer
 from django.db import transaction
 from django.utils import timezone
 from internship.models import Direction, InternshipApplication, Qualification, Vacancy
 from rest_framework import serializers
+from rest_framework.exceptions import PermissionDenied
 
 
 class ReadInternshipApplicationSerializer(serializers.ModelSerializer):
@@ -59,7 +61,7 @@ class ReadVacancySerializer(serializers.ModelSerializer):
     direction = DirectionSerializer()
     department = DepartmentSerializer()
     owner = UserSerializer()
-    approved_by = UserSerializer()
+    reviewed_by = UserSerializer(required=False)
     mentor = UserSerializer()
 
     class Meta:
@@ -72,8 +74,8 @@ class ReadVacancySerializer(serializers.ModelSerializer):
             "direction",
             "department",
             "owner",
-            "is_published",
-            "approved_by",
+            "status",
+            "reviewed_by",
             "mentor",
             "published_at",
             "created_at",
@@ -81,8 +83,8 @@ class ReadVacancySerializer(serializers.ModelSerializer):
 
 
 class VacancySerializer(serializers.ModelSerializer):
-    required_qualifications = serializers.ListSerializer(
-        child=serializers.IntegerField()
+    required_qualifications = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Qualification.objects.all()
     )
 
     class Meta:
@@ -95,8 +97,8 @@ class VacancySerializer(serializers.ModelSerializer):
             "direction",
             "department",
             "owner",
-            "is_published",
-            "approved_by",
+            "status",
+            "reviewed_by",
             "mentor",
             "published_at",
             "created_at",
@@ -105,28 +107,31 @@ class VacancySerializer(serializers.ModelSerializer):
             "id",
             "department",
             "owner",
-            "approved_by",
+            "reviewed_by",
             "published_at",
             "created_at",
         )
 
     @transaction.atomic
     def create(self, validated_data):
-        qualification_ids = validated_data.pop("required_qualifications")
-        validated_data.pop("is_published")  # publishing only after curator review
+        qualifications = validated_data.pop("required_qualifications")
+        validated_data.pop("status")  # publishing only after curator review
         validated_data["owner"] = self.context["request"].user
         validated_data["department"] = self.context["request"].user.department
         vacancy = Vacancy.objects.create(**validated_data)
-
-        qualifications = Qualification.objects.filter(id__in=qualification_ids)
-        for qualification in qualifications:
-            vacancy.required_qualifications.add(qualification)
+        vacancy.required_qualifications.set(qualifications)
         vacancy.save()
         return vacancy
 
     @transaction.atomic
     def update(self, instance: Vacancy, validated_data):
-        if validated_data["is_published"] and not instance.is_published:
-            validated_data["published_at"] = timezone.now()
-            validated_data["approved_by"] = self.context["request"].user
+        if validated_data["status"] != instance.status:
+            if self.context["request"].user.role != User.Role.CURATOR:
+                raise PermissionDenied()
+            if validated_data["status"] == Vacancy.Status.PUBLISHED:
+                validated_data["published_at"] = timezone.now()
+                validated_data["reviewed_by"] = self.context["request"].user
+
+        qualifications = validated_data.pop("required_qualifications")
+        instance.required_qualifications.set(qualifications)
         return super().update(instance, validated_data)

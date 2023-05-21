@@ -69,6 +69,11 @@ class Qualification(models.Model):
 
 
 class Vacancy(models.Model):
+    class Status(models.TextChoices):
+        PENDING = "pending", _("Pending")
+        REJECTED = "rejected", _("Rejected")
+        PUBLISHED = "published", _("Published")
+
     required_qualifications = models.ManyToManyField(
         Qualification, verbose_name="Required Qualifications"
     )
@@ -86,14 +91,19 @@ class Vacancy(models.Model):
         verbose_name="Owner",
         related_name="owned_vacancies",
     )
-    is_published = models.BooleanField(default=False, verbose_name="Is published")
-    approved_by = models.ForeignKey(
+    status = models.CharField(
+        max_length=50,
+        choices=Status.choices,
+        default=Status.PENDING,
+        verbose_name="Status",
+    )
+    reviewed_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        verbose_name="Approved By",
-        related_name="approved_vacancies",
+        verbose_name="Reviewed by",
+        related_name="reviewed_vacancies",
     )
     mentor = models.OneToOneField(
         settings.AUTH_USER_MODEL,
