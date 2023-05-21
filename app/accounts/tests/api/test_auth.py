@@ -7,7 +7,7 @@ from rest_framework import status
 def test_sign_in(generic_api_client, user):
     # Запрос на эндпоинт
     url = reverse("token_obtain_pair")
-    data = {"username": "user@user.com", "password": "password"}
+    data = {"username": "trainee@user.com", "password": "password"}
     response = generic_api_client.post(url, data, format="json")
 
     # Проверка статуса ответа
@@ -22,7 +22,7 @@ def test_sign_in(generic_api_client, user):
 @pytest.mark.django_db
 def test_refresh_token(generic_api_client):
     url = reverse("token_obtain_pair")
-    data = {"username": "user@user.com", "password": "password"}
+    data = {"username": "trainee@user.com", "password": "password"}
     response = generic_api_client.post(url, data, format="json")
     # Запрос на эндпоинт
     url = reverse("token_refresh")
