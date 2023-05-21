@@ -109,6 +109,13 @@ def candidate_client(candidate):
 
 
 @pytest.fixture
+def mentor_client(mentor):
+    client = APIClient()
+    client.force_authenticate(mentor)
+    return client
+
+
+@pytest.fixture
 def curator_client(curator):
     client = APIClient()
     client.force_authenticate(curator)
@@ -132,3 +139,11 @@ def generic_api_client(request, anon_api_client, api_client):
     if request.param == "anon":
         return anon_api_client
     return api_client
+
+
+@pytest.fixture
+def trainee_profile(preferable_country, trainee):
+    profile = trainee.trainee_profile
+    profile.citizenship = preferable_country
+    profile.save()
+    return profile
