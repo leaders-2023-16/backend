@@ -20,6 +20,8 @@ def test_retrieve_trainee_profile(generic_api_client, trainee_profile):
     assert response_data["first_name"] == trainee_profile.user.first_name
     assert response_data["last_name"] == trainee_profile.user.last_name
     assert response_data["email"] == trainee_profile.user.email
+    assert response_data["sex"] == trainee_profile.sex
+    assert response_data["birth_date"] == trainee_profile.birth_date
 
 
 @pytest.mark.django_db
@@ -42,6 +44,8 @@ def test_list_trainee_profiles(generic_api_client, trainee_profile):
         assert "first_name" in data
         assert "last_name" in data
         assert "email" in data
+        assert "sex" in data
+        assert "birth_date" in data
 
 
 @pytest.mark.django_db
@@ -72,9 +76,11 @@ def test_update_trainee_profile(api_client, user, non_preferable_country):
                 "description": "Worked on software development projects",
             }
         ],
+        "sex": "M",
+        "birth_date": "2023-05-21",
     }
 
-    response = api_client.patch(url, data, format="json")
+    response = api_client.put(url, data, format="json")
     assert response.status_code == 200
 
     trainee_profile = user.trainee_profile
@@ -82,6 +88,8 @@ def test_update_trainee_profile(api_client, user, non_preferable_country):
     assert trainee_profile.citizenship == non_preferable_country
     assert trainee_profile.bio == "Updated trainee bio"
     assert trainee_profile.phone_number == "9876543210"
+    assert trainee_profile.sex == "M"
+    assert trainee_profile.birth_date is not None
     assert trainee_profile.links.count() == 1
     assert trainee_profile.educations.count() == 1
     assert trainee_profile.work_experiences.count() == 1

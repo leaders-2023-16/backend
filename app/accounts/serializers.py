@@ -67,6 +67,8 @@ class ReadTraineeProfileSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "email",
+            "birth_date",
+            "sex",
         ]
         depth = 1
 
@@ -92,6 +94,8 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "email",
+            "birth_date",
+            "sex",
         ]
 
     @transaction.atomic
@@ -125,13 +129,6 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
         educations_data = validated_data.pop("educations", [])
         work_experiences_data = validated_data.pop("work_experiences", [])
 
-        instance.citizenship = validated_data.get("citizenship", instance.citizenship)
-        instance.bio = validated_data.get("bio", instance.bio)
-        instance.phone_number = validated_data.get(
-            "phone_number", instance.phone_number
-        )
-        instance.save()
-
         instance.links.all().delete()
         links = [Link(profile=instance, **link_data) for link_data in links_data]
         Link.objects.bulk_create(links)
@@ -150,7 +147,7 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
         ]
         WorkExperience.objects.bulk_create(work_experiences)
 
-        return instance
+        return super().update(instance, validated_data)
 
 
 class TokenRefreshSerializer(serializers.Serializer):
