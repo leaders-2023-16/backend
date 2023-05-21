@@ -1,5 +1,9 @@
 from accounts.models import User
-from accounts.serializers import DepartmentSerializer, UserSerializer
+from accounts.serializers import (
+    DepartmentSerializer,
+    ReadTraineeProfileSerializer,
+    UserSerializer,
+)
 from django.db import transaction
 from django.utils import timezone
 from internship.models import (
@@ -8,6 +12,7 @@ from internship.models import (
     Qualification,
     TestTask,
     Vacancy,
+    VacancyResponse,
 )
 from rest_framework import serializers
 from rest_framework.exceptions import PermissionDenied
@@ -174,4 +179,52 @@ class VacancySerializer(serializers.ModelSerializer):
         instance.test_task = test_task
         qualifications = validated_data.pop("required_qualifications")
         instance.required_qualifications.set(qualifications)
+        return super().update(instance, validated_data)
+
+
+class ReadVacancyResponseSerializer(serializers.ModelSerializer):
+    vacancy = VacancySerializer()
+    applicant = ReadTraineeProfileSerializer()
+
+    class Meta:
+        model = VacancyResponse
+        fields = (
+            "vacancy",
+            "applicant",
+            "text_answer",
+            "covering_letter",
+            "approved_by_mentor",
+            "approved_by_applicant",
+        )
+
+
+class VacancyResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VacancyResponse
+        fields = (
+            "vacancy",
+            "text_answer",
+            "covering_letter",
+            "approved_by_mentor",
+            "approved_by_applicant",
+        )
+
+    def create(self, validated_data):
+        user = self.context["request"].user
+        if user.role != User.Role.TRAINEE:
+            raise PermissionDenied()
+        return VacancyResponse.objects.create(
+            **validated_data, applicant=user.trainee_profile
+        )
+
+    def update(self, instance, validated_data):
+        user = self.context["request"].user
+        if user.role == User.Role.TRAINEE:
+            validated_data = {
+                "approved_by_applicant": validated_data.get("approved_by_applicant")
+            }
+        elif user.role == User.Role.MENTOR:
+            validated_data = {
+                "approved_by_mentor": validated_data.get("approved_by_mentor")
+            }
         return super().update(instance, validated_data)
