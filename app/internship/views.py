@@ -23,7 +23,7 @@ class InternshipApplicationViewSet(viewsets.ModelViewSet):
     queryset = InternshipApplication.objects.all()
     serializer_class = InternshipApplicationSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["is_recommended"]
+    filterset_fields = ["is_recommended", "direction"]
 
     def get_permissions(self):
         if self.action == "create" or self.action == "destroy":

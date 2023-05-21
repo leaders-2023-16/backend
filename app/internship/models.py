@@ -33,6 +33,11 @@ class InternshipApplication(models.Model):
         null=True,
         related_name="reviewed_applications",
     )
+    direction = models.ForeignKey(
+        "internship.Direction",
+        on_delete=models.CASCADE,
+        null=True,
+    )
 
     def set_recommendation(self):
         self.is_recommended = self._calculate_recommendation()
