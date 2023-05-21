@@ -27,6 +27,7 @@ class ReadInternshipApplicationSerializer(serializers.ModelSerializer):
             "applicant",
             "created_at",
             "is_recommended",
+            "direction",
         )
 
 
