@@ -24,25 +24,6 @@ def vacancy_data():
 
 
 @pytest.fixture
-def create_vacancy(vacancy_data):
-    def _create_vacancy(qualification_names=None, **kwargs):
-        data = vacancy_data.copy()
-        data.update(kwargs)
-        vacancy = Vacancy.objects.create(**data)
-
-        if qualification_names:
-            qualifications = []
-            for qualification_name in qualification_names:
-                qualification = Qualification.objects.create(name=qualification_name)
-                qualifications.append(qualification)
-            vacancy.required_qualifications.set(qualifications)
-
-        return vacancy
-
-    return _create_vacancy
-
-
-@pytest.fixture
 def not_published_vacancy(
     qualification, curator, mentor, personnel, direction, department
 ):
