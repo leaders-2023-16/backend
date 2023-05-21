@@ -38,6 +38,8 @@ class InternshipApplicationSerializer(serializers.ModelSerializer):
         return instance.set_recommendation()
 
     def update(self, instance, validated_data):
+        if "direction" in validated_data:
+            validated_data.pop("direction")
         if "status" in validated_data and instance.status != validated_data["status"]:
             instance.status_changed_at = timezone.now()
             instance.status_changed_by = self.context["request"].user
