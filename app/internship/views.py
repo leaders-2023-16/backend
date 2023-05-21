@@ -34,7 +34,7 @@ class VacancyViewSet(viewsets.ModelViewSet):
     queryset = Vacancy.objects.all()
     serializer_class = VacancySerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["direction", "status"]
+    filterset_fields = ["direction", "status", "reviewed_by", "department"]
     permission_classes = [permissions.IsAuthenticated]
 
     def get_permission_classes(self):
