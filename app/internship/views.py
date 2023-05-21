@@ -55,5 +55,9 @@ class VacancyViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         qs = self.queryset
         if self.request.user.role == User.Role.TRAINEE:
-            return qs.filter(status=Vacancy.Status.PUBLISHED)
+            return qs.filter(
+                status=Vacancy.Status.PUBLISHED,
+                # TODO: uncomment when direction will be added to trainee profile
+                # direction=self.request.user.trainee_profile.direction,
+            )
         return qs
