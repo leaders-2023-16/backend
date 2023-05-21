@@ -4,6 +4,13 @@ from django.db import models, transaction
 from django.utils.translation import gettext_lazy as _
 
 
+class Department(models.Model):
+    name = models.CharField("Name", max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -46,6 +53,9 @@ class User(AbstractUser):
     role = models.CharField(
         max_length=1,
         choices=Role.choices,
+    )
+    department = models.ForeignKey(
+        Department, on_delete=models.CASCADE, blank=True, null=True
     )
 
     objects = UserManager()
@@ -159,10 +169,3 @@ class WorkExperience(models.Model):
     class Meta:
         db_table = "accounts_work_experience"
         verbose_name_plural = "Work Experiences"
-
-
-class Department(models.Model):
-    name = models.CharField("Name", max_length=200)
-
-    def __str__(self):
-        return self.name

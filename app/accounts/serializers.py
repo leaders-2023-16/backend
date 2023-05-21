@@ -208,6 +208,8 @@ class SignUpSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    department = DepartmentSerializer(required=False)
+
     class Meta:
         model = User
-        fields = ("email", "role", "first_name", "last_name")
+        fields = ("email", "role", "first_name", "last_name", "department")
