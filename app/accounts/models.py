@@ -105,7 +105,7 @@ class TraineeProfile(models.Model):
     birth_date = models.DateField("Birth date", blank=True, null=True)
 
     status = models.CharField(
-        max_length=1,
+        max_length=11,
         choices=QualifyingStatus.choices,
         null=True,
     )
