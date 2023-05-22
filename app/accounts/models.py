@@ -77,9 +77,9 @@ class TraineeProfile(models.Model):
         FEMALE = "F", _("FEMALE")
 
     class QualifyingStatus(models.TextChoices):
-        PASSED = "P", _("PASSED")
-        IN_PROGRESS = "I", _("IN PROGRESS OF QUALIFICATION")
-        FAILED = "F", _("DID NOT PASS QUALIFICATION")
+        PASSED = "PASSED", _("Passed")
+        IN_PROGRESS = "IN_PROGRESS", _("In progress of qualification")
+        FAILED = "FAILED", _("Did not pass qualification")
 
     user = models.OneToOneField(
         User,
