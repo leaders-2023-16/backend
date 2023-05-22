@@ -107,7 +107,7 @@ class TraineeProfile(models.Model):
     status = models.CharField(
         max_length=11,
         choices=QualifyingStatus.choices,
-        null=True,
+        default=QualifyingStatus.IN_PROGRESS,
     )
 
     class Meta:
