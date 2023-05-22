@@ -76,6 +76,11 @@ class TraineeProfile(models.Model):
         MALE = "M", _("MALE")
         FEMALE = "F", _("FEMALE")
 
+    class QualifyingStatus(models.TextChoices):
+        PASSED = "PASSED", _("Passed")
+        IN_PROGRESS = "IN_PROGRESS", _("In progress of qualification")
+        FAILED = "FAILED", _("Did not pass qualification")
+
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -98,6 +103,12 @@ class TraineeProfile(models.Model):
         "Sex", max_length=1, choices=Sex.choices, null=True, blank=True
     )
     birth_date = models.DateField("Birth date", blank=True, null=True)
+
+    status = models.CharField(
+        max_length=11,
+        choices=QualifyingStatus.choices,
+        default=QualifyingStatus.IN_PROGRESS,
+    )
 
     class Meta:
         db_table = "accounts_trainee_profile"

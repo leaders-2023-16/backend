@@ -69,6 +69,7 @@ class ReadTraineeProfileSerializer(serializers.ModelSerializer):
             "email",
             "birth_date",
             "sex",
+            "status",
         ]
         depth = 1
 
@@ -96,7 +97,9 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
             "email",
             "birth_date",
             "sex",
+            "status",
         ]
+        read_only_fields = ("status",)
 
     @transaction.atomic
     def create(self, validated_data):
