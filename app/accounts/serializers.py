@@ -177,22 +177,10 @@ class DepartmentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class TokenObtainPairResponseSerializer(serializers.Serializer):
-    access = serializers.CharField()
-    refresh = serializers.CharField()
-    user_id = serializers.CharField()
-
-    def create(self, validated_data):
-        raise NotImplementedError()
-
-    def update(self, instance, validated_data):
-        raise NotImplementedError()
-
-
 class TokenObtainPairWithUserIdSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        data["user_id"] = self.user.id
+        data["user"] = UserSerializer(self.user).data
         return data
 
 
@@ -212,4 +200,16 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("email", "role", "first_name", "last_name", "department")
+        fields = ("id", "email", "role", "first_name", "last_name", "department")
+
+
+class TokenObtainPairResponseSerializer(serializers.Serializer):
+    access = serializers.CharField()
+    refresh = serializers.CharField()
+    user = UserSerializer(many=False, required=False)
+
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()

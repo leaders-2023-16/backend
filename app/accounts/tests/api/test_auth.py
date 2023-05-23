@@ -16,7 +16,7 @@ def test_sign_in(generic_api_client, user):
     # Проверка наличия токенов в ответе
     assert "access" in response.data
     assert "refresh" in response.data
-    assert response.data["user_id"] == user.id
+    assert response.data["user"]["id"] == user.id
 
 
 @pytest.mark.django_db
