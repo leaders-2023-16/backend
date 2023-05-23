@@ -14,8 +14,10 @@ def qualification():
 
 
 @pytest.fixture
-def internship_application(user):
-    internship = InternshipApplication.objects.create(applicant=user)
+def internship_application(user, direction):
+    internship = InternshipApplication.objects.create(
+        applicant=user, direction=direction
+    )
     internship.set_recommendation()
     return internship
 

@@ -12,7 +12,7 @@ def test_unauthorized_get_vacancies(anon_api_client, internship_application):
 
 
 @pytest.mark.django_db
-def test_get_vacancies(api_client, not_published_vacancy):
+def test_get_vacancies(api_client, not_published_vacancy, internship_application):
     url = reverse("vacancies-list")
     response = api_client.get(url, {"status": Vacancy.Status.PUBLISHED})
     assert response.status_code == status.HTTP_200_OK
@@ -34,7 +34,7 @@ def test_get_vacancies(api_client, not_published_vacancy):
     assert len(data) == 1
     assert data[0]["name"] == not_published_vacancy.name
     assert data[0]["description"] == not_published_vacancy.description
-    assert data[0]["description"] == not_published_vacancy.description
+    assert data[0]["status"] == not_published_vacancy.status
     assert data[0]["direction"]["name"] == not_published_vacancy.direction.name
     assert data[0]["department"]["name"] == not_published_vacancy.department.name
     assert data[0]["owner"]["email"] == not_published_vacancy.owner.email
