@@ -192,7 +192,7 @@ class TokenObtainPairResponseSerializer(serializers.Serializer):
 class TokenObtainPairWithUserIdSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        data["user_id"] = self.user.id
+        data["user"] = UserSerializer(self.user).data
         return data
 
 
@@ -212,4 +212,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("email", "role", "first_name", "last_name", "department")
+        fields = ("id", "email", "role", "first_name", "last_name", "department")

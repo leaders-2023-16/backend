@@ -27,7 +27,7 @@ def test_registration(generic_api_client):
     assert "access" in response.data
     assert "refresh" in response.data
 
-    assert response.data["user_id"]
+    assert response.data["user"]
 
 
 @pytest.mark.django_db
