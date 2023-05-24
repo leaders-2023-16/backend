@@ -132,6 +132,11 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
 
     @transaction.atomic
     def update(self, instance, validated_data):
+        if self.context["request"].user.role in ["F", "T"]:
+            if "cv_score" in validated_data:
+                validated_data.pop("cv_score")
+            if "test_score" in validated_data:
+                validated_data.pop("test_score")
         links_data = validated_data.pop("links", [])
         educations_data = validated_data.pop("educations", [])
         work_experiences_data = validated_data.pop("work_experiences", [])
