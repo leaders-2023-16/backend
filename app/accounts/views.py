@@ -1,5 +1,5 @@
 from accounts.models import Country, Department, TraineeProfile
-from accounts.permissions import OwnProfilePermission
+from accounts.permissions import IsCurator, OwnProfilePermission
 from accounts.serializers import (
     CountrySerializer,
     DepartmentSerializer,
@@ -84,13 +84,14 @@ class TraineeProfileViewSet(
 ):
     queryset = TraineeProfile.objects.all()
     serializer_class = TraineeProfileSerializer
-    permission_classes = [AllowAny]
     lookup_field = "user_id"
 
     def get_permissions(self):
-        if self.action in ("update", "partial_update"):
-            return IsAuthenticated(), OwnProfilePermission()
-        return super().get_permissions()
+        if self.action in ["update", "partial_update"]:
+            permission_classes = [IsAuthenticated, IsCurator | OwnProfilePermission]
+        else:
+            permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
 
     def get_serializer_class(self):
         if self.action not in ("update", "partial_update", "create"):

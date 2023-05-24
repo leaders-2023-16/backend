@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MaxValueValidator
 from django.db import models, transaction
 from django.utils.translation import gettext_lazy as _
 
@@ -108,6 +109,13 @@ class TraineeProfile(models.Model):
         max_length=11,
         choices=QualifyingStatus.choices,
         default=QualifyingStatus.IN_PROGRESS,
+    )
+
+    cv_score = models.PositiveIntegerField(
+        validators=[MaxValueValidator(100)], default=0
+    )
+    test_score = models.PositiveIntegerField(
+        validators=[MaxValueValidator(100)], default=0
     )
 
     class Meta:
