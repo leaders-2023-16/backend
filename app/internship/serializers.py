@@ -189,6 +189,7 @@ class ReadVacancyResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = VacancyResponse
         fields = (
+            "id",
             "vacancy",
             "applicant",
             "text_answer",
