@@ -63,12 +63,9 @@ class VacancyViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         qs = self.queryset
         if self.request.user.role == User.Role.TRAINEE:
-            direction_id = InternshipApplication.objects.get(
-                applicant=self.request.user.id
-            ).direction_id
             return qs.filter(
                 status=Vacancy.Status.PUBLISHED,
-                direction=direction_id,
+                direction=self.request.user.applications.direction,
             )
         return qs
 
