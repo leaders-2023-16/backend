@@ -65,8 +65,7 @@ class VacancyViewSet(viewsets.ModelViewSet):
         if self.request.user.role == User.Role.TRAINEE:
             return qs.filter(
                 status=Vacancy.Status.PUBLISHED,
-                # TODO: uncomment when direction will be added to trainee profile
-                # direction=self.request.user.trainee_profile.direction,
+                direction=self.request.user.applications.direction,
             )
         return qs
 
