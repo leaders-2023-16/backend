@@ -70,6 +70,8 @@ class ReadTraineeProfileSerializer(serializers.ModelSerializer):
             "birth_date",
             "sex",
             "status",
+            "cv_score",
+            "test_score",
         ]
         depth = 1
 
@@ -98,6 +100,8 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
             "birth_date",
             "sex",
             "status",
+            "cv_score",
+            "test_score",
         ]
         read_only_fields = ("status",)
 
