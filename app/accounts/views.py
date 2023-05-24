@@ -84,7 +84,6 @@ class TraineeProfileViewSet(
 ):
     queryset = TraineeProfile.objects.all()
     serializer_class = TraineeProfileSerializer
-    permission_classes = [AllowAny]
     lookup_field = "user_id"
 
     def get_permissions(self):
