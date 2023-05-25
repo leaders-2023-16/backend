@@ -1,0 +1,88 @@
+- model: internship.vacancy
+  pk: 1
+  fields:
+    name: HR-менеджер
+    description: Мы ищем энергичного и талантливого HR-менеджера, чтобы присоединиться
+      к нашей команде. В качестве HR-менеджера вы будете играть важную роль в управлении
+      человеческими ресурсами в нашей организации. Ваша основная задача будет заключаться
+      в поддержке и развитии наших сотрудников, управлении процессами найма, обучения
+      и развития, а также в поддержании положительной рабочей атмосферы в компании.
+    direction: 1
+    department: 219165
+    owner: 10
+    status: published
+    reviewed_by: 8
+    mentor: 9
+    test_task: 7
+    published_at: 2023-05-23 20:37:45.729242+00:00
+    created_at: 2023-05-23 20:26:26.898635+00:00
+    required_qualifications:
+    - 1
+- model: internship.vacancy
+  pk: 2
+  fields:
+    name: Лидогенератор
+    description: Мы ищем энергичного и мотивированного лидогенератора для нашей компании.
+      Лидогенератор играет важную роль в процессе привлечения потенциальных клиентов
+      и развитии бизнеса. Ваша основная задача будет заключаться в создании и поддержке
+      потока качественных лидов, которые будут переданы отделу продаж для дальнейшего
+      преобразования в клиентов.
+    direction: 3
+    department: 219376
+    owner: 10
+    status: published
+    reviewed_by: 8
+    mentor: 13
+    test_task: 9
+    published_at: 2023-05-23 20:37:45.729242+00:00
+    created_at: 2023-05-25 17:07:56.302177+00:00
+    required_qualifications:
+    - 2
+- model: internship.vacancy
+  pk: 3
+  fields:
+    name: TEST
+    description: FULL TEST
+    direction: 4
+    department: 219376
+    owner: 10
+    status: published
+    reviewed_by: 8
+    mentor: 12
+    test_task: 10
+    published_at: 2023-05-23 20:37:45.729242+00:00
+    created_at: 2023-05-25 19:19:34.048950+00:00
+    required_qualifications:
+    - 2
+- model: internship.vacancy
+  pk: 4
+  fields:
+    name: TEST1
+    description: FULL TEST1
+    direction: 5
+    department: 219376
+    owner: 10
+    status: published
+    reviewed_by: 8
+    mentor: 14
+    test_task: 11
+    published_at: 2023-05-23 20:37:45.729242+00:00
+    created_at: 2023-05-25 19:20:43.760060+00:00
+    required_qualifications:
+    - 2
+- model: internship.vacancy
+  pk: 5
+  fields:
+    name: TEST3
+    description: FULL TEST3
+    direction: 5
+    department: 219376
+    owner: 10
+    status: published
+    reviewed_by: 8
+    mentor: 15
+    test_task: 12
+    published_at: 2023-05-23 20:37:45.729242+00:00
+    created_at: 2023-05-25 19:22:05.785518+00:00
+    required_qualifications:
+    - 2

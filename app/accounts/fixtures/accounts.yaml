@@ -127,7 +127,7 @@
 - model: accounts.user
   pk: 12
   fields:
-    password: pbkdf2_sha256$600000$YHKqz4REzfxQqqA54aiZ4n$9XY30aXBihuc+4i6jLCKKVzYOJliV6sELGhtZHNMxTE=
+    password: pbkdf2_sha256$600000$Slpj4WFdlTxUnaNjK8b0M7$PsjD40ktIC6YM/RTr79N3N+KQTJGwQUuO8PUnxgUGq0=
     last_login: null
     is_superuser: false
     username: mentor1@user.com
@@ -143,7 +143,7 @@
 - model: accounts.user
   pk: 13
   fields:
-    password: pbkdf2_sha256$600000$oq4RCrtRGw0aEqwfD7HRSb$uI4/V5qMXTE4Ua3qSjCsJTfiRhXsCzjZqOT5M83NO10=
+    password: pbkdf2_sha256$600000$Slpj4WFdlTxUnaNjK8b0M7$PsjD40ktIC6YM/RTr79N3N+KQTJGwQUuO8PUnxgUGq0=
     last_login: null
     is_superuser: false
     username: mentor2@user.com
@@ -159,7 +159,7 @@
 - model: accounts.user
   pk: 14
   fields:
-    password: pbkdf2_sha256$600000$xcvmmKRYsXJkWtb8G6bM2N$SWjQFIG9eP6UOfdbMw+QwHHmUrGwOaw+0cKJvDsOqlc=
+    password: pbkdf2_sha256$600000$Slpj4WFdlTxUnaNjK8b0M7$PsjD40ktIC6YM/RTr79N3N+KQTJGwQUuO8PUnxgUGq0=
     last_login: null
     is_superuser: false
     username: mentor3@user.com
@@ -175,7 +175,7 @@
 - model: accounts.user
   pk: 15
   fields:
-    password: pbkdf2_sha256$600000$zTVkILNzSiTnkBWbO8dKf9$ZF8ZoLlzomdLf28/87oE4+zm8zjaQjWlKGbXZNIhFq8=
+    password: pbkdf2_sha256$600000$Slpj4WFdlTxUnaNjK8b0M7$PsjD40ktIC6YM/RTr79N3N+KQTJGwQUuO8PUnxgUGq0=
     last_login: null
     is_superuser: false
     username: mentor4@user.com
