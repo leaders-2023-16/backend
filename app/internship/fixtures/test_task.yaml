@@ -4,7 +4,7 @@
     title: string
     type: text
     description: string
-    department: 1
+    department: 219165
 - model: internship.testtask
   pk: 7
   fields:
