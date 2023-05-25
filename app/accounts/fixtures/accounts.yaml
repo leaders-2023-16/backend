@@ -63,6 +63,7 @@
     role: P
     groups: []
     user_permissions: []
+    department_id: 219376
 - model: accounts.user
   pk: 11
   fields:
