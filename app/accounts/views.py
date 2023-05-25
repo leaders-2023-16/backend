@@ -102,11 +102,13 @@ class TraineeProfileViewSet(
 class CountryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
+    pagination_class = None
 
 
 class DepartmentViewSet(ReadOnlyModelViewSet):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
+    pagination_class = None
 
     @method_decorator(cache_page(60 * 60 * 6))
     def list(self, request, *args, **kwargs):
