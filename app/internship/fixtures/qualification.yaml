@@ -1,0 +1,8 @@
+- model: internship.qualification
+  pk: 3
+  fields:
+    name: Инструктор
+- model: internship.qualification
+  pk: 4
+  fields:
+    name: Администратор
