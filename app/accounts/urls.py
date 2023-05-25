@@ -5,6 +5,7 @@ from accounts.views import (
     SignUpAPIView,
     TokenRefreshAndAccessView,
     TraineeProfileViewSet,
+    UserViewSet,
 )
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
@@ -15,6 +16,7 @@ router.register(
 )
 router.register(r"countries", CountryViewSet, basename="countries")
 router.register(r"departments", DepartmentViewSet, basename="departments")
+router.register(r"users", UserViewSet, basename="users")
 
 urlpatterns = [
     path("", include(router.urls)),
