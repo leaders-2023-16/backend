@@ -1,0 +1,45 @@
+- model: internship.testtask
+  pk: 5
+  fields:
+    title: string
+    type: text
+    description: string
+    department: 1
+- model: internship.testtask
+  pk: 7
+  fields:
+    title: Хантинг
+    type: hr
+    description: Захантить 3 человек для мероприятия
+    department: 219165
+- model: internship.testtask
+  pk: 9
+  fields:
+    title: Напиши стратегию
+    type: text
+    description: Ваша задача состоит в разработке и реализации стратегии лидогенерации
+      для компании, специализирующейся на продаже мобильных приложений для бизнеса.
+      Вам необходимо привлечь потенциальных клиентов из малого и среднего бизнеса,
+      заинтересованных в разработке и запуске мобильных приложений для своих компаний.
+    department: 219376
+- model: internship.testtask
+  pk: 10
+  fields:
+    title: SSD
+    type: text
+    description: adsadasd
+    department: 219376
+- model: internship.testtask
+  pk: 11
+  fields:
+    title: RAM
+    type: text
+    description: wwwww
+    department: 219376
+- model: internship.testtask
+  pk: 12
+  fields:
+    title: ROM
+    type: text
+    description: PPPP
+    department: 219376
