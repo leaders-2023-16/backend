@@ -1,5 +1,5 @@
-from accounts.models import Country, Department, TraineeProfile
-from accounts.permissions import IsCurator, OwnProfilePermission
+from accounts.models import Country, Department, TraineeProfile, User
+from accounts.permissions import IsCurator, IsMentor, IsPersonnel, OwnProfilePermission
 from accounts.serializers import (
     CountrySerializer,
     DepartmentSerializer,
@@ -9,7 +9,9 @@ from accounts.serializers import (
     TokenObtainPairWithUserIdSerializer,
     TokenRefreshSerializer,
     TraineeProfileSerializer,
+    UserSerializer,
 )
+from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from drf_yasg.utils import swagger_auto_schema
@@ -97,6 +99,35 @@ class TraineeProfileViewSet(
         if self.action not in ("update", "partial_update", "create"):
             return ReadTraineeProfileSerializer
         return self.serializer_class
+
+
+class UserViewSet(
+    viewsets.GenericViewSet,
+    viewsets.mixins.ListModelMixin,
+):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    pagination_class = None
+
+    def get_permissions(self):
+        if self.action in ["update", "partial_update"]:
+            permission_classes = [IsAuthenticated, IsCurator | OwnProfilePermission]
+        else:
+            permission_classes = [IsAuthenticated, IsCurator | IsPersonnel | IsMentor]
+        return [permission() for permission in permission_classes]
+
+    def get_queryset(self):
+        if self.request.user.role == User.Role.PERSONNEL:
+            department = self.request.user.department
+            return self.queryset.filter(
+                Q(department=department)
+                | Q(trainee_profile__vacancyresponse__vacancy__department=department)
+            )
+        if self.request.user.role == User.Role.MENTOR:
+            return self.queryset.filter(
+                trainee_profile__vacancyresponse__vacancy__mentor=self.request.user
+            )
+        return self.queryset
 
 
 class CountryViewSet(viewsets.ReadOnlyModelViewSet):
