@@ -11,9 +11,9 @@ def test_list_departments(generic_api_client, department, department2):
     assert response.status_code == 200
 
     response_data = response.json()
-    assert len(response_data["results"]) == 2
+    assert len(response_data) == 2
 
-    department_names = [dep["name"] for dep in response_data["results"]]
+    department_names = [dep["name"] for dep in response_data]
     assert department.name in department_names
     assert department2.name in department_names
 
