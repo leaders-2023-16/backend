@@ -14,6 +14,7 @@ from accounts.serializers import (
 from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status, viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -108,6 +109,8 @@ class UserViewSet(
     queryset = User.objects.all()
     serializer_class = UserSerializer
     pagination_class = None
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["role"]
 
     def get_permissions(self):
         if self.action in ["update", "partial_update"]:

@@ -1,4 +1,5 @@
 import pytest
+from accounts.models import User
 from django.urls import reverse
 from rest_framework import status
 
@@ -55,3 +56,16 @@ def test_get_list_of_users_curator(
 
     assert response.status_code == status.HTTP_200_OK
     assert len(response.data) == 5
+
+    roles = [
+        User.Role.CURATOR,
+        User.Role.TRAINEE,
+        User.Role.CANDIDATE,
+        User.Role.MENTOR,
+        User.Role.PERSONNEL,
+    ]
+    for role in roles:
+        response = curator_client.get(url, {"role": role})
+
+        assert response.status_code == status.HTTP_200_OK
+        assert len(response.data) == 1
