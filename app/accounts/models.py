@@ -156,7 +156,7 @@ class Education(models.Model):
     end_year = models.IntegerField(blank=True, null=True, verbose_name="End year")
     specialization = models.CharField(max_length=100, verbose_name="Specialization")
     degree = models.CharField(
-        max_length=100, choices=DegreeType.choices, verbose_name="Degree"
+        max_length=100, choices=DegreeType.choices, verbose_name="Degree", null=True
     )
     description = models.CharField(
         max_length=500, blank=True, null=True, verbose_name="Description"
