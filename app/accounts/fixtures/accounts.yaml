@@ -124,3 +124,67 @@
     start_date: 2022-05-20
     end_date: 2023-03-20
     description: Выдавал ботинки, объявлял дни рождения
+- model: accounts.user
+  pk: 12
+  fields:
+    password: pbkdf2_sha256$600000$YHKqz4REzfxQqqA54aiZ4n$9XY30aXBihuc+4i6jLCKKVzYOJliV6sELGhtZHNMxTE=
+    last_login: null
+    is_superuser: false
+    username: mentor1@user.com
+    first_name: Дженни
+    last_name: Лопес
+    email: mentor1@user.com
+    is_staff: false
+    is_active: true
+    date_joined: 2023-05-20 14:48:55+00:00
+    role: M
+    groups: []
+    user_permissions: []
+- model: accounts.user
+  pk: 13
+  fields:
+    password: pbkdf2_sha256$600000$oq4RCrtRGw0aEqwfD7HRSb$uI4/V5qMXTE4Ua3qSjCsJTfiRhXsCzjZqOT5M83NO10=
+    last_login: null
+    is_superuser: false
+    username: mentor2@user.com
+    first_name: Майк
+    last_name: Тайсон
+    email: mentor2@user.com
+    is_staff: false
+    is_active: true
+    date_joined: 2023-05-20 14:48:55+00:00
+    role: M
+    groups: []
+    user_permissions: []
+- model: accounts.user
+  pk: 14
+  fields:
+    password: pbkdf2_sha256$600000$xcvmmKRYsXJkWtb8G6bM2N$SWjQFIG9eP6UOfdbMw+QwHHmUrGwOaw+0cKJvDsOqlc=
+    last_login: null
+    is_superuser: false
+    username: mentor3@user.com
+    first_name: Джон
+    last_name: Фавро
+    email: mentor3@user.com
+    is_staff: false
+    is_active: true
+    date_joined: 2023-05-20 14:48:55+00:00
+    role: M
+    groups: []
+    user_permissions: []
+- model: accounts.user
+  pk: 15
+  fields:
+    password: pbkdf2_sha256$600000$zTVkILNzSiTnkBWbO8dKf9$ZF8ZoLlzomdLf28/87oE4+zm8zjaQjWlKGbXZNIhFq8=
+    last_login: null
+    is_superuser: false
+    username: mentor4@user.com
+    first_name: Ридли
+    last_name: Скотт
+    email: mentor4@user.com
+    is_staff: false
+    is_active: true
+    date_joined: 2023-05-20 14:48:55+00:00
+    role: M
+    groups: []
+    user_permissions: []
