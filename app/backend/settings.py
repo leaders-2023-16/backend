@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
-    "drf_yasg",
+    "drf_spectacular",
     "django_filters",
     "accounts",
     "internship",
@@ -158,8 +158,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "PAGE_SIZE": 100,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.BasicAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
 }
@@ -179,8 +179,17 @@ SIMPLE_JWT = {
 
 SERVER_HOST = os.getenv("SERVER_HOST", "http://127.0.0.1:8000")
 
-SWAGGER_SETTINGS = {
-    "SECURITY_DEFINITIONS": {
-        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
-    }
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Leaders 2023 API",
+    "DESCRIPTION": "Your project description",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "COMPONENT_SPLIT_REQUEST": True,
+    "SCHEMA_PATH_PREFIX": r"/api/v1",
+    "ENUM_NAME_OVERRIDES": {
+        "InternshipApplicationStatus": "internship.models.InternshipApplication.Status",
+        "VacancyStatus": "internship.models.Vacancy.Status",
+        "QualifyingStatus": "accounts.models.TraineeProfile.QualifyingStatus",
+    },
 }
