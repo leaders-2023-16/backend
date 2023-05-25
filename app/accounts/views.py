@@ -15,7 +15,7 @@ from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django_filters.rest_framework import DjangoFilterBackend
-from drf_yasg.utils import swagger_auto_schema
+from drf_spectacular.utils import extend_schema
 from rest_framework import status, viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -27,7 +27,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 class DecoratedTokenObtainPairView(TokenObtainPairView):
-    @swagger_auto_schema(
+    @extend_schema(
         responses={
             status.HTTP_200_OK: TokenObtainPairResponseSerializer(),
         }
@@ -59,8 +59,8 @@ class TokenRefreshAndAccessView(TokenRefreshView):
 
 
 class SignUpAPIView(APIView):
-    @swagger_auto_schema(
-        request_body=SignUpSerializer(),
+    @extend_schema(
+        request=SignUpSerializer(),
         responses={
             200: TokenObtainPairResponseSerializer(),
         },
