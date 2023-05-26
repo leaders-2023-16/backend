@@ -6,6 +6,7 @@ from accounts.permissions import (
     IsPersonnel,
     IsTrainee,
 )
+from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
 from internship.models import InternshipApplication, Vacancy, VacancyResponse
 from internship.serializers import (
@@ -17,6 +18,8 @@ from internship.serializers import (
     VacancySerializer,
 )
 from rest_framework import permissions, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 
 class InternshipApplicationViewSet(viewsets.ModelViewSet):
@@ -104,3 +107,14 @@ class VacancyResponseViewSet(viewsets.ModelViewSet):
         if self.request.user.role == User.Role.PERSONNEL:
             return qs.filter(vacancy__department=self.request.user.department)
         return qs
+
+    @action(detail=True, methods=["GET"], url_path="by-vacancy")
+    def by_vacancy(self, request, pk=None):
+        try:
+            vacancy_response = VacancyResponse.objects.filter(
+                vacancy_id=pk, applicant_id=self.request.user.id
+            ).get()
+        except VacancyResponse.DoesNotExist:
+            raise Http404
+        serializer = self.get_serializer(vacancy_response)
+        return Response(data=serializer.data)

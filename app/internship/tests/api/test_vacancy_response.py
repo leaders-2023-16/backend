@@ -107,3 +107,17 @@ def test_approve_vacancy_response_by_mentor(
     assert actual_vacancy_response.text_answer == vacancy_response.text_answer
     assert actual_vacancy_response.covering_letter == vacancy_response.covering_letter
     assert actual_vacancy_response.approved_by_mentor is True
+
+
+@pytest.mark.django_db
+def test_get_vacancy_response_by_vacancy(
+    api_client, trainee, published_vacancy, vacancy_response
+):
+    url = reverse("vacancy-responses-by-vacancy", args=[published_vacancy.id])
+    response = api_client.get(url)
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+    assert "applicant" in data
+    assert "vacancy" in data
+    assert data["approved_by_mentor"] is None
+    assert data["approved_by_applicant"] is None
