@@ -88,6 +88,8 @@ class TraineeProfileViewSet(
     queryset = TraineeProfile.objects.all()
     serializer_class = TraineeProfileSerializer
     lookup_field = "user_id"
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["status"]
 
     def get_permissions(self):
         if self.action in ["update", "partial_update"]:
