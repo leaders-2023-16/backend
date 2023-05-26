@@ -163,7 +163,7 @@ class VacancySerializer(serializers.ModelSerializer):
 
     @transaction.atomic
     def update(self, instance: Vacancy, validated_data):
-        if validated_data["status"] != instance.status:
+        if "status" in validated_data and validated_data["status"] != instance.status:
             if self.context["request"].user.role != User.Role.CURATOR:
                 raise PermissionDenied()
             if validated_data["status"] == Vacancy.Status.PUBLISHED:
