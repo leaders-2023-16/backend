@@ -207,12 +207,14 @@ class VacancyResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = VacancyResponse
         fields = (
+            "id",
             "vacancy",
             "text_answer",
             "covering_letter",
             "approved_by_mentor",
             "approved_by_applicant",
         )
+        read_only_fields = ["id"]
 
     def create(self, validated_data):
         user = self.context["request"].user
