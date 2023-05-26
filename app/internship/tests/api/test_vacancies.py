@@ -41,16 +41,14 @@ def test_get_vacancies(api_client, not_published_vacancy, internship_application
 
 
 @pytest.mark.django_db
-def test_create_vacancy(
-    personnel_client, vacancy_data, direction, mentor, qualification, personnel
-):
+def test_create_vacancy(personnel_client, vacancy_data, direction, mentor, personnel):
     url = reverse("vacancies-list")
     vacancy_data = {
         **vacancy_data,
         "status": Vacancy.Status.PUBLISHED,
         "direction": direction.id,
         "mentor": mentor.id,
-        "required_qualifications": [qualification.id],
+        "required_qualifications": ["qualification"],
         "test_task": {"title": "Test", "description": "Description", "type": "text"},
     }
 
@@ -63,7 +61,8 @@ def test_create_vacancy(
     actual_vacancy = Vacancy.objects.get()
     assert actual_vacancy.status == Vacancy.Status.PENDING
     assert actual_vacancy.mentor == mentor
-    assert list(actual_vacancy.required_qualifications.all()) == [qualification]
+    assert actual_vacancy.required_qualifications.count() == 1
+    assert actual_vacancy.required_qualifications.first().name == "qualification"
     assert actual_vacancy.direction == direction
     assert actual_vacancy.department == personnel.department
     assert TestTask.objects.count() == 1

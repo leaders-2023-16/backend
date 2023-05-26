@@ -111,9 +111,7 @@ class ReadVacancySerializer(serializers.ModelSerializer):
 
 
 class VacancySerializer(serializers.ModelSerializer):
-    required_qualifications = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Qualification.objects.all()
-    )
+    required_qualifications = serializers.ListSerializer(child=serializers.CharField())
     test_task = TestTaskSerializer()
 
     class Meta:
@@ -157,6 +155,8 @@ class VacancySerializer(serializers.ModelSerializer):
         serializer.is_valid(raise_exception=True)
         test_task = serializer.save()
         vacancy = Vacancy.objects.create(**validated_data, test_task=test_task)
+        qualifications = [Qualification(name=name) for name in qualifications]
+        qualifications = Qualification.objects.bulk_create(qualifications)
         vacancy.required_qualifications.set(qualifications)
         vacancy.save()
         return vacancy
@@ -180,6 +180,8 @@ class VacancySerializer(serializers.ModelSerializer):
             instance.test_task = test_task
         qualifications = validated_data.pop("required_qualifications", None)
         if qualifications is not None:
+            qualifications = [Qualification(name=name) for name in qualifications]
+            qualifications = Qualification.objects.bulk_create(qualifications)
             instance.required_qualifications.set(qualifications)
         return super().update(instance, validated_data)
 
