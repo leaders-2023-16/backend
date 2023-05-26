@@ -163,7 +163,6 @@ class VacancySerializer(serializers.ModelSerializer):
 
     @transaction.atomic
     def update(self, instance: Vacancy, validated_data):
-        test_task_data = validated_data.pop("test_task")
         if validated_data["status"] != instance.status:
             if self.context["request"].user.role != User.Role.CURATOR:
                 raise PermissionDenied()
@@ -171,14 +170,17 @@ class VacancySerializer(serializers.ModelSerializer):
                 validated_data["published_at"] = timezone.now()
                 validated_data["reviewed_by"] = self.context["request"].user
 
-        serializer = TestTaskSerializer(
-            data=test_task_data, context={"department": instance.department}
-        )
-        serializer.is_valid(raise_exception=True)
-        test_task = serializer.save()
-        instance.test_task = test_task
-        qualifications = validated_data.pop("required_qualifications")
-        instance.required_qualifications.set(qualifications)
+        test_task_data = validated_data.pop("test_task", None)
+        if test_task_data is not None:
+            serializer = TestTaskSerializer(
+                data=test_task_data, context={"department": instance.department}
+            )
+            serializer.is_valid(raise_exception=True)
+            test_task = serializer.save()
+            instance.test_task = test_task
+        qualifications = validated_data.pop("required_qualifications", None)
+        if qualifications is not None:
+            instance.required_qualifications.set(qualifications)
         return super().update(instance, validated_data)
 
 
