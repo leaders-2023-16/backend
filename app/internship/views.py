@@ -74,6 +74,8 @@ class VacancyResponseViewSet(viewsets.ModelViewSet):
     queryset = VacancyResponse.objects.all()
     serializer_class = VacancyResponseSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["approved_by_mentor", "approved_by_applicant"]
 
     def get_permission_classes(self):
         if self.action == "create" or self.action == "destroy":
