@@ -146,13 +146,17 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
             User.Role.CANDIDATE,
             User.Role.TRAINEE,
         ]:
-            validated_data.pop("cv_score", None)
-            validated_data.pop("test_score", None)
-            validated_data.pop("career_school_username", None)
-            validated_data.pop("career_school_password", None)
-            validated_data.pop("progress_career_school", None)
-            validated_data.pop("testing_platform_username", None)
-            validated_data.pop("testing_platform_password", None)
+            ignore_fields = [
+                "cv_score",
+                "test_score",
+                "career_school_username",
+                "career_school_password",
+                "progress_career_school",
+                "testing_platform_username",
+                "testing_platform_password",
+            ]
+            for field in ignore_fields:
+                validated_data.pop(field, None)
         links_data = validated_data.pop("links", [])
         educations_data = validated_data.pop("educations", [])
         work_experiences_data = validated_data.pop("work_experiences", [])
