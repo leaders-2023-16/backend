@@ -98,6 +98,10 @@ class Vacancy(models.Model):
         REJECTED = "rejected", _("Rejected")
         PUBLISHED = "published", _("Published")
 
+    class ScheduleType(models.TextChoices):
+        FULL_TIME = "full-time", _("Full-time")
+        PART_TIME = "part-time", _("Part-time")
+
     required_qualifications = models.ManyToManyField(
         Qualification, verbose_name="Required Qualifications"
     )
@@ -148,6 +152,13 @@ class Vacancy(models.Model):
         blank=True, null=True, verbose_name="Published At"
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created At")
+
+    schedule = models.CharField(
+        max_length=50,
+        choices=ScheduleType.choices,
+        default=ScheduleType.FULL_TIME,
+        verbose_name="Status",
+    )
 
     class Meta:
         verbose_name_plural = "Vacancies"

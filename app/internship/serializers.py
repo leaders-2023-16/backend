@@ -107,6 +107,7 @@ class ReadVacancySerializer(serializers.ModelSerializer):
             "test_task",
             "published_at",
             "created_at",
+            "schedule",
         ]
 
 
@@ -130,6 +131,7 @@ class VacancySerializer(serializers.ModelSerializer):
             "published_at",
             "created_at",
             "test_task",
+            "schedule",
         ]
         read_only_fields = (
             "id",
