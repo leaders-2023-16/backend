@@ -117,6 +117,21 @@ class TraineeProfile(models.Model):
     test_score = models.PositiveIntegerField(
         validators=[MaxValueValidator(100)], default=0
     )
+    career_school_username = models.CharField(
+        max_length=255, null=True, blank=True, verbose_name="Career School Login"
+    )
+    career_school_password = models.CharField(
+        max_length=255, null=True, blank=True, verbose_name="Career School Password"
+    )
+    progress_career_school = models.PositiveIntegerField(
+        validators=[MaxValueValidator(100)], default=0
+    )
+    testing_platform_username = models.CharField(
+        max_length=255, null=True, blank=True, verbose_name="Testing platform Login"
+    )
+    testing_platform_password = models.CharField(
+        max_length=255, null=True, blank=True, verbose_name="Testing platform Password"
+    )
 
     class Meta:
         db_table = "accounts_trainee_profile"
