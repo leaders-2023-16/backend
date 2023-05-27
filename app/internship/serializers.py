@@ -189,7 +189,7 @@ class VacancySerializer(serializers.ModelSerializer):
 
 
 class ReadVacancyResponseSerializer(serializers.ModelSerializer):
-    vacancy = VacancySerializer()
+    vacancy = ReadVacancySerializer()
     applicant = ReadTraineeProfileSerializer()
 
     class Meta:
