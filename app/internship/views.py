@@ -51,7 +51,7 @@ class InternshipApplicationViewSet(viewsets.ModelViewSet):
         request=None,
         responses={status.HTTP_200_OK: CountSerializer()},
     )
-    @action(detail=False, methods=["POST"])
+    @action(detail=False, methods=["POST"], url_path="end-up-selection")
     def end_up_selection(self, request):
         profiles = TraineeProfile.objects.get_rating().prefetch_related(
             "user__applications"
