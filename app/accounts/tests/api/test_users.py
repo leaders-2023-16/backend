@@ -69,3 +69,29 @@ def test_get_list_of_users_curator(
 
         assert response.status_code == status.HTTP_200_OK
         assert len(response.data) == 1
+
+
+@pytest.mark.django_db
+def test_get_free_mentors_forbidden(api_client, mentor):
+    url = reverse("users-free-mentors")
+    response = api_client.get(url)
+
+    assert response.status_code == status.HTTP_403_FORBIDDEN
+
+
+@pytest.mark.django_db
+def test_get_free_mentors(personnel_client, mentor):
+    url = reverse("users-free-mentors")
+    response = personnel_client.get(url)
+
+    assert response.status_code == status.HTTP_200_OK
+    assert len(response.data) == 1
+
+
+@pytest.mark.django_db
+def test_get_free_mentors_empty(personnel_client, mentor, published_vacancy):
+    url = reverse("users-free-mentors")
+    response = personnel_client.get(url)
+
+    assert response.status_code == status.HTTP_200_OK
+    assert len(response.data) == 0

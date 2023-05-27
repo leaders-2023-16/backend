@@ -129,16 +129,23 @@ class UserViewSet(
     serializer_class = UserSerializer
     pagination_class = None
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["role"]
+    filterset_fields = ["role", "department"]
 
     def get_permissions(self):
         if self.action in ["update", "partial_update"]:
             permission_classes = [IsAuthenticated, IsCurator | OwnProfilePermission]
+        elif self.action in "free_mentors":
+            permission_classes = [IsAuthenticated, IsCurator | IsPersonnel]
         else:
             permission_classes = [IsAuthenticated, IsCurator | IsPersonnel | IsMentor]
         return [permission() for permission in permission_classes]
 
     def get_queryset(self):
+        if self.action == "free_mentors":
+            qs = self.queryset.filter(role=User.Role.MENTOR, mentor_of__isnull=True)
+            if self.request.user.role == User.Role.PERSONNEL:
+                qs = qs.filter(department=self.request.user.department)
+            return qs
         if self.request.user.role == User.Role.PERSONNEL:
             department = self.request.user.department
             return self.queryset.filter(
@@ -150,6 +157,10 @@ class UserViewSet(
                 trainee_profile__vacancyresponse__vacancy__mentor=self.request.user
             )
         return self.queryset
+
+    @action(methods=["GET"], detail=False, url_path="free-mentors")
+    def free_mentors(self, request):
+        return self.list(request)
 
 
 class CountryViewSet(viewsets.ReadOnlyModelViewSet):
