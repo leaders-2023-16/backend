@@ -247,3 +247,7 @@ class WorkPlaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkPlace
         fields = ["id", "name", "mentor", "trainee", "is_active"]
+
+
+class CountSerializer(serializers.Serializer):
+    count = serializers.IntegerField()

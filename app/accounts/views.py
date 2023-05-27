@@ -12,7 +12,7 @@ from accounts.serializers import (
     TraineeProfileSerializer,
     UserSerializer,
 )
-from django.db.models import F, Q
+from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django_filters.rest_framework import DjangoFilterBackend
@@ -109,11 +109,7 @@ class TraineeProfileViewSet(
 
     def get_queryset(self):
         if self.action == "rating":
-            return (
-                self.queryset.filter(status=TraineeProfile.QualifyingStatus.PASSED)
-                .annotate(total_score=F("cv_score") + F("test_score"))
-                .order_by("-total_score")
-            )
+            return TraineeProfile.objects.get_rating()
         return self.queryset
 
     @action(detail=False, methods=["GET"])
