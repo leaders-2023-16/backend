@@ -182,6 +182,27 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 
+class RatingTraineeProfileSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source="user.first_name", read_only=True)
+    last_name = serializers.CharField(source="user.last_name", read_only=True)
+    email = serializers.CharField(source="user.email", read_only=True)
+    total_score = serializers.IntegerField()
+
+    class Meta:
+        model = TraineeProfile
+        fields = [
+            "user_id",
+            "first_name",
+            "last_name",
+            "email",
+            "birth_date",
+            "sex",
+            "cv_score",
+            "test_score",
+            "total_score",
+        ]
+
+
 class TokenRefreshSerializer(serializers.Serializer):
     refresh = serializers.CharField()
 

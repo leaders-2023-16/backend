@@ -1,5 +1,22 @@
 import pytest
+from accounts.models import TraineeProfile, User
 from django.urls import reverse
+
+
+@pytest.fixture
+def trainee2(create_user):
+    return create_user(role=User.Role.TRAINEE, username="trainee2@user.com")
+
+
+@pytest.fixture
+def trainee_profile2(preferable_country, trainee2):
+    profile = trainee2.trainee_profile
+    profile.citizenship = preferable_country
+    profile.cv_score = 100
+    profile.test_score = 100
+    profile.status = TraineeProfile.QualifyingStatus.PASSED
+    profile.save()
+    return profile
 
 
 @pytest.mark.django_db
@@ -145,3 +162,56 @@ def test_update_not_own_trainee_profile(api_client, user2):
 
     response = api_client.patch(url, data, format="json")
     assert response.status_code == 403
+
+
+@pytest.mark.django_db
+def test_rating_list_trainee_profiles(curator_client, trainee_profile):
+    url = reverse("trainee-profiles-rating")
+
+    response = curator_client.get(url)
+    assert response.status_code == 200
+    response_data = response.json()
+    assert "results" in response_data
+    results = response_data["results"]
+    assert len(results) == 0
+
+    # Approve trainee to internship
+    trainee_profile.status = TraineeProfile.QualifyingStatus.PASSED
+    trainee_profile.save()
+
+    response = curator_client.get(url)
+
+    response_data = response.json()
+    results = response_data["results"]
+    assert len(results) == 1
+    data = results[0]
+    assert "user_id" in data
+    assert "first_name" in data
+    assert "last_name" in data
+    assert "email" in data
+    assert "sex" in data
+    assert "birth_date" in data
+    assert "total_score" in data
+    assert data["cv_score"] == trainee_profile.cv_score
+    assert data["test_score"] == trainee_profile.test_score
+    assert data["total_score"] == trainee_profile.test_score + trainee_profile.cv_score
+
+
+@pytest.mark.django_db
+def test_rating_list_trainee_profiles_sort(
+    curator_client, trainee_profile, trainee_profile2
+):
+    # Approve trainee to internship
+    trainee_profile.status = TraineeProfile.QualifyingStatus.PASSED
+    trainee_profile.save()
+
+    url = reverse("trainee-profiles-rating")
+
+    response = curator_client.get(url)
+    assert response.status_code == 200
+
+    response_data = response.json()
+    assert "results" in response_data
+    results = response_data["results"]
+    assert len(results) == 2
+    assert results[0]["total_score"] > results[1]["total_score"]

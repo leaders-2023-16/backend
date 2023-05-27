@@ -145,5 +145,7 @@ def generic_api_client(request, anon_api_client, api_client):
 def trainee_profile(preferable_country, trainee):
     profile = trainee.trainee_profile
     profile.citizenship = preferable_country
+    profile.cv_score = 30
+    profile.test_score = 30
     profile.save()
     return profile
