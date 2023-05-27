@@ -203,3 +203,12 @@ class WorkPlaceViewSet(viewsets.ModelViewSet):
         work_place = request.user.current_work_place
         serializer = self.get_serializer(work_place)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["GET"], url_path="by-trainee")
+    def by_trainee(self, request, pk=None):
+        try:
+            work_place = WorkPlace.objects.filter(trainee_id=pk, is_active=True).get()
+        except WorkPlace.DoesNotExist:
+            raise Http404
+        serializer = self.get_serializer(work_place)
+        return Response(data=serializer.data)
