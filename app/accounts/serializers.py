@@ -69,7 +69,7 @@ class ReadTraineeProfileSerializer(serializers.ModelSerializer):
             "email",
             "birth_date",
             "sex",
-            "status",
+            "test_status",
             "cv_score",
             "test_score",
             "career_school_username",
@@ -104,7 +104,7 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
             "email",
             "birth_date",
             "sex",
-            "status",
+            "test_status",
             "cv_score",
             "test_score",
             "career_school_username",
@@ -113,7 +113,6 @@ class TraineeProfileSerializer(serializers.ModelSerializer):
             "testing_platform_username",
             "testing_platform_password",
         ]
-        read_only_fields = ("status",)
 
     @transaction.atomic
     def create(self, validated_data):

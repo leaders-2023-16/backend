@@ -128,7 +128,7 @@ def test_end_up_selection(curator_client, internship_application, trainee_profil
     assert response.status_code == status.HTTP_200_OK
     assert response.data["count"] == 0
 
-    trainee_profile.status = TraineeProfile.QualifyingStatus.PASSED
+    trainee_profile.test_status = TraineeProfile.QualifyingStatus.PASSED
     trainee_profile.save()
 
     response = curator_client.post(url)

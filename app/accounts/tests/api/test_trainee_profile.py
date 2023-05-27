@@ -14,7 +14,7 @@ def trainee_profile2(preferable_country, trainee2):
     profile.citizenship = preferable_country
     profile.cv_score = 100
     profile.test_score = 100
-    profile.status = TraineeProfile.QualifyingStatus.PASSED
+    profile.test_status = TraineeProfile.QualifyingStatus.PASSED
     profile.save()
     return profile
 
@@ -176,7 +176,7 @@ def test_rating_list_trainee_profiles(curator_client, trainee_profile):
     assert len(results) == 0
 
     # Approve trainee to internship
-    trainee_profile.status = TraineeProfile.QualifyingStatus.PASSED
+    trainee_profile.test_status = TraineeProfile.QualifyingStatus.PASSED
     trainee_profile.save()
 
     response = curator_client.get(url)
@@ -202,7 +202,7 @@ def test_rating_list_trainee_profiles_sort(
     curator_client, trainee_profile, trainee_profile2
 ):
     # Approve trainee to internship
-    trainee_profile.status = TraineeProfile.QualifyingStatus.PASSED
+    trainee_profile.test_status = TraineeProfile.QualifyingStatus.PASSED
     trainee_profile.save()
 
     url = reverse("trainee-profiles-rating")
