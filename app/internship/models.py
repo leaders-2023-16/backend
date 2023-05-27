@@ -87,6 +87,9 @@ class TestTask(models.Model):
 class Direction(models.Model):
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class Qualification(models.Model):
     id = models.BigAutoField(primary_key=True)

@@ -137,6 +137,9 @@ class TraineeProfile(models.Model):
         db_table = "accounts_trainee_profile"
         verbose_name_plural = "Trainee Profiles"
 
+    def __str__(self):
+        return "%s %s" % (self.user.first_name, self.user.last_name)
+
 
 class Link(models.Model):
     profile = models.ForeignKey(
