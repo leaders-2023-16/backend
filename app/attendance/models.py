@@ -13,7 +13,7 @@ class Report(models.Model):
     applicant = models.ForeignKey(
         "accounts.User", on_delete=models.CASCADE, related_name="reports"
     )
-    is_approved = models.BooleanField()
+    is_approved = models.BooleanField(default=False)
     approved_by = models.ForeignKey(
         "accounts.User", on_delete=models.CASCADE, related_name="approved_reports"
     )
