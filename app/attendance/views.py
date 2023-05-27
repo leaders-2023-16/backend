@@ -1,5 +1,6 @@
 from accounts.models import User
 from accounts.permissions import IsCurator, IsMentor, IsPersonnel, IsTrainee
+from attendance.filters import ReportFilterSet
 from attendance.models import Report
 from attendance.serializers import ReportSerializer
 from django_filters.rest_framework import DjangoFilterBackend
@@ -12,6 +13,7 @@ class ReportViewSet(viewsets.ModelViewSet):
     serializer_class = ReportSerializer
     pagination_class = None
     filter_backends = [DjangoFilterBackend]
+    filterset_class = ReportFilterSet
 
     def get_permissions(self):
         if self.action in ["update", "partial_update"]:
