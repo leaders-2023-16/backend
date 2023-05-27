@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "django_filters",
     "accounts",
     "internship",
+    "attendance",
 ]
 
 MIDDLEWARE = [
