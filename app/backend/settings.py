@@ -169,6 +169,7 @@ PREFERABLE_CITIZENSHIP_ID = (
     475  # Russian Federation (id from app/accounts/fixtures/countries.yaml)
 )
 REQUIRED_UNIVERSITY_YEARS = 3
+SELECTION_COUNT = 400
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=1),

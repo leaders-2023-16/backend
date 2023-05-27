@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models, transaction
+from django.db.models import F
 from django.utils.translation import gettext_lazy as _
 
 
@@ -72,6 +73,15 @@ class Country(models.Model):
         return self.name
 
 
+class TraineeProfileManager(models.Manager):
+    def get_rating(self):
+        return (
+            self.filter(status=TraineeProfile.QualifyingStatus.PASSED)
+            .annotate(total_score=F("cv_score") + F("test_score"))
+            .order_by("-total_score")
+        )
+
+
 class TraineeProfile(models.Model):
     class Sex(models.TextChoices):
         MALE = "M", _("MALE")
@@ -132,6 +142,8 @@ class TraineeProfile(models.Model):
     testing_platform_password = models.CharField(
         max_length=255, null=True, blank=True, verbose_name="Testing platform Password"
     )
+
+    objects = TraineeProfileManager()
 
     class Meta:
         db_table = "accounts_trainee_profile"
