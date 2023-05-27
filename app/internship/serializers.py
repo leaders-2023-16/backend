@@ -13,6 +13,7 @@ from internship.models import (
     TestTask,
     Vacancy,
     VacancyResponse,
+    WorkPlace,
 )
 from rest_framework import serializers
 from rest_framework.exceptions import PermissionDenied
@@ -237,3 +238,12 @@ class VacancyResponseSerializer(serializers.ModelSerializer):
                 "approved_by_mentor": validated_data.get("approved_by_mentor")
             }
         return super().update(instance, validated_data)
+
+
+class WorkPlaceSerializer(serializers.ModelSerializer):
+    trainee = UserSerializer()
+    mentor = UserSerializer()
+
+    class Meta:
+        model = WorkPlace
+        fields = ["id", "name", "mentor", "trainee", "is_active"]

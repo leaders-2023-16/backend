@@ -1,4 +1,4 @@
-from accounts.models import Department, Education, TraineeProfile
+from accounts.models import Department, Education, TraineeProfile, User
 from django.conf import settings
 from django.db import models
 from django.db.models import F
@@ -97,6 +97,7 @@ class Vacancy(models.Model):
         PENDING = "pending", _("Pending")
         REJECTED = "rejected", _("Rejected")
         PUBLISHED = "published", _("Published")
+        CLOSED = "closed", _("Closed")
 
     class ScheduleType(models.TextChoices):
         FULL_TIME = "full-time", _("Full-time")
@@ -184,3 +185,33 @@ class VacancyResponse(models.Model):
         db_table = "internship_vacancy_response"
         verbose_name_plural = "Vacancy responses"
         unique_together = [["vacancy", "applicant"]]
+
+
+class WorkPlace(models.Model):
+    name = models.CharField(max_length=255, verbose_name=_("Name"))
+    vacancy = models.OneToOneField(
+        Vacancy,
+        related_name="work_place",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
+    trainee = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="work_on",
+        verbose_name=_("Trainee"),
+    )
+    mentor = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="mentor_on",
+        verbose_name=_("Mentor"),
+    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created at"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated at"))
+    is_active = models.BooleanField(default=True, verbose_name=_("Is active"))
+
+    class Meta:
+        db_table = "attendance_work_place"
+        verbose_name_plural = "Work places"

@@ -1,6 +1,6 @@
 import pytest
 from django.urls import reverse
-from internship.models import VacancyResponse
+from internship.models import Vacancy, VacancyResponse, WorkPlace
 from rest_framework import status
 
 
@@ -121,3 +121,19 @@ def test_get_vacancy_response_by_vacancy(
     assert "vacancy" in data
     assert data["approved_by_mentor"] is None
     assert data["approved_by_applicant"] is None
+
+
+@pytest.mark.django_db
+def test_get_vacancy_response_approve(curator_client, vacancy_response):
+    url = reverse("vacancy-responses-approve", args=[vacancy_response.id])
+    response = curator_client.post(url)
+    assert response.status_code == status.HTTP_201_CREATED
+    assert WorkPlace.objects.count() == 1
+    work_place = WorkPlace.objects.first()
+    vacancy = vacancy_response.vacancy
+    vacancy.refresh_from_db()
+    assert work_place.vacancy == vacancy
+    assert work_place.name == vacancy.name
+    assert work_place.trainee == vacancy_response.applicant.user
+    assert work_place.mentor == vacancy.mentor
+    assert vacancy.status == Vacancy.Status.CLOSED
