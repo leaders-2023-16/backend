@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models, transaction
 from django.db.models import F
+from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
 
@@ -61,6 +62,10 @@ class User(AbstractUser):
     )
 
     objects = UserManager()
+
+    @cached_property
+    def current_work_place(self):
+        return self.work_on.filter(is_active=True).first()
 
 
 class Country(models.Model):
