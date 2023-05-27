@@ -13,6 +13,7 @@ class InternshipApplication(models.Model):
         REJECTED = "rejected", _("Rejected")
         NEXT_STAGE = "next_stage", _("Approved for next stage")
         APPROVED = "approved", _("Approved")
+        NOT_QUALIFY = "not_qualify", _("Did not qualify for the application")
 
     applicant = models.OneToOneField(
         "accounts.User",
