@@ -84,7 +84,7 @@ class Country(models.Model):
 class TraineeProfileManager(models.Manager):
     def get_rating(self):
         return (
-            self.filter(status=TraineeProfile.QualifyingStatus.PASSED)
+            self.filter(test_status=TraineeProfile.QualifyingStatus.PASSED)
             .annotate(total_score=F("cv_score") + F("test_score"))
             .order_by("-total_score")
         )
@@ -123,7 +123,7 @@ class TraineeProfile(models.Model):
     )
     birth_date = models.DateField("Birth date", blank=True, null=True)
 
-    status = models.CharField(
+    test_status = models.CharField(
         max_length=11,
         choices=QualifyingStatus.choices,
         default=QualifyingStatus.IN_PROGRESS,
