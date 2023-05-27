@@ -138,7 +138,7 @@ class TraineeProfile(models.Model):
         verbose_name_plural = "Trainee Profiles"
 
     def __str__(self):
-        return "%s %s" % (self.user.first_name, self.user.last_name)
+        return f"{self.user.first_name} {self.user.last_name}"
 
 
 class Link(models.Model):
