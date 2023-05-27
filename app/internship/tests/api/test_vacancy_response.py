@@ -21,6 +21,14 @@ def test_get_all_vacancy_responses(curator_client, vacancy_response):
 
 
 @pytest.mark.django_db
+def test_get_vacancies_filter(curator_client, vacancy_response):
+    url = reverse("vacancy-responses-list")
+    response = curator_client.get(url, {"vacancy": vacancy_response.vacancy.id})
+    assert response.status_code == status.HTTP_200_OK
+    assert len(response.data["results"]) == 1
+
+
+@pytest.mark.django_db
 def test_get_vacancy_responses(
     personnel_client, personnel, vacancy_response, department2
 ):
