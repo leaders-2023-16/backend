@@ -1,5 +1,5 @@
 import pytest
-from accounts.models import TraineeProfile
+from accounts.models import TraineeProfile, User
 from django.urls import reverse
 from internship.models import InternshipApplication
 from rest_framework import status
@@ -138,3 +138,4 @@ def test_end_up_selection(curator_client, internship_application, trainee_profil
     assert InternshipApplication.objects.count() == 1
     internship_application.refresh_from_db()
     assert internship_application.status == InternshipApplication.Status.APPROVED
+    assert internship_application.applicant.role == User.Role.TRAINEE

@@ -56,11 +56,17 @@ class InternshipApplicationViewSet(viewsets.ModelViewSet):
         profiles = TraineeProfile.objects.get_rating().prefetch_related(
             "user__applications"
         )[: settings.SELECTION_COUNT]
-        updated = []
+        updated_applications = []
+        updated_users = []
         for profile in profiles:
             profile.user.applications.status = InternshipApplication.Status.APPROVED
-            updated.append(profile.user.applications)
-        InternshipApplication.objects.bulk_update(updated, fields=["status"])
+            updated_applications.append(profile.user.applications)
+            profile.user.role = User.Role.TRAINEE
+            updated_users.append(profile.user)
+        InternshipApplication.objects.bulk_update(
+            updated_applications, fields=["status"]
+        )
+        User.objects.bulk_update(updated_users, fields=["role"])
 
         return Response({"count": len(profiles)}, status=status.HTTP_200_OK)
 
