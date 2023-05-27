@@ -167,6 +167,7 @@ class VacancyResponseViewSet(viewsets.ModelViewSet):
             vacancy_id=vacancy_response.vacancy_id,
             trainee_id=vacancy_response.applicant_id,
             mentor_id=vacancy_response.vacancy.mentor_id,
+            department_id=vacancy_response.vacancy.department_id,
         )
         vacancy_response.vacancy.status = Vacancy.Status.CLOSED
         vacancy_response.vacancy.save()
