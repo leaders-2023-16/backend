@@ -181,7 +181,7 @@ class WorkPlaceViewSet(viewsets.ModelViewSet):
     serializer_class = WorkPlaceSerializer
     permission_classes = [
         permissions.IsAuthenticated,
-        IsCurator | IsPersonnel | IsTrainee | IsMentor | IsTrainee,
+        IsCurator | IsPersonnel | IsTrainee | IsMentor,
     ]
     pagination_class = None
 
