@@ -65,7 +65,10 @@ class User(AbstractUser):
 
     @cached_property
     def current_work_place(self):
-        return self.work_on.filter(is_active=True).first()
+        if self.role == User.Role.TRAINEE:
+            return self.work_on.filter(is_active=True).first()
+        elif self.role == User.Role.MENTOR:
+            return self.mentor_on.filter(is_active=True).first()
 
 
 class Country(models.Model):
