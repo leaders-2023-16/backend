@@ -179,16 +179,27 @@ class VacancyResponseViewSet(viewsets.ModelViewSet):
 class WorkPlaceViewSet(viewsets.ModelViewSet):
     queryset = WorkPlace.objects.all()
     serializer_class = WorkPlaceSerializer
-    permission_classes = [
-        permissions.IsAuthenticated,
-        IsCurator | IsPersonnel | IsTrainee | IsMentor,
-    ]
+    permission_classes = [permissions.IsAuthenticated]
     pagination_class = None
 
+    def get_permission_classes(self):
+        if self.action == "current":
+            return [permissions.IsAuthenticated, IsTrainee | IsMentor]
+        return [
+            permissions.IsAuthenticated,
+            IsCurator | IsPersonnel | IsTrainee | IsMentor,
+        ]
+
     def get_permissions(self):
-        return [perm() for perm in self.permission_classes]
+        return [perm() for perm in self.get_permission_classes()]
 
     def get_serializer_class(self):
         if self.action not in ("update", "partial_update", "create"):
             return ReadWorkPlaceSerializer
         return self.serializer_class
+
+    @action(detail=False, methods=["GET"])
+    def current(self, request):
+        work_place = request.user.current_work_place
+        serializer = self.get_serializer(work_place)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
