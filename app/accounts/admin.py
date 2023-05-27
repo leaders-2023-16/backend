@@ -1,5 +1,6 @@
 from accounts.models import (
     Country,
+    Department,
     Education,
     Link,
     TraineeProfile,
@@ -8,8 +9,31 @@ from accounts.models import (
 )
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import gettext_lazy as _
 
-admin.site.register(User, UserAdmin)
+
+@admin.register(User)
+class CustomUserAdmin(UserAdmin):
+    fieldsets = (
+        (None, {"fields": ("username", "password")}),
+        (_("Personal info"), {"fields": ("first_name", "last_name", "email")}),
+        (
+            _("Permissions"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                ),
+            },
+        ),
+        (_("Important dates"), {"fields": ("last_login", "date_joined")}),
+        (_("Roles"), {"fields": ("role",)}),
+    )
+    list_display = ("first_name", "last_name", "role", "is_staff")
+    search_fields = ("first_name", "last_name", "role")
 
 
 @admin.register(Country)
@@ -84,3 +108,9 @@ class WorkExperienceAdmin(admin.ModelAdmin):
         "employer",
         "position",
     )
+
+
+@admin.register(Department)
+class DepartmentAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)

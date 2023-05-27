@@ -13,6 +13,7 @@ class InternshipApplication(models.Model):
         REJECTED = "rejected", _("Rejected")
         NEXT_STAGE = "next_stage", _("Approved for next stage")
         APPROVED = "approved", _("Approved")
+        NOT_QUALIFY = "not_qualify", _("Did not qualify for the application")
 
     applicant = models.OneToOneField(
         "accounts.User",
@@ -85,6 +86,9 @@ class TestTask(models.Model):
 
 class Direction(models.Model):
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class Qualification(models.Model):
@@ -211,6 +215,9 @@ class WorkPlace(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created at"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated at"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is active"))
+    department = models.ForeignKey(
+        Department, on_delete=models.CASCADE, verbose_name="Department"
+    )
 
     class Meta:
         db_table = "attendance_work_place"

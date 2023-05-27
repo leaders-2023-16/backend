@@ -1,4 +1,5 @@
 import pytest
+from accounts.models import TraineeProfile, User
 from django.urls import reverse
 from internship.models import InternshipApplication
 from rest_framework import status
@@ -116,3 +117,25 @@ def test_delete_internship_application(candidate_client, internship_application)
     assert not InternshipApplication.objects.filter(
         pk=internship_application.applicant_id
     ).exists()
+
+
+@pytest.mark.django_db
+def test_end_up_selection(curator_client, internship_application, trainee_profile):
+    url = reverse("internship-application-end-up-selection")
+
+    response = curator_client.post(url)
+
+    assert response.status_code == status.HTTP_200_OK
+    assert response.data["count"] == 0
+
+    trainee_profile.status = TraineeProfile.QualifyingStatus.PASSED
+    trainee_profile.save()
+
+    response = curator_client.post(url)
+
+    assert response.status_code == status.HTTP_200_OK
+    assert response.data["count"] == 1
+    assert InternshipApplication.objects.count() == 1
+    internship_application.refresh_from_db()
+    assert internship_application.status == InternshipApplication.Status.APPROVED
+    assert internship_application.applicant.role == User.Role.TRAINEE

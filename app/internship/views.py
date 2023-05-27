@@ -1,4 +1,4 @@
-from accounts.models import User
+from accounts.models import TraineeProfile, User
 from accounts.permissions import (
     IsCandidate,
     IsCurator,
@@ -6,12 +6,14 @@ from accounts.permissions import (
     IsPersonnel,
     IsTrainee,
 )
+from django.conf import settings
 from django.db import transaction
 from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
 from internship.models import InternshipApplication, Vacancy, VacancyResponse, WorkPlace
 from internship.serializers import (
+    CountSerializer,
     InternshipApplicationSerializer,
     ReadInternshipApplicationSerializer,
     ReadVacancyResponseSerializer,
@@ -42,6 +44,31 @@ class InternshipApplicationViewSet(viewsets.ModelViewSet):
         if self.action not in ("update", "partial_update", "create"):
             return ReadInternshipApplicationSerializer
         return self.serializer_class
+
+    @extend_schema(
+        description="Закончить отбор",
+        summary="Закончить отбор",
+        request=None,
+        responses={status.HTTP_200_OK: CountSerializer()},
+    )
+    @action(detail=False, methods=["POST"], url_path="end-up-selection")
+    def end_up_selection(self, request):
+        profiles = TraineeProfile.objects.get_rating().prefetch_related(
+            "user__applications"
+        )[: settings.SELECTION_COUNT]
+        updated_applications = []
+        updated_users = []
+        for profile in profiles:
+            profile.user.applications.status = InternshipApplication.Status.APPROVED
+            updated_applications.append(profile.user.applications)
+            profile.user.role = User.Role.TRAINEE
+            updated_users.append(profile.user)
+        InternshipApplication.objects.bulk_update(
+            updated_applications, fields=["status"]
+        )
+        User.objects.bulk_update(updated_users, fields=["role"])
+
+        return Response({"count": len(profiles)}, status=status.HTTP_200_OK)
 
 
 class VacancyViewSet(viewsets.ModelViewSet):
@@ -140,6 +167,7 @@ class VacancyResponseViewSet(viewsets.ModelViewSet):
             vacancy_id=vacancy_response.vacancy_id,
             trainee_id=vacancy_response.applicant_id,
             mentor_id=vacancy_response.vacancy.mentor_id,
+            department_id=vacancy_response.vacancy.department_id,
         )
         vacancy_response.vacancy.status = Vacancy.Status.CLOSED
         vacancy_response.vacancy.save()
