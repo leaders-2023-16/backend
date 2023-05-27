@@ -3,6 +3,7 @@ from accounts.serializers import (
     DepartmentSerializer,
     ReadTraineeProfileSerializer,
     UserSerializer,
+    UserWithProfileSerialization,
 )
 from django.db import transaction
 from django.utils import timezone
@@ -20,7 +21,7 @@ from rest_framework.exceptions import PermissionDenied
 
 
 class ReadInternshipApplicationSerializer(serializers.ModelSerializer):
-    applicant = UserSerializer()
+    applicant = UserWithProfileSerialization()
     status_changed_by = UserSerializer()
     is_recommended = serializers.BooleanField()  # TODO: hide field for candidate
 

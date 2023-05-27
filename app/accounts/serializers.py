@@ -263,3 +263,19 @@ class TokenObtainPairResponseSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         raise NotImplementedError()
+
+
+class UserWithProfileSerialization(UserSerializer):
+    trainee_profile = ReadTraineeProfileSerializer()
+
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "email",
+            "role",
+            "first_name",
+            "last_name",
+            "department",
+            "trainee_profile",
+        )
