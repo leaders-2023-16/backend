@@ -6,7 +6,8 @@ class Report(models.Model):
     class StatusType(models.TextChoices):
         ATTENDED = "ATTENDED", _("Attended")
         SICK_DAY = "SICK_DAY", _("Sick day")
-        VOCATION = "VOCATION", _("Vocation")
+        VACATION = "VACATION", _("Vacation")
+        STUDY_VACATION = "STUDY_VACATION", _("Study vacation")
 
     date = models.DateField()
     applicant = models.ForeignKey(
