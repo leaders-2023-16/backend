@@ -6,9 +6,11 @@ from accounts.permissions import (
     IsPersonnel,
     IsTrainee,
 )
+from django.db import transaction
 from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
-from internship.models import InternshipApplication, Vacancy, VacancyResponse
+from drf_spectacular.utils import extend_schema
+from internship.models import InternshipApplication, Vacancy, VacancyResponse, WorkPlace
 from internship.serializers import (
     InternshipApplicationSerializer,
     ReadInternshipApplicationSerializer,
@@ -16,8 +18,9 @@ from internship.serializers import (
     ReadVacancySerializer,
     VacancyResponseSerializer,
     VacancySerializer,
+    WorkPlaceSerializer,
 )
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -83,6 +86,8 @@ class VacancyResponseViewSet(viewsets.ModelViewSet):
     def get_permission_classes(self):
         if self.action == "create" or self.action == "destroy":
             return [permissions.IsAuthenticated, IsTrainee]
+        if self.action == "approve":
+            return [permissions.IsAuthenticated, IsCurator]
         return [
             permissions.IsAuthenticated,
             IsCurator | IsPersonnel | IsTrainee | IsMentor,
@@ -92,6 +97,8 @@ class VacancyResponseViewSet(viewsets.ModelViewSet):
         return [perm() for perm in self.get_permission_classes()]
 
     def get_serializer_class(self):
+        if self.action == "approve":
+            return WorkPlaceSerializer
         if self.action not in ("update", "partial_update", "create"):
             return ReadVacancyResponseSerializer
         return self.serializer_class
@@ -118,3 +125,23 @@ class VacancyResponseViewSet(viewsets.ModelViewSet):
             raise Http404
         serializer = self.get_serializer(vacancy_response)
         return Response(data=serializer.data)
+
+    @extend_schema(
+        description="Approve the candidate to this mentor",
+        summary="Approve the candidate to this mentor",
+        request=None,
+    )
+    @action(detail=True, methods=["POST"])
+    @transaction.atomic
+    def approve(self, request, pk=None):
+        vacancy_response: VacancyResponse = self.get_object()
+        work_place = WorkPlace.objects.create(
+            name=vacancy_response.vacancy.name,
+            vacancy_id=vacancy_response.vacancy_id,
+            trainee_id=vacancy_response.applicant_id,
+            mentor_id=vacancy_response.vacancy.mentor_id,
+        )
+        vacancy_response.vacancy.status = Vacancy.Status.CLOSED
+        vacancy_response.vacancy.save()
+        serializer = self.get_serializer(work_place)
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
