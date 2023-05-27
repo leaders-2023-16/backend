@@ -215,6 +215,9 @@ class WorkPlace(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created at"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated at"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is active"))
+    department = models.ForeignKey(
+        Department, on_delete=models.CASCADE, verbose_name="Department"
+    )
 
     class Meta:
         db_table = "attendance_work_place"
