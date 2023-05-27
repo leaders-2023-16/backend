@@ -240,13 +240,39 @@ class VacancyResponseSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 
-class WorkPlaceSerializer(serializers.ModelSerializer):
+class ReadWorkPlaceSerializer(serializers.ModelSerializer):
     trainee = UserSerializer()
     mentor = UserSerializer()
+    department = DepartmentSerializer()
+    vacancy = VacancySerializer()
 
     class Meta:
         model = WorkPlace
-        fields = ["id", "name", "mentor", "trainee", "is_active"]
+        fields = (
+            "id",
+            "name",
+            "mentor",
+            "trainee",
+            "vacancy",
+            "is_active",
+            "created_at",
+            "updated_at",
+            "department",
+        )
+
+
+class WorkPlaceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkPlace
+        fields = [
+            "id",
+            "name",
+            "mentor",
+            "trainee",
+            "is_active",
+            "department",
+            "vacancy",
+        ]
 
 
 class CountSerializer(serializers.Serializer):
