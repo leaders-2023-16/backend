@@ -17,6 +17,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
+from internship.models import Vacancy
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -138,7 +139,9 @@ class UserViewSet(
 
     def get_queryset(self):
         if self.action == "free_mentors":
-            qs = self.queryset.filter(role=User.Role.MENTOR, mentor_of__isnull=True)
+            qs = self.queryset.filter(role=User.Role.MENTOR).filter(
+                Q(mentor_of__isnull=True) | Q(mentor_of__status=Vacancy.Status.CLOSED)
+            )
             if self.request.user.role == User.Role.PERSONNEL:
                 qs = qs.filter(department=self.request.user.department)
             return qs
