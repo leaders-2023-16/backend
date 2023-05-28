@@ -79,5 +79,4 @@ def get_non_working_days(year, month):
         except ValueError:
             # Handles cases where the day is out of range for the given month
             pass
-    print(non_working_days)
     return non_working_days
