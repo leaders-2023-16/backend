@@ -62,6 +62,7 @@ class ReportViewSet(viewsets.ModelViewSet):
                 content_type=(
                     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                 ),
+                headers={"Access-Control-Expose-Headers": "Content-Disposition"},
             )
             response["Content-Disposition"] = f'attachment; filename="{filename}"'
             return response
