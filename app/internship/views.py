@@ -11,10 +11,18 @@ from django.db import transaction
 from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
-from internship.models import InternshipApplication, Vacancy, VacancyResponse, WorkPlace
+from internship.models import (
+    FeedBack,
+    InternshipApplication,
+    Vacancy,
+    VacancyResponse,
+    WorkPlace,
+)
 from internship.serializers import (
     CountSerializer,
+    FeedbackSerializer,
     InternshipApplicationSerializer,
+    ReadFeedbackSerializer,
     ReadInternshipApplicationSerializer,
     ReadVacancyResponseSerializer,
     ReadVacancySerializer,
@@ -228,3 +236,33 @@ class WorkPlaceViewSet(viewsets.ModelViewSet):
             raise Http404
         serializer = self.get_serializer(work_place)
         return Response(data=serializer.data)
+
+
+class FeedBackViewSet(viewsets.ModelViewSet):
+    queryset = FeedBack.objects.all()
+    serializer_class = FeedbackSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    pagination_class = None
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = [
+        "from_user",
+        "to_user",
+        "date",
+        "rating",
+    ]
+
+    def get_permission_classes(self):
+        if self.action == "create":
+            return [permissions.IsAuthenticated, IsTrainee | IsMentor]
+        return [
+            permissions.IsAuthenticated,
+            IsCurator | IsPersonnel | IsTrainee | IsMentor,
+        ]
+
+    def get_permissions(self):
+        return [perm() for perm in self.get_permission_classes()]
+
+    def get_serializer_class(self):
+        if self.action not in ("update", "partial_update", "create"):
+            return ReadFeedbackSerializer
+        return self.serializer_class

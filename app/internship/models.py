@@ -1,5 +1,6 @@
 from accounts.models import Department, Education, TraineeProfile, User
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import F
 from django.db.models.functions import Coalesce
@@ -222,3 +223,20 @@ class WorkPlace(models.Model):
     class Meta:
         db_table = "attendance_work_place"
         verbose_name_plural = "Work places"
+
+
+class FeedBack(models.Model):
+    from_user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="feedbacks_sent"
+    )
+    to_user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="feedbacks_received"
+    )
+    date = models.DateField()
+    rating = models.IntegerField(
+        default=0, validators=[MinValueValidator(0), MaxValueValidator(5)]
+    )
+    text = models.TextField(max_length=255)
+
+    def __str__(self):
+        return f"FeedBack from {self.from_user} to {self.to_user} at {self.date}"
