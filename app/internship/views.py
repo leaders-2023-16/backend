@@ -182,7 +182,14 @@ class WorkPlaceViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = None
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["is_active"]
+    filterset_fields = [
+        "is_active",
+        "created_at",
+        "updated_at",
+        "department",
+        "trainee",
+        "mentor",
+    ]
 
     def get_permission_classes(self):
         if self.action == "current":
