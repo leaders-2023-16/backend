@@ -303,11 +303,11 @@ class FeedbackSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "to_user",
-            "date",
             "rating",
             "text",
         ]
 
     def create(self, validated_data):
-        user = self.context["request"].user
-        return FeedBack.objects.create(**validated_data, from_user=user)
+        validated_data["date"] = timezone.now()
+        validated_data["from_user"] = self.context["request"].user
+        return FeedBack.objects.create(**validated_data)
