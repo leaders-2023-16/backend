@@ -15,4 +15,6 @@ class EventFilterSet(django_filters.FilterSet):
         fields = [
             "datetime_from",
             "datetime_to",
+            "workplace",
+            "name",
         ]
