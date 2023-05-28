@@ -1,6 +1,8 @@
 from django.contrib import admin
 from internship.models import (
     Direction,
+    Event,
+    FeedBack,
     InternshipApplication,
     Qualification,
     TestTask,
@@ -90,4 +92,19 @@ class VacancyResponseAdmin(admin.ModelAdmin):
 @admin.register(WorkPlace)
 class WorkPlaceAdmin(admin.ModelAdmin):
     list_display = ("name",)
+    search_fields = ("name",)
+
+
+@admin.register(FeedBack)
+class FeedBackAdmin(admin.ModelAdmin):
+    list_display = ("from_user", "to_user")
+    search_fields = ("from_user", "to_user")
+
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "datetime",
+    )
     search_fields = ("name",)
