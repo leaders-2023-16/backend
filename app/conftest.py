@@ -1,6 +1,9 @@
+import datetime
+
 import pytest
-from accounts.models import Country, Department, User
+from accounts.models import Country, Department, Education, User
 from django.conf import settings
+from django.utils import timezone
 from internship.models import Direction
 from rest_framework.test import APIClient
 
@@ -147,5 +150,20 @@ def trainee_profile(preferable_country, trainee):
     profile.citizenship = preferable_country
     profile.cv_score = 30
     profile.test_score = 30
+    profile.birth_date = timezone.now().date() - datetime.timedelta(days=365 * 20)
     profile.save()
     return profile
+
+
+@pytest.fixture
+def education(trainee_profile):
+    return Education.objects.create(
+        profile=trainee_profile,
+        name="Test education",
+        description="Test education description",
+        type=Education.Type.UNIVERSITY,
+        start_year=2018,
+        end_year=2022,
+        specialization="",
+        degree=Education.DegreeType.BACHELOR,
+    )
