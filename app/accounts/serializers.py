@@ -53,6 +53,7 @@ class ReadTraineeProfileSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(source="user.first_name", read_only=True)
     last_name = serializers.CharField(source="user.last_name", read_only=True)
     email = serializers.CharField(source="user.email", read_only=True)
+    role = serializers.CharField(source="user.role", read_only=True)
 
     class Meta:
         model = TraineeProfile
@@ -77,6 +78,7 @@ class ReadTraineeProfileSerializer(serializers.ModelSerializer):
             "progress_career_school",
             "testing_platform_username",
             "testing_platform_password",
+            "role",
         ]
         depth = 1
 
