@@ -54,16 +54,19 @@ class InternshipApplicationViewSet(viewsets.ModelViewSet):
     )
     @action(detail=False, methods=["POST"], url_path="end-up-selection")
     def end_up_selection(self, request):
-        profiles = TraineeProfile.objects.get_rating().prefetch_related(
-            "user__applications"
-        )[: settings.SELECTION_COUNT]
+        profiles = list(
+            TraineeProfile.objects.get_rating().prefetch_related("user__applications")
+        )
         updated_applications = []
         updated_users = []
-        for profile in profiles:
+        for profile in profiles[: settings.SELECTION_COUNT]:
             profile.user.applications.status = InternshipApplication.Status.APPROVED
             updated_applications.append(profile.user.applications)
             profile.user.role = User.Role.TRAINEE
             updated_users.append(profile.user)
+        for profile in profiles[settings.SELECTION_COUNT :]:
+            profile.user.applications.status = InternshipApplication.Status.REJECTED
+            updated_applications.append(profile.user.applications)
         InternshipApplication.objects.bulk_update(
             updated_applications, fields=["status"]
         )
