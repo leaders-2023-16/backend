@@ -181,6 +181,8 @@ class WorkPlaceViewSet(viewsets.ModelViewSet):
     serializer_class = WorkPlaceSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = None
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["is_active"]
 
     def get_permission_classes(self):
         if self.action == "current":
