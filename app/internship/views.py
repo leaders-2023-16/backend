@@ -201,8 +201,12 @@ class WorkPlaceViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=["GET"])
     def current(self, request):
         work_place = request.user.current_work_place
-        serializer = self.get_serializer(work_place)
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
+        if work_place:
+            serializer = self.get_serializer(work_place)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+        return Response(
+            {"detail": "Not found active work places"}, status=status.HTTP_404_NOT_FOUND
+        )
 
     @action(detail=True, methods=["GET"], url_path="by-trainee")
     def by_trainee(self, request, pk=None):
