@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from internship.models import WorkPlace
 
@@ -29,3 +30,13 @@ class Report(models.Model):
     work_place = models.ForeignKey(
         WorkPlace, on_delete=models.CASCADE, related_name="reports", null=True
     )
+
+    @cached_property
+    def report_status(self):
+        if self.status == Report.StatusType.VACATION:
+            return "А"
+        if self.status == Report.StatusType.SICK_DAY:
+            return "Б"
+        if self.status == Report.StatusType.STUDY_VACATION:
+            return "УО"
+        return "+"

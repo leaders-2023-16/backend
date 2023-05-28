@@ -20,6 +20,7 @@ class UserManager(BaseUserManager):
     @transaction.atomic
     def _create_user(self, username, password, **extra_fields):
         extra_fields.setdefault("is_active", True)
+        extra_fields.pop("email", None)
         user = self.model(username=username, email=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
