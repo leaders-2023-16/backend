@@ -38,7 +38,9 @@ def test_retrieve_trainee_profile(generic_api_client, trainee_profile):
     assert response_data["last_name"] == trainee_profile.user.last_name
     assert response_data["email"] == trainee_profile.user.email
     assert response_data["sex"] == trainee_profile.sex
-    assert response_data["birth_date"] == trainee_profile.birth_date
+    assert response_data["birth_date"] == trainee_profile.birth_date.strftime(
+        "%Y-%m-%d"
+    )
 
 
 @pytest.mark.django_db

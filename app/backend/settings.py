@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "accounts",
     "internship",
     "attendance",
+    "statistic",
 ]
 
 MIDDLEWARE = [
