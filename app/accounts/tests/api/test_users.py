@@ -1,6 +1,7 @@
 import pytest
 from accounts.models import User
 from django.urls import reverse
+from internship.models import Vacancy
 from rest_framework import status
 
 
@@ -95,3 +96,13 @@ def test_get_free_mentors_empty(personnel_client, mentor, published_vacancy):
 
     assert response.status_code == status.HTTP_200_OK
     assert len(response.data) == 0
+
+
+@pytest.mark.django_db
+def test_get_free_mentors_closed_vacancy(personnel_client, mentor, published_vacancy):
+    url = reverse("users-free-mentors")
+    published_vacancy.status = Vacancy.Status.CLOSED
+    published_vacancy.save()
+    response = personnel_client.get(url)
+    assert response.status_code == status.HTTP_200_OK
+    assert len(response.data) == 1

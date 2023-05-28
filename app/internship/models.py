@@ -138,7 +138,7 @@ class Vacancy(models.Model):
         verbose_name="Reviewed by",
         related_name="reviewed_vacancies",
     )
-    mentor = models.OneToOneField(
+    mentor = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         blank=True,
