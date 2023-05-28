@@ -9,6 +9,7 @@ from django.db import transaction
 from django.utils import timezone
 from internship.models import (
     Direction,
+    Event,
     FeedBack,
     InternshipApplication,
     Qualification,
@@ -311,3 +312,29 @@ class FeedbackSerializer(serializers.ModelSerializer):
         validated_data["date"] = timezone.now()
         validated_data["from_user"] = self.context["request"].user
         return FeedBack.objects.create(**validated_data)
+
+
+class ReadEventSerializer(serializers.ModelSerializer):
+    workplace = WorkPlaceSerializer()
+
+    class Meta:
+        model = Event
+        fields = [
+            "id",
+            "name",
+            "description",
+            "datetime",
+            "workplace",
+        ]
+
+
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = [
+            "id",
+            "name",
+            "description",
+            "datetime",
+            "workplace",
+        ]

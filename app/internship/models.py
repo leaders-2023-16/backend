@@ -240,3 +240,15 @@ class FeedBack(models.Model):
 
     def __str__(self):
         return f"FeedBack from {self.from_user} to {self.to_user} at {self.date}"
+
+
+class Event(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(max_length=255)
+    datetime = models.DateTimeField()
+    workplace = models.ForeignKey(
+        WorkPlace, on_delete=models.CASCADE, related_name="events"
+    )
+
+    def __str__(self):
+        return str(self.name)

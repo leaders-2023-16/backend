@@ -11,7 +11,9 @@ from django.db import transaction
 from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
+from internship.filters import EventFilterSet
 from internship.models import (
+    Event,
     FeedBack,
     InternshipApplication,
     Vacancy,
@@ -20,8 +22,10 @@ from internship.models import (
 )
 from internship.serializers import (
     CountSerializer,
+    EventSerializer,
     FeedbackSerializer,
     InternshipApplicationSerializer,
+    ReadEventSerializer,
     ReadFeedbackSerializer,
     ReadInternshipApplicationSerializer,
     ReadVacancyResponseSerializer,
@@ -265,4 +269,29 @@ class FeedBackViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action not in ("update", "partial_update", "create"):
             return ReadFeedbackSerializer
+        return self.serializer_class
+
+
+class EventViewSet(viewsets.ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    pagination_class = None
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = EventFilterSet
+
+    def get_permission_classes(self):
+        if self.action == "create":
+            return [permissions.IsAuthenticated, IsMentor]
+        return [
+            permissions.IsAuthenticated,
+            IsCurator | IsPersonnel | IsTrainee | IsMentor,
+        ]
+
+    def get_permissions(self):
+        return [perm() for perm in self.get_permission_classes()]
+
+    def get_serializer_class(self):
+        if self.action not in ("update", "partial_update", "create"):
+            return ReadEventSerializer
         return self.serializer_class
