@@ -11,6 +11,7 @@ from django.db import transaction
 from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
+from internship.filters import EventFilterSet
 from internship.models import (
     Event,
     FeedBack,
@@ -277,10 +278,7 @@ class EventViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = None
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = [
-        "datetime",
-        "workplace",
-    ]
+    filterset_class = EventFilterSet
 
     def get_permission_classes(self):
         if self.action == "create":
