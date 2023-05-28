@@ -1,5 +1,6 @@
 from django.urls import include, path
 from internship.views import (
+    EventViewSet,
     FeedBackViewSet,
     InternshipApplicationViewSet,
     VacancyResponseViewSet,
@@ -20,6 +21,7 @@ router.register(
 )
 router.register(r"work-places", WorkPlaceViewSet, basename="work-places")
 router.register(r"feedbacks", FeedBackViewSet, basename="feedbacks")
+router.register(r"events", EventViewSet, basename="events")
 urlpatterns = [
     path("", include(router.urls)),
 ]
