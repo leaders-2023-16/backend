@@ -9,6 +9,7 @@ from django.db import transaction
 from django.utils import timezone
 from internship.models import (
     Direction,
+    FeedBack,
     InternshipApplication,
     Qualification,
     TestTask,
@@ -278,3 +279,35 @@ class WorkPlaceSerializer(serializers.ModelSerializer):
 
 class CountSerializer(serializers.Serializer):
     count = serializers.IntegerField()
+
+
+class ReadFeedbackSerializer(serializers.ModelSerializer):
+    from_user = UserSerializer()
+    to_user = UserSerializer()
+
+    class Meta:
+        model = FeedBack
+        fields = [
+            "id",
+            "from_user",
+            "to_user",
+            "date",
+            "rating",
+            "text",
+        ]
+
+
+class FeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FeedBack
+        fields = [
+            "id",
+            "to_user",
+            "date",
+            "rating",
+            "text",
+        ]
+
+    def create(self, validated_data):
+        user = self.context["request"].user
+        return FeedBack.objects.create(**validated_data, from_user=user)
